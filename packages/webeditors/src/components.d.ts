@@ -5,57 +5,51 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { ThemeNames } from "./components/json-editor/types";
+export { ThemeNames } from "./components/json-editor/types";
 export namespace Components {
-    interface MyComponent {
+    interface JsonEditor {
         /**
-          * The first name
+          * Theme of the editor
          */
-        "first": string;
+        "theme"?: ThemeNames;
         /**
-          * The last name
+          * Value that will be displayed inside the editor
          */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "value": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLJsonEditorElement extends Components.JsonEditor, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLJsonEditorElement: {
+        prototype: HTMLJsonEditorElement;
+        new (): HTMLJsonEditorElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "json-editor": HTMLJsonEditorElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface JsonEditor {
         /**
-          * The first name
+          * Theme of the editor
          */
-        "first"?: string;
+        "theme"?: ThemeNames;
         /**
-          * The last name
+          * Value that will be displayed inside the editor
          */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "value"?: string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "json-editor": JsonEditor;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
         }
     }
 }

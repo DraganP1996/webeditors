@@ -1,0 +1,37 @@
+{
+  "name": "webeditors-react",
+  "version": "0.0.2",
+  "description": "> TODO: description",
+  "author": "Dragan Petrovic <pdragan1996@gmail.com>",
+  "homepage": "",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/types/index.d.ts",
+  "directories": {
+    "src": "src",
+    "test": "__tests__"
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "test": "node ./__tests__/react-library.test.js",
+    "build": "npm run tsc",
+    "watch": "nodemon --watch 'src/**/*' -e ts,tsx --exec 'npm run build'",
+    "tsc": "tsc -p . --outDir ./dist"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@stencil/react-output-target": "^0.8.2",
+    "webeditors-vanilla": "0.0.1"
+  }
+}
