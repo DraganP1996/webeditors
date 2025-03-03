@@ -10,7 +10,19 @@
 import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { EditorPanel as EditorPanelElement, defineCustomElement as defineEditorPanel } from "webeditors-vanilla/dist/components/editor-panel.js";
 import { JsonEditor as JsonEditorElement, defineCustomElement as defineJsonEditor } from "webeditors-vanilla/dist/components/json-editor.js";
+
+type EditorPanelEvents = NonNullable<unknown>;
+
+export const EditorPanel: StencilReactComponent<EditorPanelElement, EditorPanelEvents> = /*@__PURE__*/ createComponent<EditorPanelElement, EditorPanelEvents>({
+    tagName: 'editor-panel',
+    elementClass: EditorPanelElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as EditorPanelEvents,
+    defineCustomElement: defineEditorPanel
+});
 
 type JsonEditorEvents = NonNullable<unknown>;
 

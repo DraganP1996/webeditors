@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element, Watch } from '@stencil/core';
+import { Component, h, Prop, State, Element, Watch, Host } from '@stencil/core';
 
 import { Compartment, EditorState } from '@codemirror/state';
 import { json } from '@codemirror/lang-json';
@@ -37,6 +37,8 @@ export class JsonEditor {
    * Value that will be displayed inside the editor
    */
   @Prop() value: string;
+
+  @Prop() readonly = false;
 
   /**
    * Theme of the editor
@@ -97,6 +99,7 @@ export class JsonEditor {
         drawSelection(),
         dropCursor(),
         EditorState.allowMultipleSelections.of(true),
+        EditorState.readOnly.of(this.readonly),
         indentOnInput(),
         syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
         bracketMatching(),
@@ -123,6 +126,20 @@ export class JsonEditor {
   }
 
   render() {
-    return <div id={this._id} style={{ height: '100%', width: '100%' }}></div>;
+    return (
+      <Host
+        style={{
+          display: 'block',
+          height: '100%',
+        }}
+      >
+        <div class="editor-wrapper">
+          <editor-panel>
+            <slot name="panel" />
+          </editor-panel>
+          <div id={this._id} style={{ height: '100%', width: '100%' }}></div>
+        </div>
+      </Host>
+    );
   }
 }

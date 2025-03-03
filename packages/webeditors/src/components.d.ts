@@ -8,7 +8,10 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { ThemeNames } from "./components/json-editor/types";
 export { ThemeNames } from "./components/json-editor/types";
 export namespace Components {
+    interface EditorPanel {
+    }
     interface JsonEditor {
+        "readonly": boolean;
         /**
           * Theme of the editor
          */
@@ -20,6 +23,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLEditorPanelElement extends Components.EditorPanel, HTMLStencilElement {
+    }
+    var HTMLEditorPanelElement: {
+        prototype: HTMLEditorPanelElement;
+        new (): HTMLEditorPanelElement;
+    };
     interface HTMLJsonEditorElement extends Components.JsonEditor, HTMLStencilElement {
     }
     var HTMLJsonEditorElement: {
@@ -27,11 +36,15 @@ declare global {
         new (): HTMLJsonEditorElement;
     };
     interface HTMLElementTagNameMap {
+        "editor-panel": HTMLEditorPanelElement;
         "json-editor": HTMLJsonEditorElement;
     }
 }
 declare namespace LocalJSX {
+    interface EditorPanel {
+    }
     interface JsonEditor {
+        "readonly"?: boolean;
         /**
           * Theme of the editor
          */
@@ -42,6 +55,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface IntrinsicElements {
+        "editor-panel": EditorPanel;
         "json-editor": JsonEditor;
     }
 }
@@ -49,6 +63,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "editor-panel": LocalJSX.EditorPanel & JSXBase.HTMLAttributes<HTMLEditorPanelElement>;
             "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
         }
     }
