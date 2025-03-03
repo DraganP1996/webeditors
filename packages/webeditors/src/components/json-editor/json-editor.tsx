@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element, Watch, Host } from '@stencil/core';
+import { Component, h, Prop, State, Element, Watch, Host, Method } from '@stencil/core';
 
 import { Compartment, EditorState } from '@codemirror/state';
 import { json } from '@codemirror/lang-json';
@@ -18,7 +18,18 @@ import {
   lineNumbers,
   rectangularSelection,
 } from '@codemirror/view';
-import { bracketMatching, defaultHighlightStyle, foldGutter, foldKeymap, indentOnInput, syntaxHighlighting } from '@codemirror/language';
+import {
+  bracketMatching,
+  defaultHighlightStyle,
+  ensureSyntaxTree,
+  foldable,
+  foldEffect,
+  foldGutter,
+  foldKeymap,
+  indentOnInput,
+  syntaxHighlighting,
+  unfoldAll,
+} from '@codemirror/language';
 
 import { THEMES } from './themes';
 import { tab } from './tab.extension';
@@ -45,6 +56,35 @@ export class JsonEditor {
    */
   @Prop() theme?: ThemeNames;
   // @Prop() onLintError?: (error: Diagnostic) => void;
+
+  @Method() async foldAll(): Promise<void> {
+    const effects = [];
+
+    ensureSyntaxTree(this._editorView.state, this._editorView.state.doc.length, 500).iterate({
+      from: 0,
+      to: this._editorView.state.doc.length,
+      enter: node => {
+        const foldRange = foldable(this._editorView.state, node.from, node.to);
+
+        if (
+          !foldRange ||
+          (foldRange.from === 0 && foldRange.to === this._editorView.state.doc.length) ||
+          (foldRange.from === 1 && foldRange.to === this._editorView.state.doc.length - 1)
+        )
+          return;
+
+        effects.push(foldEffect.of({ from: foldRange.from, to: foldRange.to }));
+      },
+    });
+
+    if (effects.length) {
+      this._editorView.dispatch({ effects });
+    }
+  }
+
+  @Method() async unfoldAll(): Promise<void> {
+    unfoldAll(this._editorView);
+  }
 
   private _editorState: EditorState;
 

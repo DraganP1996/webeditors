@@ -11,11 +11,13 @@ export namespace Components {
     interface EditorPanel {
     }
     interface JsonEditor {
+        "foldAll": () => Promise<void>;
         "readonly": boolean;
         /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
+        "unfoldAll": () => Promise<void>;
         /**
           * Value that will be displayed inside the editor
          */

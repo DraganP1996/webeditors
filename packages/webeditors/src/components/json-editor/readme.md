@@ -14,6 +14,29 @@
 | `value`    | `value`    | Value that will be displayed inside the editor | `string`                                                                                                                                                                                                                              | `undefined` |
 
 
+## Methods
+
+### `foldAll() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+### `unfoldAll() => Promise<void>`
+
+
+
+#### Returns
+
+Type: `Promise<void>`
+
+
+
+
 ## Dependencies
 
 ### Depends on
