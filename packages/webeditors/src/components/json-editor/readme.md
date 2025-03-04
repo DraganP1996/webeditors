@@ -7,11 +7,19 @@
 
 ## Properties
 
-| Property   | Attribute  | Description                                    | Type                                                                                                                                                                                                                                  | Default     |
-| ---------- | ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| `readonly` | `readonly` |                                                | `boolean`                                                                                                                                                                                                                             | `false`     |
-| `theme`    | `theme`    | Theme of the editor                            | `"amy" \| "ayuLight" \| "barf" \| "bespin" \| "birdsOfParadise" \| "boysAndGirls" \| "clouds" \| "cobalt" \| "coolGlow" \| "dracula" \| "espresso" \| "noctisLilac" \| "rosePineDawn" \| "smoothy" \| "solarizedLight" \| "tomorrow"` | `undefined` |
-| `value`    | `value`    | Value that will be displayed inside the editor | `string`                                                                                                                                                                                                                              | `undefined` |
+| Property       | Attribute  | Description                                    | Type                                                                                                                                                                                                                                  | Default     |
+| -------------- | ---------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
+| `footerConfig` | --         |                                                | `{ backgroundColor: string; color: string; }`                                                                                                                                                                                         | `undefined` |
+| `readonly`     | `readonly` |                                                | `boolean`                                                                                                                                                                                                                             | `false`     |
+| `theme`        | `theme`    | Theme of the editor                            | `"amy" \| "ayuLight" \| "barf" \| "bespin" \| "birdsOfParadise" \| "boysAndGirls" \| "clouds" \| "cobalt" \| "coolGlow" \| "dracula" \| "espresso" \| "noctisLilac" \| "rosePineDawn" \| "smoothy" \| "solarizedLight" \| "tomorrow"` | `undefined` |
+| `value`        | `value`    | Value that will be displayed inside the editor | `string`                                                                                                                                                                                                                              | `undefined` |
+
+
+## Events
+
+| Event          | Description | Type                  |
+| -------------- | ----------- | --------------------- |
+| `editorChange` |             | `CustomEvent<string>` |
 
 
 ## Methods
@@ -42,11 +50,13 @@ Type: `Promise<void>`
 ### Depends on
 
 - [editor-panel](../editor-panel)
+- [editor-footer](../editor-footer)
 
 ### Graph
 ```mermaid
 graph TD;
   json-editor --> editor-panel
+  json-editor --> editor-footer
   style json-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

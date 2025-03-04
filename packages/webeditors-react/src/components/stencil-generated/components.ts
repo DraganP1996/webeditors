@@ -7,11 +7,23 @@
 
 /* eslint-disable */
 
-import type { StencilReactComponent } from '@stencil/react-output-target/runtime';
+import type { EventName, StencilReactComponent } from '@stencil/react-output-target/runtime';
 import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
+import { EditorFooter as EditorFooterElement, defineCustomElement as defineEditorFooter } from "webeditors-vanilla/dist/components/editor-footer.js";
 import { EditorPanel as EditorPanelElement, defineCustomElement as defineEditorPanel } from "webeditors-vanilla/dist/components/editor-panel.js";
 import { JsonEditor as JsonEditorElement, defineCustomElement as defineJsonEditor } from "webeditors-vanilla/dist/components/json-editor.js";
+
+type EditorFooterEvents = NonNullable<unknown>;
+
+export const EditorFooter: StencilReactComponent<EditorFooterElement, EditorFooterEvents> = /*@__PURE__*/ createComponent<EditorFooterElement, EditorFooterEvents>({
+    tagName: 'editor-footer',
+    elementClass: EditorFooterElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: {} as EditorFooterEvents,
+    defineCustomElement: defineEditorFooter
+});
 
 type EditorPanelEvents = NonNullable<unknown>;
 
@@ -24,13 +36,13 @@ export const EditorPanel: StencilReactComponent<EditorPanelElement, EditorPanelE
     defineCustomElement: defineEditorPanel
 });
 
-type JsonEditorEvents = NonNullable<unknown>;
+type JsonEditorEvents = { onEditorChange: EventName<CustomEvent<string>> };
 
 export const JsonEditor: StencilReactComponent<JsonEditorElement, JsonEditorEvents> = /*@__PURE__*/ createComponent<JsonEditorElement, JsonEditorEvents>({
     tagName: 'json-editor',
     elementClass: JsonEditorElement,
     // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
     react: React,
-    events: {} as JsonEditorEvents,
+    events: { onEditorChange: 'editorChange' } as JsonEditorEvents,
     defineCustomElement: defineJsonEditor
 });

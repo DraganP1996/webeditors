@@ -5,13 +5,23 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { ThemeNames } from "./components/json-editor/types";
-export { ThemeNames } from "./components/json-editor/types";
+import { CursorPosition, EditorFooterConfig, ThemeNames } from "./components/json-editor/types";
+export { CursorPosition, EditorFooterConfig, ThemeNames } from "./components/json-editor/types";
 export namespace Components {
+    interface EditorFooter {
+        "backgroundColor": string;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "background-color"?: string;
+        "color": string;
+        "cursorPosition": CursorPosition;
+    }
     interface EditorPanel {
     }
     interface JsonEditor {
         "foldAll": () => Promise<void>;
+        "footerConfig"?: EditorFooterConfig;
         "readonly": boolean;
         /**
           * Theme of the editor
@@ -24,28 +34,61 @@ export namespace Components {
         "value": string;
     }
 }
+export interface JsonEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLJsonEditorElement;
+}
 declare global {
+    interface HTMLEditorFooterElement extends Components.EditorFooter, HTMLStencilElement {
+    }
+    var HTMLEditorFooterElement: {
+        prototype: HTMLEditorFooterElement;
+        new (): HTMLEditorFooterElement;
+    };
     interface HTMLEditorPanelElement extends Components.EditorPanel, HTMLStencilElement {
     }
     var HTMLEditorPanelElement: {
         prototype: HTMLEditorPanelElement;
         new (): HTMLEditorPanelElement;
     };
+    interface HTMLJsonEditorElementEventMap {
+        "editorChange": string;
+    }
     interface HTMLJsonEditorElement extends Components.JsonEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLJsonEditorElementEventMap>(type: K, listener: (this: HTMLJsonEditorElement, ev: JsonEditorCustomEvent<HTMLJsonEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLJsonEditorElementEventMap>(type: K, listener: (this: HTMLJsonEditorElement, ev: JsonEditorCustomEvent<HTMLJsonEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLJsonEditorElement: {
         prototype: HTMLJsonEditorElement;
         new (): HTMLJsonEditorElement;
     };
     interface HTMLElementTagNameMap {
+        "editor-footer": HTMLEditorFooterElement;
         "editor-panel": HTMLEditorPanelElement;
         "json-editor": HTMLJsonEditorElement;
     }
 }
 declare namespace LocalJSX {
+    interface EditorFooter {
+        "backgroundColor"?: string;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "background-color"?: string;
+        "color"?: string;
+        "cursorPosition"?: CursorPosition;
+    }
     interface EditorPanel {
     }
     interface JsonEditor {
+        "footerConfig"?: EditorFooterConfig;
+        "onEditorChange"?: (event: JsonEditorCustomEvent<string>) => void;
         "readonly"?: boolean;
         /**
           * Theme of the editor
@@ -57,6 +100,7 @@ declare namespace LocalJSX {
         "value"?: string;
     }
     interface IntrinsicElements {
+        "editor-footer": EditorFooter;
         "editor-panel": EditorPanel;
         "json-editor": JsonEditor;
     }
@@ -65,6 +109,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "editor-footer": LocalJSX.EditorFooter & JSXBase.HTMLAttributes<HTMLEditorFooterElement>;
             "editor-panel": LocalJSX.EditorPanel & JSXBase.HTMLAttributes<HTMLEditorPanelElement>;
             "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
         }

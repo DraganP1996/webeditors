@@ -1,4 +1,4 @@
-import { Component, h, Prop, State, Element, Watch, Host, Method } from '@stencil/core';
+import { Component, h, Prop, State, Element, Watch, Host, Method, EventEmitter, Event } from '@stencil/core';
 
 import { Compartment, EditorState } from '@codemirror/state';
 import { json } from '@codemirror/lang-json';
@@ -17,6 +17,7 @@ import {
   keymap,
   lineNumbers,
   rectangularSelection,
+  ViewUpdate,
 } from '@codemirror/view';
 import {
   bracketMatching,
@@ -34,7 +35,7 @@ import {
 import { THEMES } from './themes';
 import { tab } from './tab.extension';
 import { diagnosticsListener, lintExtensions } from './lint.extension';
-import { ThemeNames } from './types';
+import { CursorPosition, EditorFooterConfig, ThemeNames } from './types';
 
 @Component({
   tag: 'json-editor',
@@ -51,11 +52,15 @@ export class JsonEditor {
 
   @Prop() readonly = false;
 
+  @Prop() footerConfig?: EditorFooterConfig;
+
   /**
    * Theme of the editor
    */
   @Prop() theme?: ThemeNames;
   // @Prop() onLintError?: (error: Diagnostic) => void;
+
+  @State() private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
 
   @Method() async foldAll(): Promise<void> {
     const effects = [];
@@ -86,8 +91,6 @@ export class JsonEditor {
     unfoldAll(this._editorView);
   }
 
-  private _editorState: EditorState;
-
   @Watch('theme')
   onThemeChange(theme: ThemeNames) {
     theme && this._setTheme(theme);
@@ -95,19 +98,25 @@ export class JsonEditor {
 
   @Watch('value')
   onValueChange(value: string) {
+    const currentSelection = this._editorView.state.selection;
+
     this._editorView.dispatch({
       changes: {
         from: 0,
         to: this._editorView.state.doc.length,
         insert: value,
       },
+      selection: currentSelection,
     });
   }
 
-  private _editorView: EditorView;
+  @Event() editorChange: EventEmitter<string>;
 
+  private _editorView: EditorView;
+  private _currentValue = '';
   private _tabSize: Compartment = new Compartment();
   private _currTheme = new Compartment();
+  private _editorHeight: string;
 
   private _setTheme(theme: ThemeNames) {
     this._editorView.dispatch({
@@ -115,20 +124,39 @@ export class JsonEditor {
     });
   }
 
+  private _updateCurrentValue(value: string) {
+    if (value.trim() === this._currentValue.trim()) return;
+
+    this._currentValue = value;
+    this.editorChange.emit(this._currentValue);
+  }
+
+  private _updateCursorPosition() {
+    const state = this._editorView.state;
+    const ln = state.doc.lineAt(state.selection.main.head).number;
+    const col = state.selection.ranges[0].head - state.doc.lineAt(state.selection.main.head).from;
+
+    if (col === this._cursorPosition.col && ln === this._cursorPosition.ln) return;
+
+    this._cursorPosition = { col, ln };
+  }
+
   @State() private _id = !!this.el.id ? this.el.id : `id_${Date.now().toString()}`;
 
-  // private _changeTabSize(size: number) {
-  //   this._editorView.dispatch({
-  //     effects: this._tabSize.reconfigure(EditorState.tabSize.of(size)),
-  //   });
-  // }
+  calculateEditorHeight() {
+    const panel = this.el.querySelector('div[slot=panel]');
+    const panelHeight = panel?.clientHeight || 0;
+    const footer = this.el.getElementsByTagName('editor-footer')[0];
+    const footerHeight = footer?.clientHeight || 0;
+
+    this._editorHeight = `calc(100% - ${panelHeight + footerHeight}px)`;
+  }
 
   componentDidLoad() {
     if (this._editorView) return;
 
-    const targetElement = document.querySelector(`#${this._id}`)!;
-
-    this._editorState = EditorState.create({
+    const parent = document.querySelector(`#${this._id}`)!;
+    const state = EditorState.create({
       doc: this.value,
       extensions: [
         lineNumbers(),
@@ -140,6 +168,13 @@ export class JsonEditor {
         dropCursor(),
         EditorState.allowMultipleSelections.of(true),
         EditorState.readOnly.of(this.readonly),
+        EditorView.updateListener.of((update: ViewUpdate) => {
+          this._updateCursorPosition();
+
+          if (update.docChanged) {
+            this._updateCurrentValue(update.state.doc.toString());
+          }
+        }),
         indentOnInput(),
         syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
         bracketMatching(),
@@ -160,9 +195,11 @@ export class JsonEditor {
       ],
     });
     this._editorView = new EditorView({
-      parent: targetElement,
-      state: this._editorState,
+      parent,
+      state,
     });
+
+    this.calculateEditorHeight();
   }
 
   render() {
@@ -177,7 +214,8 @@ export class JsonEditor {
           <editor-panel>
             <slot name="panel" />
           </editor-panel>
-          <div id={this._id} style={{ height: '100%', width: '100%' }}></div>
+          <div id={this._id} style={{ height: this._editorHeight, width: '100%' }}></div>
+          {this.footerConfig && <editor-footer cursorPosition={this._cursorPosition} backgroundColor={this.footerConfig.backgroundColor} color={this.footerConfig.color} />}
         </div>
       </Host>
     );
