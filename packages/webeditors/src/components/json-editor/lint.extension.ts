@@ -24,7 +24,6 @@ export const diagnosticsListener = (callback?: (diagnostics: Diagnostic[]) => vo
     }
 
     if (callback) callback(diagnostics);
-    console.log('New diagnostics:', diagnostics);
   });
 
 export const lintExtensions = [extension, gutter, tooltipTheme];

@@ -22,7 +22,18 @@ export namespace Components {
     interface JsonEditor {
         "foldAll": () => Promise<void>;
         "footerConfig"?: EditorFooterConfig;
+        "mode": 'json' | 'text';
         "readonly": boolean;
+        "showActionsPanel": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        "showFooter": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -88,8 +99,19 @@ declare namespace LocalJSX {
     }
     interface JsonEditor {
         "footerConfig"?: EditorFooterConfig;
+        "mode"?: 'json' | 'text';
         "onEditorChange"?: (event: JsonEditorCustomEvent<string>) => void;
         "readonly"?: boolean;
+        "showActionsPanel"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        "showFooter"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */

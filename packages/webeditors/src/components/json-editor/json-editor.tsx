@@ -1,41 +1,13 @@
 import { Component, h, Prop, State, Element, Watch, Host, Method, EventEmitter, Event } from '@stencil/core';
 
-import { Compartment, EditorState } from '@codemirror/state';
-import { json } from '@codemirror/lang-json';
-import { autocompletion, closeBrackets, closeBracketsKeymap, completionKeymap } from '@codemirror/autocomplete';
-import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
-import { lintKeymap } from '@codemirror/lint';
-import { highlightSelectionMatches, searchKeymap } from '@codemirror/search';
-import {
-  crosshairCursor,
-  drawSelection,
-  dropCursor,
-  EditorView,
-  highlightActiveLine,
-  highlightActiveLineGutter,
-  highlightSpecialChars,
-  keymap,
-  lineNumbers,
-  rectangularSelection,
-  ViewUpdate,
-} from '@codemirror/view';
-import {
-  bracketMatching,
-  defaultHighlightStyle,
-  ensureSyntaxTree,
-  foldable,
-  foldEffect,
-  foldGutter,
-  foldKeymap,
-  indentOnInput,
-  syntaxHighlighting,
-  unfoldAll,
-} from '@codemirror/language';
+import { Compartment, EditorState, Extension } from '@codemirror/state';
+
+import { EditorView, ViewUpdate } from '@codemirror/view';
+import { ensureSyntaxTree, foldable, foldEffect, unfoldAll } from '@codemirror/language';
 
 import { THEMES } from './themes';
-import { tab } from './tab.extension';
-import { diagnosticsListener, lintExtensions } from './lint.extension';
 import { CursorPosition, EditorFooterConfig, ThemeNames } from './types';
+import { JSON_EXTENSIONS, PLAIN_TEXT_EXTENSIONS } from './const';
 
 @Component({
   tag: 'json-editor',
@@ -54,11 +26,17 @@ export class JsonEditor {
 
   @Prop() footerConfig?: EditorFooterConfig;
 
+  @Prop() showActionsPanel: boolean;
+
+  @Prop() showFooter: boolean;
+
   /**
    * Theme of the editor
    */
   @Prop() theme?: ThemeNames;
-  // @Prop() onLintError?: (error: Diagnostic) => void;
+
+  @Prop() mode: 'json' | 'text' = 'json';
+  // @Prop() onLintError?: (error: Diagnostic) => void; TODO: this is more like an event
 
   @State() private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
 
@@ -155,44 +133,26 @@ export class JsonEditor {
   componentDidLoad() {
     if (this._editorView) return;
 
+    const plainExtensions: Extension[] = [
+      EditorState.readOnly.of(this.readonly),
+      EditorView.updateListener.of((update: ViewUpdate) => {
+        this._updateCursorPosition();
+
+        if (update.docChanged) {
+          this._updateCurrentValue(update.state.doc.toString());
+        }
+      }),
+      this._currTheme.of(this.theme ? THEMES[this.theme] : THEMES.amy),
+      this._tabSize.of(EditorState.tabSize.of(2)),
+      ...PLAIN_TEXT_EXTENSIONS,
+    ];
+
+    const extensions = this.mode === 'json' ? [...plainExtensions, ...JSON_EXTENSIONS] : plainExtensions;
     const parent = document.querySelector(`#${this._id}`)!;
+
     const state = EditorState.create({
       doc: this.value,
-      extensions: [
-        lineNumbers(),
-        highlightActiveLineGutter(),
-        highlightSpecialChars(),
-        history(),
-        foldGutter(),
-        drawSelection(),
-        dropCursor(),
-        EditorState.allowMultipleSelections.of(true),
-        EditorState.readOnly.of(this.readonly),
-        EditorView.updateListener.of((update: ViewUpdate) => {
-          this._updateCursorPosition();
-
-          if (update.docChanged) {
-            this._updateCurrentValue(update.state.doc.toString());
-          }
-        }),
-        indentOnInput(),
-        syntaxHighlighting(defaultHighlightStyle, { fallback: true }),
-        bracketMatching(),
-        closeBrackets(),
-        autocompletion(),
-        rectangularSelection(),
-        crosshairCursor(),
-        highlightActiveLine(),
-        highlightSelectionMatches(),
-        ...lintExtensions,
-        this._currTheme.of(this.theme ? THEMES[this.theme] : THEMES.amy),
-        diagnosticsListener(),
-        // this.theme ? THEMES[this.theme] : THEMES.amy,
-        keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...searchKeymap, ...historyKeymap, ...foldKeymap, ...completionKeymap, ...lintKeymap]),
-        json(),
-        tab,
-        this._tabSize.of(EditorState.tabSize.of(2)),
-      ],
+      extensions,
     });
     this._editorView = new EditorView({
       parent,
@@ -211,11 +171,15 @@ export class JsonEditor {
         }}
       >
         <div class="editor-wrapper">
-          <editor-panel>
-            <slot name="panel" />
-          </editor-panel>
+          {this.showActionsPanel && this.mode !== 'text' && (
+            <editor-panel>
+              <slot name="panel" />
+            </editor-panel>
+          )}
           <div id={this._id} style={{ height: this._editorHeight, width: '100%' }}></div>
-          {this.footerConfig && <editor-footer cursorPosition={this._cursorPosition} backgroundColor={this.footerConfig.backgroundColor} color={this.footerConfig.color} />}
+          {this.footerConfig && this.showFooter && (
+            <editor-footer cursorPosition={this._cursorPosition} backgroundColor={this.footerConfig.backgroundColor} color={this.footerConfig.color} />
+          )}
         </div>
       </Host>
     );
