@@ -25,6 +25,12 @@
       "import": "./loader/index.js",
       "require": "./loader/index.cjs",
       "types": "./loader/index.d.ts"
+    },
+    "./hydrate": {
+      "types": "./hydrate/index.d.ts",
+      "import": "./hydrate/index.js",
+      "require": "./hydrate/index.cjs.js",
+      "default": "./hydrate/index.js"
     }
   },
   "repository": {
@@ -48,11 +54,13 @@
     "@codemirror/commands": "^6.8.0",
     "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/lang-json": "^6.0.1",
+    "@codemirror/lang-xml": "^6.1.0",
     "@codemirror/language": "^6.10.8",
     "@codemirror/lint": "^6.8.4",
     "@codemirror/search": "^6.5.10",
     "@rollup/plugin-alias": "^5.1.1",
     "codemirror": "^6.0.1",
+    "fast-xml-parser": "^5.0.8",
     "thememirror": "^2.0.1"
   },
   "devDependencies": {

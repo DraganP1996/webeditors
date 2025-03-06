@@ -17,9 +17,9 @@ import { bracketMatching, defaultHighlightStyle, foldGutter, foldKeymap, indentO
 import { lintKeymap } from '@codemirror/lint';
 import { tab } from '../../shared-extensions';
 import { diagnosticsListener, lintExtensions } from './lint.extension';
-import { json } from '@codemirror/lang-json';
+import { xml } from '@codemirror/lang-xml';
 
-export const PLAIN_TEXT_EXTENSIONS: Extension[] = [
+export const XML_EXTENSIONS: Extension[] = [
   lineNumbers(),
   history(),
   drawSelection(),
@@ -27,9 +27,6 @@ export const PLAIN_TEXT_EXTENSIONS: Extension[] = [
   EditorState.allowMultipleSelections.of(true),
   keymap.of([...closeBracketsKeymap, ...defaultKeymap, ...searchKeymap, ...historyKeymap, ...foldKeymap, ...completionKeymap, ...lintKeymap]),
   tab,
-];
-
-export const JSON_EXTENSIONS: Extension[] = [
   highlightActiveLineGutter(),
   highlightSpecialChars(),
   foldGutter(),
@@ -44,5 +41,5 @@ export const JSON_EXTENSIONS: Extension[] = [
   highlightSelectionMatches(),
   ...lintExtensions,
   diagnosticsListener(),
-  json(),
+  xml(),
 ];

@@ -7,14 +7,14 @@ import { ensureSyntaxTree, foldable, foldEffect, unfoldAll } from '@codemirror/l
 
 import { THEMES } from '../../styles/themes';
 import { CursorPosition, EditorFooterConfig, ThemeNames } from '../../types/types';
-import { JSON_EXTENSIONS, PLAIN_TEXT_EXTENSIONS } from './const';
+import { XML_EXTENSIONS } from './const';
 
 @Component({
-  tag: 'json-editor',
+  tag: 'xml-editor',
   styleUrl: '../../styles/editor.css',
   shadow: false,
 })
-export class JsonEditor {
+export class XMLEditor {
   @Element() el!: HTMLElement;
 
   /**
@@ -43,11 +43,6 @@ export class JsonEditor {
    * Theme of the editor
    */
   @Prop() theme?: ThemeNames;
-  /**
-   * Defines the mode of the editor
-   */
-  @Prop() mode: 'json' | 'text' = 'json';
-
   /**
    * Position of the cursor
    */
@@ -141,7 +136,7 @@ export class JsonEditor {
     this._cursorPosition = { col, ln };
   }
 
-  private _id = !!this.el.id ? this.el.id : `json-editor-${Math.random().toString(36).substr(2, 9)}`;
+  private _id = !!this.el.id ? this.el.id : `xml-editor-${Math.random().toString(36).substr(2, 9)}`;
 
   calculateEditorHeight() {
     const panel = this.el.querySelector('div[slot=panel]');
@@ -153,7 +148,7 @@ export class JsonEditor {
   }
 
   componentDidLoad() {
-    const plainExtensions: Extension[] = [
+    const extensions: Extension[] = [
       EditorState.readOnly.of(this.readonly),
       EditorView.updateListener.of((update: ViewUpdate) => {
         this._updateCursorPosition();
@@ -164,10 +159,9 @@ export class JsonEditor {
       }),
       this._currTheme.of(this.theme ? THEMES[this.theme] : THEMES.amy),
       this._tabSize.of(EditorState.tabSize.of(2)),
-      ...PLAIN_TEXT_EXTENSIONS,
+      ...XML_EXTENSIONS,
     ];
 
-    const extensions = this.mode === 'json' ? [...plainExtensions, ...JSON_EXTENSIONS] : plainExtensions;
     const parent = document.querySelector(`#${this._id}`)!;
 
     const state = EditorState.create({
@@ -191,7 +185,7 @@ export class JsonEditor {
         }}
       >
         <div class="editor-wrapper">
-          {this.showActionsPanel && this.mode !== 'text' && (
+          {this.showActionsPanel && (
             <editor-panel>
               <slot name="panel" />
             </editor-panel>

@@ -1,4 +1,4 @@
-# json-editor
+# xml-editor
 
 
 
@@ -10,7 +10,6 @@
 | Property           | Attribute            | Description                                                   | Type                                                                                                                                                                                                                                  | Default     |
 | ------------------ | -------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | `footerConfig`     | --                   | Configuration for the editor footer                           | `{ backgroundColor: string; color: string; }`                                                                                                                                                                                         | `undefined` |
-| `mode`             | `mode`               | Defines the mode of the editor                                | `"json" \| "text"`                                                                                                                                                                                                                    | `'json'`    |
 | `readonly`         | `readonly`           | Defines if the editor is in readonly mode Default value false | `boolean`                                                                                                                                                                                                                             | `false`     |
 | `showActionsPanel` | `show-actions-panel` | Defines if the action panel should be visible                 | `boolean`                                                                                                                                                                                                                             | `undefined` |
 | `showFooter`       | `show-footer`        | Defines if the footer should be visible                       | `boolean`                                                                                                                                                                                                                             | `undefined` |
@@ -58,9 +57,9 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
-  json-editor --> editor-panel
-  json-editor --> editor-footer
-  style json-editor fill:#f9f,stroke:#333,stroke-width:4px
+  xml-editor --> editor-panel
+  xml-editor --> editor-footer
+  style xml-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

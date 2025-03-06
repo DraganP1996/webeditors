@@ -19,11 +19,13 @@
 ### Used by
 
  - [json-editor](../json-editor)
+ - [xml-editor](../xml-editor)
 
 ### Graph
 ```mermaid
 graph TD;
   json-editor --> editor-footer
+  xml-editor --> editor-footer
   style editor-footer fill:#f9f,stroke:#333,stroke-width:4px
 ```
 

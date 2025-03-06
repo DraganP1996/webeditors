@@ -1,5 +1,5 @@
 import { Component, h, Host, Prop } from '@stencil/core';
-import { CursorPosition } from '../json-editor/types';
+import { CursorPosition } from '../../types/types';
 
 @Component({
   tag: 'editor-footer',

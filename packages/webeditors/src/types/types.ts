@@ -1,4 +1,4 @@
-import { THEMES } from './themes';
+import { THEMES } from '../styles/themes';
 
 type LIST_OF_THEMES = keyof typeof THEMES;
 

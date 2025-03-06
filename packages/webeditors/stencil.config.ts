@@ -16,6 +16,10 @@ export const config: Config = {
       externalRuntime: false,
     },
     {
+      type: 'dist-hydrate-script',
+      dir: './hydrate',
+    },
+    {
       type: 'docs-readme',
     },
     {
@@ -25,6 +29,7 @@ export const config: Config = {
     reactOutputTarget({
       // Relative path to where the React components will be generated
       outDir: '../webeditors-react/src/components/stencil-generated/',
+      hydrateModule: 'webeditors-vanilla/hydrate',
     }),
   ],
   testing: {

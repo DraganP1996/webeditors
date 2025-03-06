@@ -5,8 +5,8 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { CursorPosition, EditorFooterConfig, ThemeNames } from "./components/json-editor/types";
-export { CursorPosition, EditorFooterConfig, ThemeNames } from "./components/json-editor/types";
+import { CursorPosition, EditorFooterConfig, ThemeNames } from "./types/types";
+export { CursorPosition, EditorFooterConfig, ThemeNames } from "./types/types";
 export namespace Components {
     interface EditorFooter {
         "backgroundColor": string;
@@ -20,15 +20,33 @@ export namespace Components {
     interface EditorPanel {
     }
     interface JsonEditor {
+        /**
+          * Method that makes possible to fold all the foldible blocks
+         */
         "foldAll": () => Promise<void>;
+        /**
+          * Configuration for the editor footer
+         */
         "footerConfig"?: EditorFooterConfig;
+        /**
+          * Defines the mode of the editor
+         */
         "mode": 'json' | 'text';
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
         "readonly": boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
         "showActionsPanel": boolean;
         /**
          * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
          */
         "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
         "showFooter": boolean;
         /**
          * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
@@ -38,6 +56,51 @@ export namespace Components {
           * Theme of the editor
          */
         "theme"?: ThemeNames;
+        /**
+          * Method that makes possible to unfold all the folded
+         */
+        "unfoldAll": () => Promise<void>;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value": string;
+    }
+    interface XmlEditor {
+        /**
+          * Method that makes possible to fold all the foldible blocks
+         */
+        "foldAll": () => Promise<void>;
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly": boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Method that makes possible to unfold all the folded
+         */
         "unfoldAll": () => Promise<void>;
         /**
           * Value that will be displayed inside the editor
@@ -48,6 +111,10 @@ export namespace Components {
 export interface JsonEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLJsonEditorElement;
+}
+export interface XmlEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLXmlEditorElement;
 }
 declare global {
     interface HTMLEditorFooterElement extends Components.EditorFooter, HTMLStencilElement {
@@ -79,10 +146,28 @@ declare global {
         prototype: HTMLJsonEditorElement;
         new (): HTMLJsonEditorElement;
     };
+    interface HTMLXmlEditorElementEventMap {
+        "editorChange": string;
+    }
+    interface HTMLXmlEditorElement extends Components.XmlEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLXmlEditorElementEventMap>(type: K, listener: (this: HTMLXmlEditorElement, ev: XmlEditorCustomEvent<HTMLXmlEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLXmlEditorElementEventMap>(type: K, listener: (this: HTMLXmlEditorElement, ev: XmlEditorCustomEvent<HTMLXmlEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLXmlEditorElement: {
+        prototype: HTMLXmlEditorElement;
+        new (): HTMLXmlEditorElement;
+    };
     interface HTMLElementTagNameMap {
         "editor-footer": HTMLEditorFooterElement;
         "editor-panel": HTMLEditorPanelElement;
         "json-editor": HTMLJsonEditorElement;
+        "xml-editor": HTMLXmlEditorElement;
     }
 }
 declare namespace LocalJSX {
@@ -98,15 +183,71 @@ declare namespace LocalJSX {
     interface EditorPanel {
     }
     interface JsonEditor {
+        /**
+          * Configuration for the editor footer
+         */
         "footerConfig"?: EditorFooterConfig;
+        /**
+          * Defines the mode of the editor
+         */
         "mode"?: 'json' | 'text';
+        /**
+          * Event triggered by the change of the editor value
+         */
         "onEditorChange"?: (event: JsonEditorCustomEvent<string>) => void;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
         "readonly"?: boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
         "showActionsPanel"?: boolean;
         /**
          * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
          */
         "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value"?: string;
+    }
+    interface XmlEditor {
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Event triggered by the change of the editor value
+         */
+        "onEditorChange"?: (event: XmlEditorCustomEvent<string>) => void;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly"?: boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
         "showFooter"?: boolean;
         /**
          * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
@@ -125,6 +266,7 @@ declare namespace LocalJSX {
         "editor-footer": EditorFooter;
         "editor-panel": EditorPanel;
         "json-editor": JsonEditor;
+        "xml-editor": XmlEditor;
     }
 }
 export { LocalJSX as JSX };
@@ -134,6 +276,7 @@ declare module "@stencil/core" {
             "editor-footer": LocalJSX.EditorFooter & JSXBase.HTMLAttributes<HTMLEditorFooterElement>;
             "editor-panel": LocalJSX.EditorPanel & JSXBase.HTMLAttributes<HTMLEditorPanelElement>;
             "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
+            "xml-editor": LocalJSX.XmlEditor & JSXBase.HTMLAttributes<HTMLXmlEditorElement>;
         }
     }
 }
