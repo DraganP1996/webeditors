@@ -38,7 +38,10 @@ export const config: Config = {
   rollupPlugins: {
     before: [
       alias({
-        entries: [{ find: 'thememirror', replacement: resolve(__dirname, '../../node_modules/thememirror/dist/index.js') }],
+        entries: [
+          { find: 'thememirror', replacement: resolve(__dirname, '../../node_modules/thememirror/dist/index.js') },
+          { find: 'yaml', replacement: 'yaml/dist/public-api.js' },
+        ],
       }),
     ],
   },

@@ -1,6 +1,6 @@
 {
   "name": "webeditors-vanilla",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.cjs.js",
@@ -55,13 +55,15 @@
     "@codemirror/lang-javascript": "^6.2.3",
     "@codemirror/lang-json": "^6.0.1",
     "@codemirror/lang-xml": "^6.1.0",
+    "@codemirror/lang-yaml": "^6.1.2",
     "@codemirror/language": "^6.10.8",
     "@codemirror/lint": "^6.8.4",
     "@codemirror/search": "^6.5.10",
     "@rollup/plugin-alias": "^5.1.1",
     "codemirror": "^6.0.1",
     "fast-xml-parser": "^5.0.8",
-    "thememirror": "^2.0.1"
+    "thememirror": "^2.0.1",
+    "yaml": "^2.7.0"
   },
   "devDependencies": {
     "@stencil/core": "^4.27.1",

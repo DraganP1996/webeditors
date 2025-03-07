@@ -6,4 +6,4 @@
  */
 
 /* eslint-disable */
-export { EditorFooter, EditorPanel, JsonEditor, XmlEditor } from "./components.server";
+export { EditorFooter, EditorPanel, JsonEditor, XmlEditor, YamlEditor } from "./components.server";

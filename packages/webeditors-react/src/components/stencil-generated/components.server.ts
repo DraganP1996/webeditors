@@ -15,6 +15,7 @@ import { EditorFooter as EditorFooterElement, defineCustomElement as defineEdito
 import { EditorPanel as EditorPanelElement, defineCustomElement as defineEditorPanel } from "webeditors-vanilla/dist/components/editor-panel.js";
 import { JsonEditor as JsonEditorElement, defineCustomElement as defineJsonEditor } from "webeditors-vanilla/dist/components/json-editor.js";
 import { XmlEditor as XmlEditorElement, defineCustomElement as defineXmlEditor } from "webeditors-vanilla/dist/components/xml-editor.js";
+import { YamlEditor as YamlEditorElement, defineCustomElement as defineYamlEditor } from "webeditors-vanilla/dist/components/yaml-editor.js";
 
 type EditorFooterEvents = NonNullable<unknown>;
 
@@ -90,6 +91,29 @@ export const XmlEditor: StencilReactComponent<XmlEditorElement, XmlEditorEvents>
     })
     : /*@__PURE__*/ createSSRComponent<XmlEditorElement, XmlEditorEvents>({
         tagName: 'xml-editor',
+        properties: {
+            value: 'value',
+            readonly: 'readonly',
+            showActionsPanel: 'show-actions-panel',
+            showFooter: 'show-footer',
+            theme: 'theme'
+        },
+        hydrateModule: import('webeditors-vanilla/hydrate')
+    });
+
+type YamlEditorEvents = { onEditorChange: EventName<CustomEvent<string>> };
+
+export const YamlEditor: StencilReactComponent<YamlEditorElement, YamlEditorEvents> = typeof window !== 'undefined'
+    ? /*@__PURE__*/ createComponent<YamlEditorElement, YamlEditorEvents>({
+        tagName: 'yaml-editor',
+        elementClass: YamlEditorElement,
+        // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+        react: React,
+        events: { onEditorChange: 'editorChange' } as YamlEditorEvents,
+        defineCustomElement: defineYamlEditor
+    })
+    : /*@__PURE__*/ createSSRComponent<YamlEditorElement, YamlEditorEvents>({
+        tagName: 'yaml-editor',
         properties: {
             value: 'value',
             readonly: 'readonly',

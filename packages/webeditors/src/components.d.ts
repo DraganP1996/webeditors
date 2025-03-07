@@ -107,6 +107,48 @@ export namespace Components {
          */
         "value": string;
     }
+    interface YamlEditor {
+        /**
+          * Method that makes possible to fold all the foldible blocks
+         */
+        "foldAll": () => Promise<void>;
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly": boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter": boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Method that makes possible to unfold all the folded
+         */
+        "unfoldAll": () => Promise<void>;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value": string;
+    }
 }
 export interface JsonEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -115,6 +157,10 @@ export interface JsonEditorCustomEvent<T> extends CustomEvent<T> {
 export interface XmlEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLXmlEditorElement;
+}
+export interface YamlEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLYamlEditorElement;
 }
 declare global {
     interface HTMLEditorFooterElement extends Components.EditorFooter, HTMLStencilElement {
@@ -163,11 +209,29 @@ declare global {
         prototype: HTMLXmlEditorElement;
         new (): HTMLXmlEditorElement;
     };
+    interface HTMLYamlEditorElementEventMap {
+        "editorChange": string;
+    }
+    interface HTMLYamlEditorElement extends Components.YamlEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLYamlEditorElementEventMap>(type: K, listener: (this: HTMLYamlEditorElement, ev: YamlEditorCustomEvent<HTMLYamlEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLYamlEditorElementEventMap>(type: K, listener: (this: HTMLYamlEditorElement, ev: YamlEditorCustomEvent<HTMLYamlEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLYamlEditorElement: {
+        prototype: HTMLYamlEditorElement;
+        new (): HTMLYamlEditorElement;
+    };
     interface HTMLElementTagNameMap {
         "editor-footer": HTMLEditorFooterElement;
         "editor-panel": HTMLEditorPanelElement;
         "json-editor": HTMLJsonEditorElement;
         "xml-editor": HTMLXmlEditorElement;
+        "yaml-editor": HTMLYamlEditorElement;
     }
 }
 declare namespace LocalJSX {
@@ -262,11 +326,50 @@ declare namespace LocalJSX {
          */
         "value"?: string;
     }
+    interface YamlEditor {
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Event triggered by the change of the editor value
+         */
+        "onEditorChange"?: (event: YamlEditorCustomEvent<string>) => void;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly"?: boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-actions-panel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter"?: boolean;
+        /**
+         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
+         */
+        "show-footer"?: boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value"?: string;
+    }
     interface IntrinsicElements {
         "editor-footer": EditorFooter;
         "editor-panel": EditorPanel;
         "json-editor": JsonEditor;
         "xml-editor": XmlEditor;
+        "yaml-editor": YamlEditor;
     }
 }
 export { LocalJSX as JSX };
@@ -277,6 +380,7 @@ declare module "@stencil/core" {
             "editor-panel": LocalJSX.EditorPanel & JSXBase.HTMLAttributes<HTMLEditorPanelElement>;
             "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
             "xml-editor": LocalJSX.XmlEditor & JSXBase.HTMLAttributes<HTMLXmlEditorElement>;
+            "yaml-editor": LocalJSX.YamlEditor & JSXBase.HTMLAttributes<HTMLYamlEditorElement>;
         }
     }
 }
