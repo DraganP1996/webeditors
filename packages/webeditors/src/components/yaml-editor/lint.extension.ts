@@ -1,6 +1,6 @@
 import { Diagnostic, linter, lintGutter, setDiagnosticsEffect } from '@codemirror/lint';
 import { EditorView } from 'codemirror';
-import YAML from 'yaml';
+import { parseDocument } from 'yaml';
 
 const gutter = lintGutter();
 const tooltipTheme = EditorView.theme({
@@ -10,17 +10,15 @@ const tooltipTheme = EditorView.theme({
 const yamlLinter = async (view: EditorView) => {
   const diagnostics = [];
   const text = view.state.doc.toString();
-  const yamlDocument = YAML.parseDocument(text);
-
-  console.log('yamlDocument', yamlDocument);
+  const yamlDocument = parseDocument(text);
 
   if (yamlDocument.errors.length) {
-    yamlDocument.errors.forEach(err => {
+    yamlDocument.errors.forEach(error => {
       diagnostics.push({
         from: 0,
         to: 0,
         severity: 'error',
-        message: err.message,
+        message: error.message,
       });
     });
   }

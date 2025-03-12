@@ -46,7 +46,7 @@ export class XMLEditor {
   /**
    * Position of the cursor
    */
-  private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
+  @State() private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
 
   /**
    * Method that makes possible to fold all the foldible blocks

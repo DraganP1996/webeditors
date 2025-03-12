@@ -1,6 +1,8 @@
 import { Config } from '@stencil/core';
 import { reactOutputTarget } from '@stencil/react-output-target';
 import alias from '@rollup/plugin-alias';
+import commonjs from '@rollup/plugin-commonjs';
+import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { resolve } from 'path';
 
 export const config: Config = {
@@ -38,10 +40,15 @@ export const config: Config = {
   rollupPlugins: {
     before: [
       alias({
-        entries: [
-          { find: 'thememirror', replacement: resolve(__dirname, '../../node_modules/thememirror/dist/index.js') },
-          { find: 'yaml', replacement: 'yaml/dist/public-api.js' },
-        ],
+        entries: [{ find: 'thememirror', replacement: resolve(__dirname, '../../node_modules/thememirror/dist/index.js') }],
+      }),
+      nodeResolve({
+        browser: true,
+        preferBuiltins: false,
+      }),
+      commonjs({
+        include: 'node_modules/**',
+        transformMixedEsModules: true,
       }),
     ],
   },

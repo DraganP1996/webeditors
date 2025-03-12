@@ -127,14 +127,6 @@ function hydrateFactory($stencilWindow, $stencilHydrateOpts, $stencilHydrateResu
     /*hydrateAppClosure start*/
 
 
-var require$$0 = require('node:process');
-var require$$0$1 = require('node:buffer');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var require$$0__default = /*#__PURE__*/_interopDefaultLegacy(require$$0);
-var require$$0__default$1 = /*#__PURE__*/_interopDefaultLegacy(require$$0$1);
-
 const NAMESPACE = 'webeditors';
 const BUILD = /* webeditors */ { allRenderFn: true, appendChildSlotFix: false, asyncLoading: true, attachStyles: true, cloneNodeFix: false, constructableCSS: false, cssAnnotations: true, devTools: false, element: false, event: true, experimentalScopedSlotChanges: false, experimentalSlotFixes: false, formAssociated: false, hasRenderFn: true, hostListener: false, hostListenerTarget: false, hostListenerTargetBody: false, hostListenerTargetDocument: false, hostListenerTargetParent: false, hostListenerTargetWindow: false, hotModuleReplacement: false, hydrateClientSide: true, hydrateServerSide: true, hydratedAttribute: false, hydratedClass: true, hydratedSelectorName: "hydrated", invisiblePrehydration: true, isDebug: false, isDev: false, isTesting: false, lazyLoad: true, lifecycle: true, lifecycleDOMEvents: false, member: true, method: true, mode: false, modernPropertyDecls: true, observeAttribute: true, profile: false, prop: true, propBoolean: true, propMutable: false, propNumber: false, propString: true, reflect: false, scoped: false, scopedSlotTextContentFix: false, scriptDataOpts: false, shadowDelegatesFocus: false, shadowDom: false, shadowDomShim: true, slot: true, slotChildNodesFix: false, slotRelocation: true, state: true, style: true, svg: false, taskQueue: true, updatable: true, vdomAttribute: true, vdomClass: true, vdomFunctional: false, vdomKey: true, vdomListener: false, vdomPropOrAttr: true, vdomRef: false, vdomRender: true, vdomStyle: true, vdomText: true, vdomXlink: false, watchCallback: true };
 
@@ -185,7 +177,7 @@ function queryNonceMetaTagContent(doc) {
 var result_exports = {};
 __export(result_exports, {
   err: () => err,
-  map: () => map$7,
+  map: () => map$1,
   ok: () => ok,
   unwrap: () => unwrap,
   unwrapErr: () => unwrapErr
@@ -200,7 +192,7 @@ var err = (value) => ({
   isErr: true,
   value
 });
-function map$7(result, fn) {
+function map$1(result, fn) {
   if (result.isOk) {
     const val = fn(result.value);
     if (val instanceof Promise) {
@@ -19967,7 +19959,7 @@ function getStyleTags(node) {
     return rule || null;
 }
 const t = Tag$1.define;
-const comment = t(), name = t(), typeName = t(name), propertyName = t(name), literal = t(), string$6 = t(literal), number = t(literal), content = t(), heading = t(content), keyword = t(), operator = t(), punctuation = t(), bracket = t(punctuation), meta = t();
+const comment = t(), name = t(), typeName = t(name), propertyName = t(name), literal = t(), string$1 = t(literal), number = t(literal), content = t(), heading = t(content), keyword = t(), operator = t(), punctuation = t(), bracket = t(punctuation), meta = t();
 /**
 The default set of highlighting [tags](#highlight.Tag).
 
@@ -19988,7 +19980,7 @@ it is okay to style it as its more general variant (a variable).
 For tags that extend some parent tag, the documentation links to
 the parent.
 */
-const tags$2 = {
+const tags = {
     /**
     A comment.
     */
@@ -20052,19 +20044,19 @@ const tags$2 = {
     /**
     A string [literal](#highlight.tags.literal).
     */
-    string: string$6,
+    string: string$1,
     /**
     A documentation [string](#highlight.tags.string).
     */
-    docString: t(string$6),
+    docString: t(string$1),
     /**
     A character literal (subtag of [string](#highlight.tags.string)).
     */
-    character: t(string$6),
+    character: t(string$1),
     /**
     An attribute value (subtag of [string](#highlight.tags.string)).
     */
-    attributeValue: t(string$6),
+    attributeValue: t(string$1),
     /**
     A number [literal](#highlight.tags.literal).
     */
@@ -20354,8 +20346,8 @@ const tags$2 = {
     */
     special: Tag$1.defineModifier("special")
 };
-for (let name in tags$2) {
-    let val = tags$2[name];
+for (let name in tags) {
+    let val = tags[name];
     if (val instanceof Tag$1)
         val.name = name;
 }
@@ -20408,36 +20400,36 @@ In addition, these mappings are provided:
   to `"tok-propertyName tok-definition"`
 */
 tagHighlighter([
-    { tag: tags$2.link, class: "tok-link" },
-    { tag: tags$2.heading, class: "tok-heading" },
-    { tag: tags$2.emphasis, class: "tok-emphasis" },
-    { tag: tags$2.strong, class: "tok-strong" },
-    { tag: tags$2.keyword, class: "tok-keyword" },
-    { tag: tags$2.atom, class: "tok-atom" },
-    { tag: tags$2.bool, class: "tok-bool" },
-    { tag: tags$2.url, class: "tok-url" },
-    { tag: tags$2.labelName, class: "tok-labelName" },
-    { tag: tags$2.inserted, class: "tok-inserted" },
-    { tag: tags$2.deleted, class: "tok-deleted" },
-    { tag: tags$2.literal, class: "tok-literal" },
-    { tag: tags$2.string, class: "tok-string" },
-    { tag: tags$2.number, class: "tok-number" },
-    { tag: [tags$2.regexp, tags$2.escape, tags$2.special(tags$2.string)], class: "tok-string2" },
-    { tag: tags$2.variableName, class: "tok-variableName" },
-    { tag: tags$2.local(tags$2.variableName), class: "tok-variableName tok-local" },
-    { tag: tags$2.definition(tags$2.variableName), class: "tok-variableName tok-definition" },
-    { tag: tags$2.special(tags$2.variableName), class: "tok-variableName2" },
-    { tag: tags$2.definition(tags$2.propertyName), class: "tok-propertyName tok-definition" },
-    { tag: tags$2.typeName, class: "tok-typeName" },
-    { tag: tags$2.namespace, class: "tok-namespace" },
-    { tag: tags$2.className, class: "tok-className" },
-    { tag: tags$2.macroName, class: "tok-macroName" },
-    { tag: tags$2.propertyName, class: "tok-propertyName" },
-    { tag: tags$2.operator, class: "tok-operator" },
-    { tag: tags$2.comment, class: "tok-comment" },
-    { tag: tags$2.meta, class: "tok-meta" },
-    { tag: tags$2.invalid, class: "tok-invalid" },
-    { tag: tags$2.punctuation, class: "tok-punctuation" }
+    { tag: tags.link, class: "tok-link" },
+    { tag: tags.heading, class: "tok-heading" },
+    { tag: tags.emphasis, class: "tok-emphasis" },
+    { tag: tags.strong, class: "tok-strong" },
+    { tag: tags.keyword, class: "tok-keyword" },
+    { tag: tags.atom, class: "tok-atom" },
+    { tag: tags.bool, class: "tok-bool" },
+    { tag: tags.url, class: "tok-url" },
+    { tag: tags.labelName, class: "tok-labelName" },
+    { tag: tags.inserted, class: "tok-inserted" },
+    { tag: tags.deleted, class: "tok-deleted" },
+    { tag: tags.literal, class: "tok-literal" },
+    { tag: tags.string, class: "tok-string" },
+    { tag: tags.number, class: "tok-number" },
+    { tag: [tags.regexp, tags.escape, tags.special(tags.string)], class: "tok-string2" },
+    { tag: tags.variableName, class: "tok-variableName" },
+    { tag: tags.local(tags.variableName), class: "tok-variableName tok-local" },
+    { tag: tags.definition(tags.variableName), class: "tok-variableName tok-definition" },
+    { tag: tags.special(tags.variableName), class: "tok-variableName2" },
+    { tag: tags.definition(tags.propertyName), class: "tok-propertyName tok-definition" },
+    { tag: tags.typeName, class: "tok-typeName" },
+    { tag: tags.namespace, class: "tok-namespace" },
+    { tag: tags.className, class: "tok-className" },
+    { tag: tags.macroName, class: "tok-macroName" },
+    { tag: tags.propertyName, class: "tok-propertyName" },
+    { tag: tags.operator, class: "tok-operator" },
+    { tag: tags.comment, class: "tok-comment" },
+    { tag: tags.meta, class: "tok-meta" },
+    { tag: tags.invalid, class: "tok-invalid" },
+    { tag: tags.punctuation, class: "tok-punctuation" }
 ]);
 
 var _a;
@@ -21999,44 +21991,44 @@ const treeHighlighter = /*@__PURE__*/Prec.high(/*@__PURE__*/ViewPlugin.fromClass
 A default highlight style (works well with light themes).
 */
 const defaultHighlightStyle = /*@__PURE__*/HighlightStyle.define([
-    { tag: tags$2.meta,
+    { tag: tags.meta,
         color: "#404740" },
-    { tag: tags$2.link,
+    { tag: tags.link,
         textDecoration: "underline" },
-    { tag: tags$2.heading,
+    { tag: tags.heading,
         textDecoration: "underline",
         fontWeight: "bold" },
-    { tag: tags$2.emphasis,
+    { tag: tags.emphasis,
         fontStyle: "italic" },
-    { tag: tags$2.strong,
+    { tag: tags.strong,
         fontWeight: "bold" },
-    { tag: tags$2.strikethrough,
+    { tag: tags.strikethrough,
         textDecoration: "line-through" },
-    { tag: tags$2.keyword,
+    { tag: tags.keyword,
         color: "#708" },
-    { tag: [tags$2.atom, tags$2.bool, tags$2.url, tags$2.contentSeparator, tags$2.labelName],
+    { tag: [tags.atom, tags.bool, tags.url, tags.contentSeparator, tags.labelName],
         color: "#219" },
-    { tag: [tags$2.literal, tags$2.inserted],
+    { tag: [tags.literal, tags.inserted],
         color: "#164" },
-    { tag: [tags$2.string, tags$2.deleted],
+    { tag: [tags.string, tags.deleted],
         color: "#a11" },
-    { tag: [tags$2.regexp, tags$2.escape, /*@__PURE__*/tags$2.special(tags$2.string)],
+    { tag: [tags.regexp, tags.escape, /*@__PURE__*/tags.special(tags.string)],
         color: "#e40" },
-    { tag: /*@__PURE__*/tags$2.definition(tags$2.variableName),
+    { tag: /*@__PURE__*/tags.definition(tags.variableName),
         color: "#00f" },
-    { tag: /*@__PURE__*/tags$2.local(tags$2.variableName),
+    { tag: /*@__PURE__*/tags.local(tags.variableName),
         color: "#30a" },
-    { tag: [tags$2.typeName, tags$2.namespace],
+    { tag: [tags.typeName, tags.namespace],
         color: "#085" },
-    { tag: tags$2.className,
+    { tag: tags.className,
         color: "#167" },
-    { tag: [/*@__PURE__*/tags$2.special(tags$2.variableName), tags$2.macroName],
+    { tag: [/*@__PURE__*/tags.special(tags.variableName), tags.macroName],
         color: "#256" },
-    { tag: /*@__PURE__*/tags$2.definition(tags$2.propertyName),
+    { tag: /*@__PURE__*/tags.definition(tags.propertyName),
         color: "#00c" },
-    { tag: tags$2.comment,
+    { tag: tags.comment,
         color: "#940" },
-    { tag: tags$2.invalid,
+    { tag: tags.invalid,
         color: "#f00" }
 ]);
 
@@ -22233,7 +22225,7 @@ function createTokenType(extra, tagStr) {
     for (let name of tagStr.split(" ")) {
         let found = [];
         for (let part of name.split(".")) {
-            let value = (extra[part] || tags$2[part]);
+            let value = (extra[part] || tags[part]);
             if (!value) {
                 warnForPart(part, `Unknown highlighting tag ${part}`);
             }
@@ -22316,71 +22308,71 @@ const amy = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#404080',
         },
         {
-            tag: [tags$2.string, tags$2.regexp],
+            tag: [tags.string, tags.regexp],
             color: '#999999',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#7090B0',
         },
         {
-            tag: [tags$2.bool, tags$2.null],
+            tag: [tags.bool, tags.null],
             color: '#8080A0',
         },
         {
-            tag: [tags$2.punctuation, tags$2.derefOperator],
+            tag: [tags.punctuation, tags.derefOperator],
             color: '#805080',
         },
         {
-            tag: tags$2.keyword,
+            tag: tags.keyword,
             color: '#60B0FF',
         },
         {
-            tag: tags$2.definitionKeyword,
+            tag: tags.definitionKeyword,
             color: '#B0FFF0',
         },
         {
-            tag: tags$2.moduleKeyword,
+            tag: tags.moduleKeyword,
             color: '#60B0FF',
         },
         {
-            tag: tags$2.operator,
+            tag: tags.operator,
             color: '#A0A0FF',
         },
         {
-            tag: [tags$2.variableName, tags$2.self],
+            tag: [tags.variableName, tags.self],
             color: '#008080',
         },
         {
-            tag: tags$2.operatorKeyword,
+            tag: tags.operatorKeyword,
             color: '#A0A0FF',
         },
         {
-            tag: tags$2.controlKeyword,
+            tag: tags.controlKeyword,
             color: '#80A0FF',
         },
         {
-            tag: tags$2.className,
+            tag: tags.className,
             color: '#70E080',
         },
         {
-            tag: [tags$2.function(tags$2.propertyName), tags$2.propertyName],
+            tag: [tags.function(tags.propertyName), tags.propertyName],
             color: '#50A0A0',
         },
         {
-            tag: tags$2.tagName,
+            tag: tags.tagName,
             color: '#009090',
         },
         {
-            tag: tags$2.modifier,
+            tag: tags.modifier,
             color: '#B0FFF0',
         },
         {
-            tag: [tags$2.squareBracket, tags$2.attributeName],
+            tag: [tags.squareBracket, tags.attributeName],
             color: '#D0D0FF',
         },
     ],
@@ -22400,63 +22392,63 @@ const ayuLight = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#787b8099',
         },
         {
-            tag: tags$2.string,
+            tag: tags.string,
             color: '#86b300',
         },
         {
-            tag: tags$2.regexp,
+            tag: tags.regexp,
             color: '#4cbf99',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#ffaa33',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             color: '#5c6166',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#fa8d3e',
         },
         {
-            tag: [tags$2.keyword, tags$2.special(tags$2.brace)],
+            tag: [tags.keyword, tags.special(tags.brace)],
             color: '#fa8d3e',
         },
         {
-            tag: tags$2.operator,
+            tag: tags.operator,
             color: '#ed9366',
         },
         {
-            tag: tags$2.separator,
+            tag: tags.separator,
             color: '#5c6166b3',
         },
         {
-            tag: tags$2.punctuation,
+            tag: tags.punctuation,
             color: '#5c6166',
         },
         {
-            tag: [tags$2.definition(tags$2.propertyName), tags$2.function(tags$2.variableName)],
+            tag: [tags.definition(tags.propertyName), tags.function(tags.variableName)],
             color: '#f2ae49',
         },
         {
-            tag: [tags$2.className, tags$2.definition(tags$2.typeName)],
+            tag: [tags.className, tags.definition(tags.typeName)],
             color: '#22a4e6',
         },
         {
-            tag: [tags$2.tagName, tags$2.typeName, tags$2.self, tags$2.labelName],
+            tag: [tags.tagName, tags.typeName, tags.self, tags.labelName],
             color: '#55b4d4',
         },
         {
-            tag: tags$2.angleBracket,
+            tag: tags.angleBracket,
             color: '#55b4d480',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#f2ae49',
         },
     ],
@@ -22476,45 +22468,45 @@ const barf = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#6E6E6E',
         },
         {
-            tag: [tags$2.string, tags$2.regexp, tags$2.special(tags$2.brace)],
+            tag: [tags.string, tags.regexp, tags.special(tags.brace)],
             color: '#5C81B3',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#C1E1B8',
         },
         {
-            tag: tags$2.bool,
+            tag: tags.bool,
             color: '#53667D',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier, tags$2.function(tags$2.propertyName)],
+            tag: [tags.definitionKeyword, tags.modifier, tags.function(tags.propertyName)],
             color: '#A3D295',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.keyword, tags$2.moduleKeyword, tags$2.operatorKeyword, tags$2.operator],
+            tag: [tags.keyword, tags.moduleKeyword, tags.operatorKeyword, tags.operator],
             color: '#697A8E',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.variableName, tags$2.attributeName],
+            tag: [tags.variableName, tags.attributeName],
             color: '#708E67',
         },
         {
             tag: [
-                tags$2.function(tags$2.variableName),
-                tags$2.definition(tags$2.propertyName),
-                tags$2.derefOperator,
+                tags.function(tags.variableName),
+                tags.definition(tags.propertyName),
+                tags.derefOperator,
             ],
             color: '#fff',
         },
         {
-            tag: tags$2.tagName,
+            tag: tags.tagName,
             color: '#A3D295',
         },
     ],
@@ -22534,39 +22526,39 @@ const bespin = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#666666',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace)],
+            tag: [tags.string, tags.special(tags.brace)],
             color: '#54BE0D',
         },
         {
-            tag: tags$2.regexp,
+            tag: tags.regexp,
             color: '#E9C062',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#CF6A4C',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator],
+            tag: [tags.keyword, tags.operator],
             color: '#5EA6EA',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             color: '#7587A6',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#F9EE98',
         },
         {
-            tag: [tags$2.propertyName, tags$2.function(tags$2.variableName)],
+            tag: [tags.propertyName, tags.function(tags.variableName)],
             color: '#937121',
         },
         {
-            tag: [tags$2.typeName, tags$2.angleBracket, tags$2.tagName],
+            tag: [tags.typeName, tags.angleBracket, tags.tagName],
             color: '#9B859D',
         },
     ],
@@ -22586,51 +22578,51 @@ const birdsOfParadise = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#6B4E32',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator, tags$2.derefOperator],
+            tag: [tags.keyword, tags.operator, tags.derefOperator],
             color: '#EF5D32',
         },
         {
-            tag: tags$2.className,
+            tag: tags.className,
             color: '#EFAC32',
             fontWeight: 'bold',
         },
         {
             tag: [
-                tags$2.typeName,
-                tags$2.propertyName,
-                tags$2.function(tags$2.variableName),
-                tags$2.definition(tags$2.variableName),
+                tags.typeName,
+                tags.propertyName,
+                tags.function(tags.variableName),
+                tags.definition(tags.variableName),
             ],
             color: '#EFAC32',
         },
         {
-            tag: tags$2.definition(tags$2.typeName),
+            tag: tags.definition(tags.typeName),
             color: '#EFAC32',
             fontWeight: 'bold',
         },
         {
-            tag: tags$2.labelName,
+            tag: tags.labelName,
             color: '#EFAC32',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.number, tags$2.bool],
+            tag: [tags.number, tags.bool],
             color: '#6C99BB',
         },
         {
-            tag: [tags$2.variableName, tags$2.self],
+            tag: [tags.variableName, tags.self],
             color: '#7DAF9C',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace), tags$2.regexp],
+            tag: [tags.string, tags.special(tags.brace), tags.regexp],
             color: '#D9D762',
         },
         {
-            tag: [tags$2.angleBracket, tags$2.tagName, tags$2.attributeName],
+            tag: [tags.angleBracket, tags.tagName, tags.attributeName],
             color: '#EFCB43',
         },
     ],
@@ -22650,24 +22642,24 @@ const boysAndGirls = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#404040',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace), tags$2.regexp],
+            tag: [tags.string, tags.special(tags.brace), tags.regexp],
             color: '#00D8FF',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#E62286',
         },
         {
-            tag: [tags$2.variableName, tags$2.attributeName, tags$2.self],
+            tag: [tags.variableName, tags.attributeName, tags.self],
             color: '#E62286',
             fontWeight: 'bold',
         },
         {
-            tag: tags$2.function(tags$2.variableName),
+            tag: tags.function(tags.variableName),
             color: '#fff',
             fontWeight: 'bold',
         },
@@ -22688,31 +22680,31 @@ const clouds = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#BCC8BA',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace), tags$2.regexp],
+            tag: [tags.string, tags.special(tags.brace), tags.regexp],
             color: '#5D90CD',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#46A609',
         },
         {
-            tag: tags$2.keyword,
+            tag: tags.keyword,
             color: '#AF956F',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#C52727',
         },
         {
-            tag: [tags$2.angleBracket, tags$2.tagName, tags$2.attributeName],
+            tag: [tags.angleBracket, tags.tagName, tags.attributeName],
             color: '#606060',
         },
         {
-            tag: tags$2.self,
+            tag: tags.self,
             color: '#000',
         },
     ],
@@ -22732,61 +22724,61 @@ const cobalt = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#0088FF',
         },
         {
-            tag: tags$2.string,
+            tag: tags.string,
             color: '#3AD900',
         },
         {
-            tag: tags$2.regexp,
+            tag: tags.regexp,
             color: '#80FFC2',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#FF628C',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#FFEE80',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             color: '#CCCCCC',
         },
         {
-            tag: tags$2.self,
+            tag: tags.self,
             color: '#FF80E1',
         },
         {
             tag: [
-                tags$2.className,
-                tags$2.definition(tags$2.propertyName),
-                tags$2.function(tags$2.variableName),
-                tags$2.definition(tags$2.typeName),
-                tags$2.labelName,
+                tags.className,
+                tags.definition(tags.propertyName),
+                tags.function(tags.variableName),
+                tags.definition(tags.typeName),
+                tags.labelName,
             ],
             color: '#FFDD00',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator],
+            tag: [tags.keyword, tags.operator],
             color: '#FF9D00',
         },
         {
-            tag: [tags$2.propertyName, tags$2.typeName],
+            tag: [tags.propertyName, tags.typeName],
             color: '#80FFBB',
         },
         {
-            tag: tags$2.special(tags$2.brace),
+            tag: tags.special(tags.brace),
             color: '#EDEF7D',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#9EFFFF',
         },
         {
-            tag: tags$2.derefOperator,
+            tag: tags.derefOperator,
             color: '#fff',
         },
     ],
@@ -22806,49 +22798,49 @@ const coolGlow = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#AEAEAE',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace), tags$2.regexp],
+            tag: [tags.string, tags.special(tags.brace), tags.regexp],
             color: '#8DFF8E',
         },
         {
             tag: [
-                tags$2.className,
-                tags$2.definition(tags$2.propertyName),
-                tags$2.function(tags$2.variableName),
-                tags$2.function(tags$2.definition(tags$2.variableName)),
-                tags$2.definition(tags$2.typeName),
+                tags.className,
+                tags.definition(tags.propertyName),
+                tags.function(tags.variableName),
+                tags.function(tags.definition(tags.variableName)),
+                tags.definition(tags.typeName),
             ],
             color: '#A3EBFF',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#62E9BD',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator],
+            tag: [tags.keyword, tags.operator],
             color: '#2BF1DC',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#F8FBB1',
         },
         {
-            tag: [tags$2.variableName, tags$2.self],
+            tag: [tags.variableName, tags.self],
             color: '#B683CA',
         },
         {
-            tag: [tags$2.angleBracket, tags$2.tagName, tags$2.typeName, tags$2.propertyName],
+            tag: [tags.angleBracket, tags.tagName, tags.typeName, tags.propertyName],
             color: '#60A4F1',
         },
         {
-            tag: tags$2.derefOperator,
+            tag: tags.derefOperator,
             color: '#E0E0E0',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#7BACCA',
         },
     ],
@@ -22868,35 +22860,35 @@ const dracula = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#6272a4',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace)],
+            tag: [tags.string, tags.special(tags.brace)],
             color: '#f1fa8c',
         },
         {
-            tag: [tags$2.number, tags$2.self, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.self, tags.bool, tags.null],
             color: '#bd93f9',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator],
+            tag: [tags.keyword, tags.operator],
             color: '#ff79c6',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.typeName],
+            tag: [tags.definitionKeyword, tags.typeName],
             color: '#8be9fd',
         },
         {
-            tag: tags$2.definition(tags$2.typeName),
+            tag: tags.definition(tags.typeName),
             color: '#f8f8f2',
         },
         {
             tag: [
-                tags$2.className,
-                tags$2.definition(tags$2.propertyName),
-                tags$2.function(tags$2.variableName),
-                tags$2.attributeName,
+                tags.className,
+                tags.definition(tags.propertyName),
+                tags.function(tags.variableName),
+                tags.attributeName,
             ],
             color: '#50fa7b',
         },
@@ -22917,29 +22909,29 @@ const espresso = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#AAAAAA',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator, tags$2.typeName, tags$2.tagName, tags$2.propertyName],
+            tag: [tags.keyword, tags.operator, tags.typeName, tags.tagName, tags.propertyName],
             color: '#2F6F9F',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.attributeName, tags$2.definition(tags$2.propertyName)],
+            tag: [tags.attributeName, tags.definition(tags.propertyName)],
             color: '#4F9FD0',
         },
         {
-            tag: [tags$2.className, tags$2.string, tags$2.special(tags$2.brace)],
+            tag: [tags.className, tags.string, tags.special(tags.brace)],
             color: '#CF4F5F',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#CF4F5F',
             fontWeight: 'bold',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             fontWeight: 'bold',
         },
     ],
@@ -22959,64 +22951,64 @@ const noctisLilac = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#9995b7',
         },
         {
-            tag: tags$2.keyword,
+            tag: tags.keyword,
             color: '#ff5792',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#ff5792',
         },
         {
-            tag: [tags$2.className, tags$2.tagName, tags$2.definition(tags$2.typeName)],
+            tag: [tags.className, tags.tagName, tags.definition(tags.typeName)],
             color: '#0094f0',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null, tags$2.special(tags$2.brace)],
+            tag: [tags.number, tags.bool, tags.null, tags.special(tags.brace)],
             color: '#5842ff',
         },
         {
-            tag: [tags$2.definition(tags$2.propertyName), tags$2.function(tags$2.variableName)],
+            tag: [tags.definition(tags.propertyName), tags.function(tags.variableName)],
             color: '#0095a8',
         },
         {
-            tag: tags$2.typeName,
+            tag: tags.typeName,
             color: '#b3694d',
         },
         {
-            tag: [tags$2.propertyName, tags$2.variableName],
+            tag: [tags.propertyName, tags.variableName],
             color: '#fa8900',
         },
         {
-            tag: tags$2.operator,
+            tag: tags.operator,
             color: '#ff5792',
         },
         {
-            tag: tags$2.self,
+            tag: tags.self,
             color: '#e64100',
         },
         {
-            tag: [tags$2.string, tags$2.regexp],
+            tag: [tags.string, tags.regexp],
             color: '#00b368',
         },
         {
-            tag: [tags$2.paren, tags$2.bracket],
+            tag: [tags.paren, tags.bracket],
             color: '#0431fa',
         },
         {
-            tag: tags$2.labelName,
+            tag: tags.labelName,
             color: '#00bdd6',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#e64100',
         },
         {
-            tag: tags$2.angleBracket,
+            tag: tags.angleBracket,
             color: '#9995b7',
         },
     ],
@@ -23036,43 +23028,43 @@ const rosePineDawn = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#9893a5',
         },
         {
-            tag: [tags$2.bool, tags$2.null],
+            tag: [tags.bool, tags.null],
             color: '#286983',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#d7827e',
         },
         {
-            tag: tags$2.className,
+            tag: tags.className,
             color: '#d7827e',
         },
         {
-            tag: [tags$2.angleBracket, tags$2.tagName, tags$2.typeName],
+            tag: [tags.angleBracket, tags.tagName, tags.typeName],
             color: '#56949f',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#907aa9',
         },
         {
-            tag: tags$2.punctuation,
+            tag: tags.punctuation,
             color: '#797593',
         },
         {
-            tag: [tags$2.keyword, tags$2.modifier],
+            tag: [tags.keyword, tags.modifier],
             color: '#286983',
         },
         {
-            tag: [tags$2.string, tags$2.regexp],
+            tag: [tags.string, tags.regexp],
             color: '#ea9d34',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             color: '#d7827e',
         },
     ],
@@ -23092,67 +23084,67 @@ const smoothy = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#CFCFCF',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#E66C29',
         },
         {
             tag: [
-                tags$2.className,
-                tags$2.definition(tags$2.propertyName),
-                tags$2.function(tags$2.variableName),
-                tags$2.labelName,
-                tags$2.definition(tags$2.typeName),
+                tags.className,
+                tags.definition(tags.propertyName),
+                tags.function(tags.variableName),
+                tags.labelName,
+                tags.definition(tags.typeName),
             ],
             color: '#2EB43B',
         },
         {
-            tag: tags$2.keyword,
+            tag: tags.keyword,
             color: '#D8B229',
         },
         {
-            tag: tags$2.operator,
+            tag: tags.operator,
             color: '#4EA44E',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#925A47',
         },
         {
-            tag: tags$2.string,
+            tag: tags.string,
             color: '#704D3D',
         },
         {
-            tag: tags$2.typeName,
+            tag: tags.typeName,
             color: '#2F8996',
         },
         {
-            tag: [tags$2.variableName, tags$2.propertyName],
+            tag: [tags.variableName, tags.propertyName],
             color: '#77ACB0',
         },
         {
-            tag: tags$2.self,
+            tag: tags.self,
             color: '#77ACB0',
             fontWeight: 'bold',
         },
         {
-            tag: tags$2.regexp,
+            tag: tags.regexp,
             color: '#E3965E',
         },
         {
-            tag: [tags$2.tagName, tags$2.angleBracket],
+            tag: [tags.tagName, tags.angleBracket],
             color: '#BAA827',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#B06520',
         },
         {
-            tag: tags$2.derefOperator,
+            tag: tags.derefOperator,
             color: '#000',
         },
     ],
@@ -23172,61 +23164,61 @@ const solarizedLight = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#93A1A1',
         },
         {
-            tag: tags$2.string,
+            tag: tags.string,
             color: '#2AA198',
         },
         {
-            tag: tags$2.regexp,
+            tag: tags.regexp,
             color: '#D30102',
         },
         {
-            tag: tags$2.number,
+            tag: tags.number,
             color: '#D33682',
         },
         {
-            tag: tags$2.variableName,
+            tag: tags.variableName,
             color: '#268BD2',
         },
         {
-            tag: [tags$2.keyword, tags$2.operator, tags$2.punctuation],
+            tag: [tags.keyword, tags.operator, tags.punctuation],
             color: '#859900',
         },
         {
-            tag: [tags$2.definitionKeyword, tags$2.modifier],
+            tag: [tags.definitionKeyword, tags.modifier],
             color: '#073642',
             fontWeight: 'bold',
         },
         {
-            tag: [tags$2.className, tags$2.self, tags$2.definition(tags$2.propertyName)],
+            tag: [tags.className, tags.self, tags.definition(tags.propertyName)],
             color: '#268BD2',
         },
         {
-            tag: tags$2.function(tags$2.variableName),
+            tag: tags.function(tags.variableName),
             color: '#268BD2',
         },
         {
-            tag: [tags$2.bool, tags$2.null],
+            tag: [tags.bool, tags.null],
             color: '#B58900',
         },
         {
-            tag: tags$2.tagName,
+            tag: tags.tagName,
             color: '#268BD2',
             fontWeight: 'bold',
         },
         {
-            tag: tags$2.angleBracket,
+            tag: tags.angleBracket,
             color: '#93A1A1',
         },
         {
-            tag: tags$2.attributeName,
+            tag: tags.attributeName,
             color: '#93A1A1',
         },
         {
-            tag: tags$2.typeName,
+            tag: tags.typeName,
             color: '#859900',
         },
     ],
@@ -23246,39 +23238,39 @@ const tomorrow = createTheme({
     },
     styles: [
         {
-            tag: tags$2.comment,
+            tag: tags.comment,
             color: '#8E908C',
         },
         {
-            tag: [tags$2.variableName, tags$2.self, tags$2.propertyName, tags$2.attributeName, tags$2.regexp],
+            tag: [tags.variableName, tags.self, tags.propertyName, tags.attributeName, tags.regexp],
             color: '#C82829',
         },
         {
-            tag: [tags$2.number, tags$2.bool, tags$2.null],
+            tag: [tags.number, tags.bool, tags.null],
             color: '#F5871F',
         },
         {
-            tag: [tags$2.className, tags$2.typeName, tags$2.definition(tags$2.typeName)],
+            tag: [tags.className, tags.typeName, tags.definition(tags.typeName)],
             color: '#C99E00',
         },
         {
-            tag: [tags$2.string, tags$2.special(tags$2.brace)],
+            tag: [tags.string, tags.special(tags.brace)],
             color: '#718C00',
         },
         {
-            tag: tags$2.operator,
+            tag: tags.operator,
             color: '#3E999F',
         },
         {
-            tag: [tags$2.definition(tags$2.propertyName), tags$2.function(tags$2.variableName)],
+            tag: [tags.definition(tags.propertyName), tags.function(tags.variableName)],
             color: '#4271AE',
         },
         {
-            tag: tags$2.keyword,
+            tag: tags.keyword,
             color: '#8959A8',
         },
         {
-            tag: tags$2.derefOperator,
+            tag: tags.derefOperator,
             color: '#4D4D4C',
         },
     ],
@@ -30329,18 +30321,18 @@ function getSpecializer(spec) {
 }
 
 const jsonHighlighting = styleTags({
-  String: tags$2.string,
-  Number: tags$2.number,
-  "True False": tags$2.bool,
-  PropertyName: tags$2.propertyName,
-  Null: tags$2.null,
-  ", :": tags$2.separator,
-  "[ ]": tags$2.squareBracket,
-  "{ }": tags$2.brace
+  String: tags.string,
+  Number: tags.number,
+  "True False": tags.bool,
+  PropertyName: tags.propertyName,
+  Null: tags.null,
+  ", :": tags.separator,
+  "[ ]": tags.squareBracket,
+  "{ }": tags.brace
 });
 
 // This file was generated by lezer-generator. You probably shouldn't edit it.
-const parser$4 = LRParser.deserialize({
+const parser$2 = LRParser.deserialize({
   version: 14,
   states: "$bOVQPOOOOQO'#Cb'#CbOnQPO'#CeOvQPO'#ClOOQO'#Cr'#CrQOQPOOOOQO'#Cg'#CgO}QPO'#CfO!SQPO'#CtOOQO,59P,59PO![QPO,59PO!aQPO'#CuOOQO,59W,59WO!iQPO,59WOVQPO,59QOqQPO'#CmO!nQPO,59`OOQO1G.k1G.kOVQPO'#CnO!vQPO,59aOOQO1G.r1G.rOOQO1G.l1G.lOOQO,59X,59XOOQO-E6k-E6kOOQO,59Y,59YOOQO-E6l-E6l",
   stateData: "#O~OeOS~OQSORSOSSOTSOWQO_ROgPO~OVXOgUO~O^[O~PVO[^O~O]_OVhX~OVaO~O]bO^iX~O^dO~O]_OVha~O]bO^ia~O",
@@ -30398,7 +30390,7 @@ A language provider that provides JSON parsing.
 */
 const jsonLanguage = /*@__PURE__*/LRLanguage.define({
     name: "json",
-    parser: /*@__PURE__*/parser$4.configure({
+    parser: /*@__PURE__*/parser$2.configure({
         props: [
             /*@__PURE__*/indentNodeProp.add({
                 Object: /*@__PURE__*/continuedIndent({ except: /^\s*\}/ }),
@@ -30615,10 +30607,10 @@ class JsonEditor {
         this.calculateEditorHeight();
     }
     render() {
-        return (hAsync(Host, { key: '4c5717c774eee8588390659c22fc8b1d11801a57', style: {
+        return (hAsync(Host, { key: '144cbb07d2b0e06ab19695faab7356878806ba26', style: {
                 display: 'block',
                 height: '100%',
-            } }, hAsync("div", { key: 'cb93008de1a1cc940e5a589c9d892f91e6fa5349', class: "editor-wrapper" }, this.showActionsPanel && this.mode !== 'text' && (hAsync("editor-panel", { key: '21569924c43a2eba72dbcb293c52867180146aaa' }, hAsync("slot", { key: 'd0ad77bc68bc027985657931d1360aef77db0b42', name: "panel" }))), hAsync("div", { key: '806e136a96e0ce0690eabb48a49fe07a3efe5804', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '06a23312537981c7014a69d68cb23ebc5a948eef', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
+            } }, hAsync("div", { key: '7d7b7b59062d13fcf6ad3e5ff1ccce6b761cdb3e', class: "editor-wrapper" }, this.showActionsPanel && this.mode !== 'text' && (hAsync("editor-panel", { key: 'cb5b1778db7eb97865c1e5959459ae6b4093c385' }, hAsync("slot", { key: '3a79ed4543bd0deaf3d01c569a94209aa4487ec6', name: "panel" }))), hAsync("div", { key: 'c2586ce13a054c2144b6938d9c058d33c346927e', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '120015e2e378bb9c7edb2f356d7285abb69f495f', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
     }
     static get watchers() { return {
         "theme": ["onThemeChange"],
@@ -30636,6 +30628,7 @@ class JsonEditor {
             "showFooter": [4, "show-footer"],
             "theme": [1],
             "mode": [1],
+            "_cursorPosition": [32],
             "_editorHeight": [32],
             "foldAll": [64],
             "unfoldAll": [64]
@@ -31229,22 +31222,22 @@ const piContent = scanTo(piContent$1, "?>");
 const cdataContent = scanTo(cdataContent$1, "]]>");
 
 const xmlHighlighting = styleTags({
-  Text: tags$2.content,
-  "StartTag StartCloseTag EndTag SelfCloseEndTag": tags$2.angleBracket,
-  TagName: tags$2.tagName,
-  "MismatchedCloseTag/TagName": [tags$2.tagName, tags$2.invalid],
-  AttributeName: tags$2.attributeName,
-  AttributeValue: tags$2.attributeValue,
-  Is: tags$2.definitionOperator,
-  "EntityReference CharacterReference": tags$2.character,
-  Comment: tags$2.blockComment,
-  ProcessingInst: tags$2.processingInstruction,
-  DoctypeDecl: tags$2.documentMeta,
-  Cdata: tags$2.special(tags$2.string)
+  Text: tags.content,
+  "StartTag StartCloseTag EndTag SelfCloseEndTag": tags.angleBracket,
+  TagName: tags.tagName,
+  "MismatchedCloseTag/TagName": [tags.tagName, tags.invalid],
+  AttributeName: tags.attributeName,
+  AttributeValue: tags.attributeValue,
+  Is: tags.definitionOperator,
+  "EntityReference CharacterReference": tags.character,
+  Comment: tags.blockComment,
+  ProcessingInst: tags.processingInstruction,
+  DoctypeDecl: tags.documentMeta,
+  Cdata: tags.special(tags.string)
 });
 
 // This file was generated by lezer-generator. You probably shouldn't edit it.
-const parser$3 = LRParser.deserialize({
+const parser$1 = LRParser.deserialize({
   version: 14,
   states: ",lOQOaOOOrOxO'#CfOzOpO'#CiO!tOaO'#CgOOOP'#Cg'#CgO!{OrO'#CrO#TOtO'#CsO#]OpO'#CtOOOP'#DT'#DTOOOP'#Cv'#CvQQOaOOOOOW'#Cw'#CwO#eOxO,59QOOOP,59Q,59QOOOO'#Cx'#CxO#mOpO,59TO#uO!bO,59TOOOP'#C|'#C|O$TOaO,59RO$[OpO'#CoOOOP,59R,59ROOOQ'#C}'#C}O$dOrO,59^OOOP,59^,59^OOOS'#DO'#DOO$lOtO,59_OOOP,59_,59_O$tOpO,59`O$|OpO,59`OOOP-E6t-E6tOOOW-E6u-E6uOOOP1G.l1G.lOOOO-E6v-E6vO%UO!bO1G.oO%UO!bO1G.oO%dOpO'#CkO%lO!bO'#CyO%zO!bO1G.oOOOP1G.o1G.oOOOP1G.w1G.wOOOP-E6z-E6zOOOP1G.m1G.mO&VOpO,59ZO&_OpO,59ZOOOQ-E6{-E6{OOOP1G.x1G.xOOOS-E6|-E6|OOOP1G.y1G.yO&gOpO1G.zO&gOpO1G.zOOOP1G.z1G.zO&oO!bO7+$ZO&}O!bO7+$ZOOOP7+$Z7+$ZOOOP7+$c7+$cO'YOpO,59VO'bOpO,59VO'mO!bO,59eOOOO-E6w-E6wO'{OpO1G.uO'{OpO1G.uOOOP1G.u1G.uO(TOpO7+$fOOOP7+$f7+$fO(]O!bO<<GuOOOP<<Gu<<GuOOOP<<G}<<G}O'bOpO1G.qO'bOpO1G.qO(hO#tO'#CnO(vO&jO'#CnOOOO1G.q1G.qO)UOpO7+$aOOOP7+$a7+$aOOOP<<HQ<<HQOOOPAN=aAN=aOOOPAN=iAN=iO'bOpO7+$]OOOO7+$]7+$]OOOO'#Cz'#CzO)^O#tO,59YOOOO,59Y,59YOOOO'#C{'#C{O)lO&jO,59YOOOP<<G{<<G{OOOO<<Gw<<GwOOOO-E6x-E6xOOOO1G.t1G.tOOOO-E6y-E6y",
   stateData: ")z~OPQOSVOTWOVWOWWOXWOiXOyPO!QTO!SUO~OvZOx]O~O^`Oz^O~OPQOQcOSVOTWOVWOWWOXWOyPO!QTO!SUO~ORdO~P!SOteO!PgO~OuhO!RjO~O^lOz^O~OvZOxoO~O^qOz^O~O[vO`sOdwOz^O~ORyO~P!SO^{Oz^O~OteO!P}O~OuhO!R!PO~O^!QOz^O~O[!SOz^O~O[!VO`sOd!WOz^O~Oa!YOz^O~Oz^O[mX`mXdmX~O[!VO`sOd!WO~O^!]Oz^O~O[!_Oz^O~O[!aOz^O~O[!cO`sOd!dOz^O~O[!cO`sOd!dO~Oa!eOz^O~Oz^O{!gO}!hO~Oz^O[ma`madma~O[!kOz^O~O[!lOz^O~O[!mO`sOd!nO~OW!qOX!qO{!sO|!qO~OW!tOX!tO}!sO!O!tO~O[!vOz^O~OW!qOX!qO{!yO|!qO~OW!tOX!tO}!yO!O!tO~O",
@@ -31472,7 +31465,7 @@ highlighting and indentation information.
 */
 const xmlLanguage = /*@__PURE__*/LRLanguage.define({
     name: "xml",
-    parser: /*@__PURE__*/parser$3.configure({
+    parser: /*@__PURE__*/parser$1.configure({
         props: [
             /*@__PURE__*/indentNodeProp.add({
                 Element(context) {
@@ -31734,10 +31727,10 @@ class XMLEditor {
         this.calculateEditorHeight();
     }
     render() {
-        return (hAsync(Host, { key: '10f002b4e1ab815ef1e705470ca382bf10a61a90', style: {
+        return (hAsync(Host, { key: '48a509e949a8cb8237782532300e4a4a797eaeb0', style: {
                 display: 'block',
                 height: '100%',
-            } }, hAsync("div", { key: 'c508f58ee88ee36307c9e4e3447c7ea99387b511', class: "editor-wrapper" }, this.showActionsPanel && (hAsync("editor-panel", { key: 'a367a01afca39094dc387f5eec62838bfcd60371' }, hAsync("slot", { key: '263d1d55a62c8bf88a43ea564dbdd2460909c252', name: "panel" }))), hAsync("div", { key: 'c9ed3a887556a53bb707ea2ceb5e6cb8975e1f7d', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '2ffbba9e2583c08527a5422bb3279b2725c925c4', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
+            } }, hAsync("div", { key: '237a5de48ed73132c067c9d88c0643f6484d1b7c', class: "editor-wrapper" }, this.showActionsPanel && (hAsync("editor-panel", { key: '893babbd79a82ef810f24f36168098853e4157e2' }, hAsync("slot", { key: '420789bf161338489e21fab50b06ab5d9923b8b5', name: "panel" }))), hAsync("div", { key: '99ef6a7b584119deb1fee30a3aaee178475caf1a', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '997b27d5abe8cc5ae8db7c543184d00588c3b228', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
     }
     static get watchers() { return {
         "theme": ["onThemeChange"],
@@ -31754,6 +31747,7 @@ class XMLEditor {
             "showActionsPanel": [4, "show-actions-panel"],
             "showFooter": [4, "show-footer"],
             "theme": [1],
+            "_cursorPosition": [32],
             "_editorHeight": [32],
             "foldAll": [64],
             "unfoldAll": [64]
@@ -31763,14 +31757,6 @@ class XMLEditor {
         "$attrsToReflect$": []
     }; }
 }
-
-var publicApi = {};
-
-var composer$1 = {};
-
-var directives$2 = {};
-
-var identity$w = {};
 
 const ALIAS = Symbol.for('yaml.alias');
 const DOC = Symbol.for('yaml.document');
@@ -31783,9 +31769,9 @@ const isAlias = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] 
 const isDocument = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === DOC;
 const isMap = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === MAP;
 const isPair = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === PAIR;
-const isScalar$1 = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === SCALAR$1;
+const isScalar = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === SCALAR$1;
 const isSeq = (node) => !!node && typeof node === 'object' && node[NODE_TYPE] === SEQ;
-function isCollection$1(node) {
+function isCollection(node) {
     if (node && typeof node === 'object')
         switch (node[NODE_TYPE]) {
             case MAP:
@@ -31805,32 +31791,11 @@ function isNode(node) {
         }
     return false;
 }
-const hasAnchor = (node) => (isScalar$1(node) || isCollection$1(node)) && !!node.anchor;
+const hasAnchor = (node) => (isScalar(node) || isCollection(node)) && !!node.anchor;
 
-identity$w.ALIAS = ALIAS;
-identity$w.DOC = DOC;
-identity$w.MAP = MAP;
-identity$w.NODE_TYPE = NODE_TYPE;
-identity$w.PAIR = PAIR;
-identity$w.SCALAR = SCALAR$1;
-identity$w.SEQ = SEQ;
-identity$w.hasAnchor = hasAnchor;
-identity$w.isAlias = isAlias;
-identity$w.isCollection = isCollection$1;
-identity$w.isDocument = isDocument;
-identity$w.isMap = isMap;
-identity$w.isNode = isNode;
-identity$w.isPair = isPair;
-identity$w.isScalar = isScalar$1;
-identity$w.isSeq = isSeq;
-
-var visit$5 = {};
-
-var identity$v = identity$w;
-
-const BREAK$1 = Symbol('break visit');
-const SKIP$1 = Symbol('skip children');
-const REMOVE$1 = Symbol('remove node');
+const BREAK = Symbol('break visit');
+const SKIP = Symbol('skip children');
+const REMOVE = Symbol('remove node');
 /**
  * Apply a visitor to an AST node or document.
  *
@@ -31861,11 +31826,11 @@ const REMOVE$1 = Symbol('remove node');
  * and `Node` (alias, map, seq & scalar) targets. Of all these, only the most
  * specific defined one will be used for each node.
  */
-function visit$4(node, visitor) {
+function visit(node, visitor) {
     const visitor_ = initVisitor(visitor);
-    if (identity$v.isDocument(node)) {
+    if (isDocument(node)) {
         const cd = visit_(null, node.contents, visitor_, Object.freeze([node]));
-        if (cd === REMOVE$1)
+        if (cd === REMOVE)
             node.contents = null;
     }
     else
@@ -31875,130 +31840,43 @@ function visit$4(node, visitor) {
 // namespace using `var`, but then complains about that because
 // `unique symbol` must be `const`.
 /** Terminate visit traversal completely */
-visit$4.BREAK = BREAK$1;
+visit.BREAK = BREAK;
 /** Do not visit the children of the current node */
-visit$4.SKIP = SKIP$1;
+visit.SKIP = SKIP;
 /** Remove the current node */
-visit$4.REMOVE = REMOVE$1;
+visit.REMOVE = REMOVE;
 function visit_(key, node, visitor, path) {
     const ctrl = callVisitor(key, node, visitor, path);
-    if (identity$v.isNode(ctrl) || identity$v.isPair(ctrl)) {
+    if (isNode(ctrl) || isPair(ctrl)) {
         replaceNode(key, path, ctrl);
         return visit_(key, ctrl, visitor, path);
     }
     if (typeof ctrl !== 'symbol') {
-        if (identity$v.isCollection(node)) {
+        if (isCollection(node)) {
             path = Object.freeze(path.concat(node));
             for (let i = 0; i < node.items.length; ++i) {
                 const ci = visit_(i, node.items[i], visitor, path);
                 if (typeof ci === 'number')
                     i = ci - 1;
-                else if (ci === BREAK$1)
-                    return BREAK$1;
-                else if (ci === REMOVE$1) {
+                else if (ci === BREAK)
+                    return BREAK;
+                else if (ci === REMOVE) {
                     node.items.splice(i, 1);
                     i -= 1;
                 }
             }
         }
-        else if (identity$v.isPair(node)) {
+        else if (isPair(node)) {
             path = Object.freeze(path.concat(node));
             const ck = visit_('key', node.key, visitor, path);
-            if (ck === BREAK$1)
-                return BREAK$1;
-            else if (ck === REMOVE$1)
+            if (ck === BREAK)
+                return BREAK;
+            else if (ck === REMOVE)
                 node.key = null;
             const cv = visit_('value', node.value, visitor, path);
-            if (cv === BREAK$1)
-                return BREAK$1;
-            else if (cv === REMOVE$1)
-                node.value = null;
-        }
-    }
-    return ctrl;
-}
-/**
- * Apply an async visitor to an AST node or document.
- *
- * Walks through the tree (depth-first) starting from `node`, calling a
- * `visitor` function with three arguments:
- *   - `key`: For sequence values and map `Pair`, the node's index in the
- *     collection. Within a `Pair`, `'key'` or `'value'`, correspondingly.
- *     `null` for the root node.
- *   - `node`: The current node.
- *   - `path`: The ancestry of the current node.
- *
- * The return value of the visitor may be used to control the traversal:
- *   - `Promise`: Must resolve to one of the following values
- *   - `undefined` (default): Do nothing and continue
- *   - `visit.SKIP`: Do not visit the children of this node, continue with next
- *     sibling
- *   - `visit.BREAK`: Terminate traversal completely
- *   - `visit.REMOVE`: Remove the current node, then continue with the next one
- *   - `Node`: Replace the current node, then continue by visiting it
- *   - `number`: While iterating the items of a sequence or map, set the index
- *     of the next step. This is useful especially if the index of the current
- *     node has changed.
- *
- * If `visitor` is a single function, it will be called with all values
- * encountered in the tree, including e.g. `null` values. Alternatively,
- * separate visitor functions may be defined for each `Map`, `Pair`, `Seq`,
- * `Alias` and `Scalar` node. To define the same visitor function for more than
- * one node type, use the `Collection` (map and seq), `Value` (map, seq & scalar)
- * and `Node` (alias, map, seq & scalar) targets. Of all these, only the most
- * specific defined one will be used for each node.
- */
-async function visitAsync(node, visitor) {
-    const visitor_ = initVisitor(visitor);
-    if (identity$v.isDocument(node)) {
-        const cd = await visitAsync_(null, node.contents, visitor_, Object.freeze([node]));
-        if (cd === REMOVE$1)
-            node.contents = null;
-    }
-    else
-        await visitAsync_(null, node, visitor_, Object.freeze([]));
-}
-// Without the `as symbol` casts, TS declares these in the `visit`
-// namespace using `var`, but then complains about that because
-// `unique symbol` must be `const`.
-/** Terminate visit traversal completely */
-visitAsync.BREAK = BREAK$1;
-/** Do not visit the children of the current node */
-visitAsync.SKIP = SKIP$1;
-/** Remove the current node */
-visitAsync.REMOVE = REMOVE$1;
-async function visitAsync_(key, node, visitor, path) {
-    const ctrl = await callVisitor(key, node, visitor, path);
-    if (identity$v.isNode(ctrl) || identity$v.isPair(ctrl)) {
-        replaceNode(key, path, ctrl);
-        return visitAsync_(key, ctrl, visitor, path);
-    }
-    if (typeof ctrl !== 'symbol') {
-        if (identity$v.isCollection(node)) {
-            path = Object.freeze(path.concat(node));
-            for (let i = 0; i < node.items.length; ++i) {
-                const ci = await visitAsync_(i, node.items[i], visitor, path);
-                if (typeof ci === 'number')
-                    i = ci - 1;
-                else if (ci === BREAK$1)
-                    return BREAK$1;
-                else if (ci === REMOVE$1) {
-                    node.items.splice(i, 1);
-                    i -= 1;
-                }
-            }
-        }
-        else if (identity$v.isPair(node)) {
-            path = Object.freeze(path.concat(node));
-            const ck = await visitAsync_('key', node.key, visitor, path);
-            if (ck === BREAK$1)
-                return BREAK$1;
-            else if (ck === REMOVE$1)
-                node.key = null;
-            const cv = await visitAsync_('value', node.value, visitor, path);
-            if (cv === BREAK$1)
-                return BREAK$1;
-            else if (cv === REMOVE$1)
+            if (cv === BREAK)
+                return BREAK;
+            else if (cv === REMOVE)
                 node.value = null;
         }
     }
@@ -32026,43 +31904,37 @@ function initVisitor(visitor) {
 function callVisitor(key, node, visitor, path) {
     if (typeof visitor === 'function')
         return visitor(key, node, path);
-    if (identity$v.isMap(node))
+    if (isMap(node))
         return visitor.Map?.(key, node, path);
-    if (identity$v.isSeq(node))
+    if (isSeq(node))
         return visitor.Seq?.(key, node, path);
-    if (identity$v.isPair(node))
+    if (isPair(node))
         return visitor.Pair?.(key, node, path);
-    if (identity$v.isScalar(node))
+    if (isScalar(node))
         return visitor.Scalar?.(key, node, path);
-    if (identity$v.isAlias(node))
+    if (isAlias(node))
         return visitor.Alias?.(key, node, path);
     return undefined;
 }
 function replaceNode(key, path, node) {
     const parent = path[path.length - 1];
-    if (identity$v.isCollection(parent)) {
+    if (isCollection(parent)) {
         parent.items[key] = node;
     }
-    else if (identity$v.isPair(parent)) {
+    else if (isPair(parent)) {
         if (key === 'key')
             parent.key = node;
         else
             parent.value = node;
     }
-    else if (identity$v.isDocument(parent)) {
+    else if (isDocument(parent)) {
         parent.contents = node;
     }
     else {
-        const pt = identity$v.isAlias(parent) ? 'alias' : 'scalar';
+        const pt = isAlias(parent) ? 'alias' : 'scalar';
         throw new Error(`Cannot replace node with ${pt} parent`);
     }
 }
-
-visit$5.visit = visit$4;
-visit$5.visitAsync = visitAsync;
-
-var identity$u = identity$w;
-var visit$3 = visit$5;
 
 const escapeChars = {
     '!': '%21',
@@ -32214,10 +32086,10 @@ class Directives {
             : [];
         const tagEntries = Object.entries(this.tags);
         let tagNames;
-        if (doc && tagEntries.length > 0 && identity$u.isNode(doc.contents)) {
+        if (doc && tagEntries.length > 0 && isNode(doc.contents)) {
             const tags = {};
-            visit$3.visit(doc.contents, (_key, node) => {
-                if (identity$u.isNode(node) && node.tag)
+            visit(doc.contents, (_key, node) => {
+                if (isNode(node) && node.tag)
                     tags[node.tag] = true;
             });
             tagNames = Object.keys(tags);
@@ -32236,17 +32108,6 @@ class Directives {
 Directives.defaultYaml = { explicit: false, version: '1.2' };
 Directives.defaultTags = { '!!': 'tag:yaml.org,2002:' };
 
-directives$2.Directives = Directives;
-
-var Document$4 = {};
-
-var Alias$5 = {};
-
-var anchors$3 = {};
-
-var identity$t = identity$w;
-var visit$2 = visit$5;
-
 /**
  * Verify that the input string is a valid anchor.
  *
@@ -32262,7 +32123,7 @@ function anchorIsValid(anchor) {
 }
 function anchorNames(root) {
     const anchors = new Set();
-    visit$2.visit(root, {
+    visit(root, {
         Value(_key, node) {
             if (node.anchor)
                 anchors.add(node.anchor);
@@ -32301,7 +32162,7 @@ function createNodeAnchors(doc, prefix) {
                 const ref = sourceObjects.get(source);
                 if (typeof ref === 'object' &&
                     ref.anchor &&
-                    (identity$t.isScalar(ref.node) || identity$t.isCollection(ref.node))) {
+                    (isScalar(ref.node) || isCollection(ref.node))) {
                     ref.node.anchor = ref.anchor;
                 }
                 else {
@@ -32315,15 +32176,6 @@ function createNodeAnchors(doc, prefix) {
     };
 }
 
-anchors$3.anchorIsValid = anchorIsValid;
-anchors$3.anchorNames = anchorNames;
-anchors$3.createNodeAnchors = createNodeAnchors;
-anchors$3.findNewAnchor = findNewAnchor;
-
-var Node$3 = {};
-
-var applyReviver$3 = {};
-
 /**
  * Applies the JSON.parse reviver algorithm as defined in the ECMA-262 spec,
  * in section 24.5.1.1 "Runtime Semantics: InternalizeJSONProperty" of the
@@ -32331,12 +32183,12 @@ var applyReviver$3 = {};
  *
  * Includes extensions for handling Map and Set objects.
  */
-function applyReviver$2(reviver, obj, key, val) {
+function applyReviver(reviver, obj, key, val) {
     if (val && typeof val === 'object') {
         if (Array.isArray(val)) {
             for (let i = 0, len = val.length; i < len; ++i) {
                 const v0 = val[i];
-                const v1 = applyReviver$2(reviver, val, String(i), v0);
+                const v1 = applyReviver(reviver, val, String(i), v0);
                 // eslint-disable-next-line @typescript-eslint/no-array-delete
                 if (v1 === undefined)
                     delete val[i];
@@ -32347,7 +32199,7 @@ function applyReviver$2(reviver, obj, key, val) {
         else if (val instanceof Map) {
             for (const k of Array.from(val.keys())) {
                 const v0 = val.get(k);
-                const v1 = applyReviver$2(reviver, val, k, v0);
+                const v1 = applyReviver(reviver, val, k, v0);
                 if (v1 === undefined)
                     val.delete(k);
                 else if (v1 !== v0)
@@ -32356,7 +32208,7 @@ function applyReviver$2(reviver, obj, key, val) {
         }
         else if (val instanceof Set) {
             for (const v0 of Array.from(val)) {
-                const v1 = applyReviver$2(reviver, val, v0, v0);
+                const v1 = applyReviver(reviver, val, v0, v0);
                 if (v1 === undefined)
                     val.delete(v0);
                 else if (v1 !== v0) {
@@ -32367,7 +32219,7 @@ function applyReviver$2(reviver, obj, key, val) {
         }
         else {
             for (const [k, v0] of Object.entries(val)) {
-                const v1 = applyReviver$2(reviver, val, k, v0);
+                const v1 = applyReviver(reviver, val, k, v0);
                 if (v1 === undefined)
                     delete val[k];
                 else if (v1 !== v0)
@@ -32377,12 +32229,6 @@ function applyReviver$2(reviver, obj, key, val) {
     }
     return reviver.call(obj, key, val);
 }
-
-applyReviver$3.applyReviver = applyReviver$2;
-
-var toJS$8 = {};
-
-var identity$s = identity$w;
 
 /**
  * Recursively convert any node or its contents to native JavaScript
@@ -32394,13 +32240,13 @@ var identity$s = identity$w;
  *   `{ keep: true }` is not set, output should be suitable for JSON
  *   stringification.
  */
-function toJS$7(value, arg, ctx) {
+function toJS(value, arg, ctx) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     if (Array.isArray(value))
-        return value.map((v, i) => toJS$7(v, String(i), ctx));
+        return value.map((v, i) => toJS(v, String(i), ctx));
     if (value && typeof value.toJSON === 'function') {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-        if (!ctx || !identity$s.hasAnchor(value))
+        if (!ctx || !hasAnchor(value))
             return value.toJSON(arg, ctx);
         const data = { aliasCount: 0, count: 1, res: undefined };
         ctx.anchors.set(value, data);
@@ -32418,15 +32264,9 @@ function toJS$7(value, arg, ctx) {
     return value;
 }
 
-toJS$8.toJS = toJS$7;
-
-var applyReviver$1 = applyReviver$3;
-var identity$r = identity$w;
-var toJS$6 = toJS$8;
-
 class NodeBase {
     constructor(type) {
-        Object.defineProperty(this, identity$r.NODE_TYPE, { value: type });
+        Object.defineProperty(this, NODE_TYPE, { value: type });
     }
     /** Create a copy of this node.  */
     clone() {
@@ -32437,7 +32277,7 @@ class NodeBase {
     }
     /** A plain JavaScript representation of this node. */
     toJS(doc, { mapAsMap, maxAliasCount, onAnchor, reviver } = {}) {
-        if (!identity$r.isDocument(doc))
+        if (!isDocument(doc))
             throw new TypeError('A document argument is required');
         const ctx = {
             anchors: new Map(),
@@ -32447,27 +32287,19 @@ class NodeBase {
             mapKeyWarned: false,
             maxAliasCount: typeof maxAliasCount === 'number' ? maxAliasCount : 100
         };
-        const res = toJS$6.toJS(this, '', ctx);
+        const res = toJS(this, '', ctx);
         if (typeof onAnchor === 'function')
             for (const { count, res } of ctx.anchors.values())
                 onAnchor(res, count);
         return typeof reviver === 'function'
-            ? applyReviver$1.applyReviver(reviver, { '': res }, '', res)
+            ? applyReviver(reviver, { '': res }, '', res)
             : res;
     }
 }
 
-Node$3.NodeBase = NodeBase;
-
-var anchors$2 = anchors$3;
-var visit$1 = visit$5;
-var identity$q = identity$w;
-var Node$2 = Node$3;
-var toJS$5 = toJS$8;
-
-class Alias$4 extends Node$2.NodeBase {
+class Alias$1 extends NodeBase {
     constructor(source) {
-        super(identity$q.ALIAS);
+        super(ALIAS);
         this.source = source;
         Object.defineProperty(this, 'tag', {
             set() {
@@ -32481,10 +32313,10 @@ class Alias$4 extends Node$2.NodeBase {
      */
     resolve(doc) {
         let found = undefined;
-        visit$1.visit(doc, {
+        visit(doc, {
             Node: (_key, node) => {
                 if (node === this)
-                    return visit$1.visit.BREAK;
+                    return visit.BREAK;
                 if (node.anchor === this.source)
                     found = node;
             }
@@ -32503,7 +32335,7 @@ class Alias$4 extends Node$2.NodeBase {
         let data = anchors.get(source);
         if (!data) {
             // Resolve anchors for Node.prototype.toJS()
-            toJS$5.toJS(source, null, ctx);
+            toJS(source, null, ctx);
             data = anchors.get(source);
         }
         /* istanbul ignore if */
@@ -32525,7 +32357,7 @@ class Alias$4 extends Node$2.NodeBase {
     toString(ctx, _onComment, _onChompKeep) {
         const src = `*${this.source}`;
         if (ctx) {
-            anchors$2.anchorIsValid(this.source);
+            anchorIsValid(this.source);
             if (ctx.options.verifyAliasOrder && !ctx.anchors.has(this.source)) {
                 const msg = `Unresolved alias (the anchor must be set before the alias): ${this.source}`;
                 throw new Error(msg);
@@ -32537,12 +32369,12 @@ class Alias$4 extends Node$2.NodeBase {
     }
 }
 function getAliasCount(doc, node, anchors) {
-    if (identity$q.isAlias(node)) {
+    if (isAlias(node)) {
         const source = node.resolve(doc);
         const anchor = anchors && source && anchors.get(source);
         return anchor ? anchor.count * anchor.aliasCount : 0;
     }
-    else if (identity$q.isCollection(node)) {
+    else if (isCollection(node)) {
         let count = 0;
         for (const item of node.items) {
             const c = getAliasCount(doc, item, anchors);
@@ -32551,7 +32383,7 @@ function getAliasCount(doc, node, anchors) {
         }
         return count;
     }
-    else if (identity$q.isPair(node)) {
+    else if (isPair(node)) {
         const kc = getAliasCount(doc, node.key, anchors);
         const vc = getAliasCount(doc, node.value, anchors);
         return Math.max(kc, vc);
@@ -32559,43 +32391,24 @@ function getAliasCount(doc, node, anchors) {
     return 1;
 }
 
-Alias$5.Alias = Alias$4;
-
-var Collection$4 = {};
-
-var createNode$5 = {};
-
-var Scalar$j = {};
-
-var identity$p = identity$w;
-var Node$1 = Node$3;
-var toJS$4 = toJS$8;
-
 const isScalarValue = (value) => !value || (typeof value !== 'function' && typeof value !== 'object');
-class Scalar$i extends Node$1.NodeBase {
+class Scalar extends NodeBase {
     constructor(value) {
-        super(identity$p.SCALAR);
+        super(SCALAR$1);
         this.value = value;
     }
     toJSON(arg, ctx) {
-        return ctx?.keep ? this.value : toJS$4.toJS(this.value, arg, ctx);
+        return ctx?.keep ? this.value : toJS(this.value, arg, ctx);
     }
     toString() {
         return String(this.value);
     }
 }
-Scalar$i.BLOCK_FOLDED = 'BLOCK_FOLDED';
-Scalar$i.BLOCK_LITERAL = 'BLOCK_LITERAL';
-Scalar$i.PLAIN = 'PLAIN';
-Scalar$i.QUOTE_DOUBLE = 'QUOTE_DOUBLE';
-Scalar$i.QUOTE_SINGLE = 'QUOTE_SINGLE';
-
-Scalar$j.Scalar = Scalar$i;
-Scalar$j.isScalarValue = isScalarValue;
-
-var Alias$3 = Alias$5;
-var identity$o = identity$w;
-var Scalar$h = Scalar$j;
+Scalar.BLOCK_FOLDED = 'BLOCK_FOLDED';
+Scalar.BLOCK_LITERAL = 'BLOCK_LITERAL';
+Scalar.PLAIN = 'PLAIN';
+Scalar.QUOTE_DOUBLE = 'QUOTE_DOUBLE';
+Scalar.QUOTE_SINGLE = 'QUOTE_SINGLE';
 
 const defaultTagPrefix = 'tag:yaml.org,2002:';
 function findTagObject(value, tagName, tags) {
@@ -32608,13 +32421,13 @@ function findTagObject(value, tagName, tags) {
     }
     return tags.find(t => t.identify?.(value) && !t.format);
 }
-function createNode$4(value, tagName, ctx) {
-    if (identity$o.isDocument(value))
+function createNode(value, tagName, ctx) {
+    if (isDocument(value))
         value = value.contents;
-    if (identity$o.isNode(value))
+    if (isNode(value))
         return value;
-    if (identity$o.isPair(value)) {
-        const map = ctx.schema[identity$o.MAP].createNode?.(ctx.schema, null, ctx);
+    if (isPair(value)) {
+        const map = ctx.schema[MAP].createNode?.(ctx.schema, null, ctx);
         map.items.push(value);
         return map;
     }
@@ -32635,7 +32448,7 @@ function createNode$4(value, tagName, ctx) {
         if (ref) {
             if (!ref.anchor)
                 ref.anchor = onAnchor(value);
-            return new Alias$3.Alias(ref.anchor);
+            return new Alias$1(ref.anchor);
         }
         else {
             ref = { anchor: null, node: null };
@@ -32651,17 +32464,17 @@ function createNode$4(value, tagName, ctx) {
             value = value.toJSON();
         }
         if (!value || typeof value !== 'object') {
-            const node = new Scalar$h.Scalar(value);
+            const node = new Scalar(value);
             if (ref)
                 ref.node = node;
             return node;
         }
         tagObj =
             value instanceof Map
-                ? schema[identity$o.MAP]
+                ? schema[MAP]
                 : Symbol.iterator in Object(value)
-                    ? schema[identity$o.SEQ]
-                    : schema[identity$o.MAP];
+                    ? schema[SEQ]
+                    : schema[MAP];
     }
     if (onTagObj) {
         onTagObj(tagObj);
@@ -32671,7 +32484,7 @@ function createNode$4(value, tagName, ctx) {
         ? tagObj.createNode(ctx.schema, value, ctx)
         : typeof tagObj?.nodeClass?.from === 'function'
             ? tagObj.nodeClass.from(ctx.schema, value, ctx)
-            : new Scalar$h.Scalar(value);
+            : new Scalar(value);
     if (tagName)
         node.tag = tagName;
     else if (!tagObj.default)
@@ -32680,12 +32493,6 @@ function createNode$4(value, tagName, ctx) {
         ref.node = node;
     return node;
 }
-
-createNode$5.createNode = createNode$4;
-
-var createNode$3 = createNode$5;
-var identity$n = identity$w;
-var Node = Node$3;
 
 function collectionFromPath(schema, path, value) {
     let v = value;
@@ -32700,7 +32507,7 @@ function collectionFromPath(schema, path, value) {
             v = new Map([[k, v]]);
         }
     }
-    return createNode$3.createNode(v, undefined, {
+    return createNode(v, undefined, {
         aliasDuplicateObjects: false,
         keepUndefined: false,
         onAnchor: () => {
@@ -32714,7 +32521,7 @@ function collectionFromPath(schema, path, value) {
 // as it does not cover untypable empty non-string iterables (e.g. []).
 const isEmptyPath = (path) => path == null ||
     (typeof path === 'object' && !!path[Symbol.iterator]().next().done);
-class Collection$3 extends Node.NodeBase {
+class Collection extends NodeBase {
     constructor(type, schema) {
         super(type);
         Object.defineProperty(this, 'schema', {
@@ -32733,7 +32540,7 @@ class Collection$3 extends Node.NodeBase {
         const copy = Object.create(Object.getPrototypeOf(this), Object.getOwnPropertyDescriptors(this));
         if (schema)
             copy.schema = schema;
-        copy.items = copy.items.map(it => identity$n.isNode(it) || identity$n.isPair(it) ? it.clone(schema) : it);
+        copy.items = copy.items.map(it => isNode(it) || isPair(it) ? it.clone(schema) : it);
         if (this.range)
             copy.range = this.range.slice();
         return copy;
@@ -32749,7 +32556,7 @@ class Collection$3 extends Node.NodeBase {
         else {
             const [key, ...rest] = path;
             const node = this.get(key, true);
-            if (identity$n.isCollection(node))
+            if (isCollection(node))
                 node.addIn(rest, value);
             else if (node === undefined && this.schema)
                 this.set(key, collectionFromPath(this.schema, rest, value));
@@ -32766,7 +32573,7 @@ class Collection$3 extends Node.NodeBase {
         if (rest.length === 0)
             return this.delete(key);
         const node = this.get(key, true);
-        if (identity$n.isCollection(node))
+        if (isCollection(node))
             return node.deleteIn(rest);
         else
             throw new Error(`Expected YAML collection at ${key}. Remaining path: ${rest}`);
@@ -32780,18 +32587,18 @@ class Collection$3 extends Node.NodeBase {
         const [key, ...rest] = path;
         const node = this.get(key, true);
         if (rest.length === 0)
-            return !keepScalar && identity$n.isScalar(node) ? node.value : node;
+            return !keepScalar && isScalar(node) ? node.value : node;
         else
-            return identity$n.isCollection(node) ? node.getIn(rest, keepScalar) : undefined;
+            return isCollection(node) ? node.getIn(rest, keepScalar) : undefined;
     }
     hasAllNullValues(allowScalar) {
         return this.items.every(node => {
-            if (!identity$n.isPair(node))
+            if (!isPair(node))
                 return false;
             const n = node.value;
             return (n == null ||
                 (allowScalar &&
-                    identity$n.isScalar(n) &&
+                    isScalar(n) &&
                     n.value == null &&
                     !n.commentBefore &&
                     !n.comment &&
@@ -32806,7 +32613,7 @@ class Collection$3 extends Node.NodeBase {
         if (rest.length === 0)
             return this.has(key);
         const node = this.get(key, true);
-        return identity$n.isCollection(node) ? node.hasIn(rest) : false;
+        return isCollection(node) ? node.hasIn(rest) : false;
     }
     /**
      * Sets a value in this collection. For `!!set`, `value` needs to be a
@@ -32819,7 +32626,7 @@ class Collection$3 extends Node.NodeBase {
         }
         else {
             const node = this.get(key, true);
-            if (identity$n.isCollection(node))
+            if (isCollection(node))
                 node.setIn(rest, value);
             else if (node === undefined && this.schema)
                 this.set(key, collectionFromPath(this.schema, rest, value));
@@ -32829,18 +32636,6 @@ class Collection$3 extends Node.NodeBase {
     }
 }
 
-Collection$4.Collection = Collection$3;
-Collection$4.collectionFromPath = collectionFromPath;
-Collection$4.isEmptyPath = isEmptyPath;
-
-var Pair$7 = {};
-
-var stringifyPair$2 = {};
-
-var stringify$7 = {};
-
-var stringifyComment$5 = {};
-
 /**
  * Stringifies a comment.
  *
@@ -32848,7 +32643,7 @@ var stringifyComment$5 = {};
  * lines consisting of a single space are replaced by `#`,
  * and all other lines are prefixed with a `#`.
  */
-const stringifyComment$4 = (str) => str.replace(/^(?!$)(?: $)?/gm, '#');
+const stringifyComment = (str) => str.replace(/^(?!$)(?: $)?/gm, '#');
 function indentComment(comment, indent) {
     if (/^\n+$/.test(comment))
         return comment.substring(1);
@@ -32860,14 +32655,6 @@ const lineComment = (str, indent, comment) => str.endsWith('\n')
         ? '\n' + indentComment(comment, indent)
         : (str.endsWith(' ') ? '' : ' ') + comment;
 
-stringifyComment$5.indentComment = indentComment;
-stringifyComment$5.lineComment = lineComment;
-stringifyComment$5.stringifyComment = stringifyComment$4;
-
-var stringifyString$5 = {};
-
-var foldFlowLines$2 = {};
-
 const FOLD_FLOW = 'flow';
 const FOLD_BLOCK = 'block';
 const FOLD_QUOTED = 'quoted';
@@ -32876,7 +32663,7 @@ const FOLD_QUOTED = 'quoted';
  * not followed by newlines or spaces unless `mode` is `'quoted'`. Lines are
  * terminated with `\n` and started with `indent`.
  */
-function foldFlowLines$1(text, indent, mode = 'flow', { indentAtStart, lineWidth = 80, minContentWidth = 20, onFold, onOverflow } = {}) {
+function foldFlowLines(text, indent, mode = 'flow', { indentAtStart, lineWidth = 80, minContentWidth = 20, onFold, onOverflow } = {}) {
     if (!lineWidth || lineWidth < 0)
         return text;
     if (lineWidth < minContentWidth)
@@ -33013,14 +32800,6 @@ function consumeMoreIndentedLines(text, i, indent) {
     return end;
 }
 
-foldFlowLines$2.FOLD_BLOCK = FOLD_BLOCK;
-foldFlowLines$2.FOLD_FLOW = FOLD_FLOW;
-foldFlowLines$2.FOLD_QUOTED = FOLD_QUOTED;
-foldFlowLines$2.foldFlowLines = foldFlowLines$1;
-
-var Scalar$g = Scalar$j;
-var foldFlowLines = foldFlowLines$2;
-
 const getFoldOptions = (ctx, isBlock) => ({
     indentAtStart: isBlock ? ctx.indent.length : ctx.indentAtStart,
     lineWidth: ctx.options.lineWidth,
@@ -33135,7 +32914,7 @@ function doubleQuotedString(value, ctx) {
     str = start ? str + json.slice(start) : json;
     return implicitKey
         ? str
-        : foldFlowLines.foldFlowLines(str, indent, foldFlowLines.FOLD_QUOTED, getFoldOptions(ctx, false));
+        : foldFlowLines(str, indent, FOLD_QUOTED, getFoldOptions(ctx, false));
 }
 function singleQuotedString(value, ctx) {
     if (ctx.options.singleQuote === false ||
@@ -33147,7 +32926,7 @@ function singleQuotedString(value, ctx) {
     const res = "'" + value.replace(/'/g, "''").replace(/\n+/g, `$&\n${indent}`) + "'";
     return ctx.implicitKey
         ? res
-        : foldFlowLines.foldFlowLines(res, indent, foldFlowLines.FOLD_FLOW, getFoldOptions(ctx, false));
+        : foldFlowLines(res, indent, FOLD_FLOW, getFoldOptions(ctx, false));
 }
 function quotedString(value, ctx) {
     const { singleQuote } = ctx.options;
@@ -33186,9 +32965,9 @@ function blockString({ comment, type, value }, ctx, onComment, onChompKeep) {
         (ctx.forceBlockIndent || containsDocumentMarker(value) ? '  ' : '');
     const literal = blockQuote === 'literal'
         ? true
-        : blockQuote === 'folded' || type === Scalar$g.Scalar.BLOCK_FOLDED
+        : blockQuote === 'folded' || type === Scalar.BLOCK_FOLDED
             ? false
-            : type === Scalar$g.Scalar.BLOCK_LITERAL
+            : type === Scalar.BLOCK_LITERAL
                 ? true
                 : !lineLengthOverLimit(value, lineWidth, indent.length);
     if (!value)
@@ -33254,12 +33033,12 @@ function blockString({ comment, type, value }, ctx, onComment, onChompKeep) {
             .replace(/\n+/g, `$&${indent}`);
         let literalFallback = false;
         const foldOptions = getFoldOptions(ctx, true);
-        if (blockQuote !== 'folded' && type !== Scalar$g.Scalar.BLOCK_FOLDED) {
+        if (blockQuote !== 'folded' && type !== Scalar.BLOCK_FOLDED) {
             foldOptions.onOverflow = () => {
                 literalFallback = true;
             };
         }
-        const body = foldFlowLines.foldFlowLines(`${start}${foldedValue}${end}`, indent, foldFlowLines.FOLD_BLOCK, foldOptions);
+        const body = foldFlowLines(`${start}${foldedValue}${end}`, indent, FOLD_BLOCK, foldOptions);
         if (!literalFallback)
             return `>${header}\n${indent}${body}`;
     }
@@ -33287,7 +33066,7 @@ function plainString(item, ctx, onComment, onChompKeep) {
     }
     if (!implicitKey &&
         !inFlow &&
-        type !== Scalar$g.Scalar.PLAIN &&
+        type !== Scalar.PLAIN &&
         value.includes('\n')) {
         // Where allowed & type not set explicitly, prefer block style for multiline strings
         return blockString(item, ctx, onComment, onChompKeep);
@@ -33313,31 +33092,31 @@ function plainString(item, ctx, onComment, onChompKeep) {
     }
     return implicitKey
         ? str
-        : foldFlowLines.foldFlowLines(str, indent, foldFlowLines.FOLD_FLOW, getFoldOptions(ctx, false));
+        : foldFlowLines(str, indent, FOLD_FLOW, getFoldOptions(ctx, false));
 }
-function stringifyString$4(item, ctx, onComment, onChompKeep) {
+function stringifyString(item, ctx, onComment, onChompKeep) {
     const { implicitKey, inFlow } = ctx;
     const ss = typeof item.value === 'string'
         ? item
         : Object.assign({}, item, { value: String(item.value) });
     let { type } = item;
-    if (type !== Scalar$g.Scalar.QUOTE_DOUBLE) {
+    if (type !== Scalar.QUOTE_DOUBLE) {
         // force double quotes on control characters & unpaired surrogates
         if (/[\x00-\x08\x0b-\x1f\x7f-\x9f\u{D800}-\u{DFFF}]/u.test(ss.value))
-            type = Scalar$g.Scalar.QUOTE_DOUBLE;
+            type = Scalar.QUOTE_DOUBLE;
     }
     const _stringify = (_type) => {
         switch (_type) {
-            case Scalar$g.Scalar.BLOCK_FOLDED:
-            case Scalar$g.Scalar.BLOCK_LITERAL:
+            case Scalar.BLOCK_FOLDED:
+            case Scalar.BLOCK_LITERAL:
                 return implicitKey || inFlow
                     ? quotedString(ss.value, ctx) // blocks are not valid inside flow containers
                     : blockString(ss, ctx, onComment, onChompKeep);
-            case Scalar$g.Scalar.QUOTE_DOUBLE:
+            case Scalar.QUOTE_DOUBLE:
                 return doubleQuotedString(ss.value, ctx);
-            case Scalar$g.Scalar.QUOTE_SINGLE:
+            case Scalar.QUOTE_SINGLE:
                 return singleQuotedString(ss.value, ctx);
-            case Scalar$g.Scalar.PLAIN:
+            case Scalar.PLAIN:
                 return plainString(ss, ctx, onComment, onChompKeep);
             default:
                 return null;
@@ -33354,17 +33133,10 @@ function stringifyString$4(item, ctx, onComment, onChompKeep) {
     return res;
 }
 
-stringifyString$5.stringifyString = stringifyString$4;
-
-var anchors$1 = anchors$3;
-var identity$m = identity$w;
-var stringifyComment$3 = stringifyComment$5;
-var stringifyString$3 = stringifyString$5;
-
 function createStringifyContext(doc, options) {
     const opt = Object.assign({
         blockQuote: true,
-        commentString: stringifyComment$3.stringifyComment,
+        commentString: stringifyComment,
         defaultKeyType: null,
         defaultStringType: 'PLAIN',
         directives: null,
@@ -33410,7 +33182,7 @@ function getTagObject(tags, item) {
     }
     let tagObj = undefined;
     let obj;
-    if (identity$m.isScalar(item)) {
+    if (isScalar(item)) {
         obj = item.value;
         let match = tags.filter(t => t.identify?.(obj));
         if (match.length > 1) {
@@ -33432,13 +33204,13 @@ function getTagObject(tags, item) {
     return tagObj;
 }
 // needs to be called before value stringifier to allow for circular anchor refs
-function stringifyProps(node, tagObj, { anchors: anchors$1$1, doc }) {
+function stringifyProps(node, tagObj, { anchors, doc }) {
     if (!doc.directives)
         return '';
     const props = [];
-    const anchor = (identity$m.isScalar(node) || identity$m.isCollection(node)) && node.anchor;
-    if (anchor && anchors$1.anchorIsValid(anchor)) {
-        anchors$1$1.add(anchor);
+    const anchor = (isScalar(node) || isCollection(node)) && node.anchor;
+    if (anchor && anchorIsValid(anchor)) {
+        anchors.add(anchor);
         props.push(`&${anchor}`);
     }
     const tag = node.tag ? node.tag : tagObj.default ? null : tagObj.tag;
@@ -33446,10 +33218,10 @@ function stringifyProps(node, tagObj, { anchors: anchors$1$1, doc }) {
         props.push(doc.directives.tagString(tag));
     return props.join(' ');
 }
-function stringify$6(item, ctx, onComment, onChompKeep) {
-    if (identity$m.isPair(item))
+function stringify(item, ctx, onComment, onChompKeep) {
+    if (isPair(item))
         return item.toString(ctx, onComment, onChompKeep);
-    if (identity$m.isAlias(item)) {
+    if (isAlias(item)) {
         if (ctx.doc.directives)
             return item.toString(ctx);
         if (ctx.resolvedAliases?.has(item)) {
@@ -33464,7 +33236,7 @@ function stringify$6(item, ctx, onComment, onChompKeep) {
         }
     }
     let tagObj = undefined;
-    const node = identity$m.isNode(item)
+    const node = isNode(item)
         ? item
         : ctx.doc.createNode(item, { onTagObj: o => (tagObj = o) });
     if (!tagObj)
@@ -33474,32 +33246,24 @@ function stringify$6(item, ctx, onComment, onChompKeep) {
         ctx.indentAtStart = (ctx.indentAtStart ?? 0) + props.length + 1;
     const str = typeof tagObj.stringify === 'function'
         ? tagObj.stringify(node, ctx, onComment, onChompKeep)
-        : identity$m.isScalar(node)
-            ? stringifyString$3.stringifyString(node, ctx, onComment, onChompKeep)
+        : isScalar(node)
+            ? stringifyString(node, ctx, onComment, onChompKeep)
             : node.toString(ctx, onComment, onChompKeep);
     if (!props)
         return str;
-    return identity$m.isScalar(node) || str[0] === '{' || str[0] === '['
+    return isScalar(node) || str[0] === '{' || str[0] === '['
         ? `${props} ${str}`
         : `${props}\n${ctx.indent}${str}`;
 }
 
-stringify$7.createStringifyContext = createStringifyContext;
-stringify$7.stringify = stringify$6;
-
-var identity$l = identity$w;
-var Scalar$f = Scalar$j;
-var stringify$5 = stringify$7;
-var stringifyComment$2 = stringifyComment$5;
-
-function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
+function stringifyPair({ key, value }, ctx, onComment, onChompKeep) {
     const { allNullValues, doc, indent, indentStep, options: { commentString, indentSeq, simpleKeys } } = ctx;
-    let keyComment = (identity$l.isNode(key) && key.comment) || null;
+    let keyComment = (isNode(key) && key.comment) || null;
     if (simpleKeys) {
         if (keyComment) {
             throw new Error('With simple keys, key nodes cannot have comments');
         }
-        if (identity$l.isCollection(key) || (!identity$l.isNode(key) && typeof key === 'object')) {
+        if (isCollection(key) || (!isNode(key) && typeof key === 'object')) {
             const msg = 'With simple keys, collection cannot be used as a key value';
             throw new Error(msg);
         }
@@ -33507,9 +33271,9 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
     let explicitKey = !simpleKeys &&
         (!key ||
             (keyComment && value == null && !ctx.inFlow) ||
-            identity$l.isCollection(key) ||
-            (identity$l.isScalar(key)
-                ? key.type === Scalar$f.Scalar.BLOCK_FOLDED || key.type === Scalar$f.Scalar.BLOCK_LITERAL
+            isCollection(key) ||
+            (isScalar(key)
+                ? key.type === Scalar.BLOCK_FOLDED || key.type === Scalar.BLOCK_LITERAL
                 : typeof key === 'object'));
     ctx = Object.assign({}, ctx, {
         allNullValues: false,
@@ -33518,7 +33282,7 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
     });
     let keyCommentDone = false;
     let chompKeep = false;
-    let str = stringify$5.stringify(key, ctx, () => (keyCommentDone = true), () => (chompKeep = true));
+    let str = stringify(key, ctx, () => (keyCommentDone = true), () => (chompKeep = true));
     if (!explicitKey && !ctx.inFlow && str.length > 1024) {
         if (simpleKeys)
             throw new Error('With simple keys, single line scalar must not span more than 1024 characters');
@@ -33534,7 +33298,7 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
     else if ((allNullValues && !simpleKeys) || (value == null && explicitKey)) {
         str = `? ${str}`;
         if (keyComment && !keyCommentDone) {
-            str += stringifyComment$2.lineComment(str, ctx.indent, commentString(keyComment));
+            str += lineComment(str, ctx.indent, commentString(keyComment));
         }
         else if (chompKeep && onChompKeep)
             onChompKeep();
@@ -33544,16 +33308,16 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
         keyComment = null;
     if (explicitKey) {
         if (keyComment)
-            str += stringifyComment$2.lineComment(str, ctx.indent, commentString(keyComment));
+            str += lineComment(str, ctx.indent, commentString(keyComment));
         str = `? ${str}\n${indent}:`;
     }
     else {
         str = `${str}:`;
         if (keyComment)
-            str += stringifyComment$2.lineComment(str, ctx.indent, commentString(keyComment));
+            str += lineComment(str, ctx.indent, commentString(keyComment));
     }
     let vsb, vcb, valueComment;
-    if (identity$l.isNode(value)) {
+    if (isNode(value)) {
         vsb = !!value.spaceBefore;
         vcb = value.commentBefore;
         valueComment = value.comment;
@@ -33566,14 +33330,14 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
             value = doc.createNode(value);
     }
     ctx.implicitKey = false;
-    if (!explicitKey && !keyComment && identity$l.isScalar(value))
+    if (!explicitKey && !keyComment && isScalar(value))
         ctx.indentAtStart = str.length + 1;
     chompKeep = false;
     if (!indentSeq &&
         indentStep.length >= 2 &&
         !ctx.inFlow &&
         !explicitKey &&
-        identity$l.isSeq(value) &&
+        isSeq(value) &&
         !value.flow &&
         !value.tag &&
         !value.anchor) {
@@ -33581,13 +33345,13 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
         ctx.indent = ctx.indent.substring(2);
     }
     let valueCommentDone = false;
-    const valueStr = stringify$5.stringify(value, ctx, () => (valueCommentDone = true), () => (chompKeep = true));
+    const valueStr = stringify(value, ctx, () => (valueCommentDone = true), () => (chompKeep = true));
     let ws = ' ';
     if (keyComment || vsb || vcb) {
         ws = vsb ? '\n' : '';
         if (vcb) {
             const cs = commentString(vcb);
-            ws += `\n${stringifyComment$2.indentComment(cs, ctx.indent)}`;
+            ws += `\n${indentComment(cs, ctx.indent)}`;
         }
         if (valueStr === '' && !ctx.inFlow) {
             if (ws === '\n')
@@ -33597,7 +33361,7 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
             ws += `\n${ctx.indent}`;
         }
     }
-    else if (!explicitKey && identity$l.isCollection(value)) {
+    else if (!explicitKey && isCollection(value)) {
         const vs0 = valueStr[0];
         const nl0 = valueStr.indexOf('\n');
         const hasNewline = nl0 !== -1;
@@ -33628,7 +33392,7 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
             onComment();
     }
     else if (valueComment && !valueCommentDone) {
-        str += stringifyComment$2.lineComment(str, ctx.indent, commentString(valueComment));
+        str += lineComment(str, ctx.indent, commentString(valueComment));
     }
     else if (chompKeep && onChompKeep) {
         onChompKeep();
@@ -33636,34 +33400,11 @@ function stringifyPair$1({ key, value }, ctx, onComment, onChompKeep) {
     return str;
 }
 
-stringifyPair$2.stringifyPair = stringifyPair$1;
-
-var addPairToJSMap$3 = {};
-
-var log$2 = {};
-
-var node_process$2 = require$$0__default['default'];
-
-function debug(logLevel, ...messages) {
-    if (logLevel === 'debug')
-        console.log(...messages);
-}
 function warn(logLevel, warning) {
     if (logLevel === 'debug' || logLevel === 'warn') {
-        if (typeof node_process$2.emitWarning === 'function')
-            node_process$2.emitWarning(warning);
-        else
-            console.warn(warning);
+        console.warn(warning);
     }
 }
-
-log$2.debug = debug;
-log$2.warn = warn;
-
-var merge$4 = {};
-
-var identity$k = identity$w;
-var Scalar$e = Scalar$j;
 
 // If the value associated with a merge key is a single mapping node, each of
 // its key/value pairs is inserted into the current mapping, unless the key
@@ -33673,25 +33414,25 @@ var Scalar$e = Scalar$j;
 // Keys in mapping nodes earlier in the sequence override keys specified in
 // later mapping nodes. -- http://yaml.org/type/merge.html
 const MERGE_KEY = '<<';
-const merge$3 = {
+const merge = {
     identify: value => value === MERGE_KEY ||
         (typeof value === 'symbol' && value.description === MERGE_KEY),
     default: 'key',
     tag: 'tag:yaml.org,2002:merge',
     test: /^<<$/,
-    resolve: () => Object.assign(new Scalar$e.Scalar(Symbol(MERGE_KEY)), {
+    resolve: () => Object.assign(new Scalar(Symbol(MERGE_KEY)), {
         addToJSMap: addMergeToJSMap
     }),
     stringify: () => MERGE_KEY
 };
-const isMergeKey = (ctx, key) => (merge$3.identify(key) ||
-    (identity$k.isScalar(key) &&
-        (!key.type || key.type === Scalar$e.Scalar.PLAIN) &&
-        merge$3.identify(key.value))) &&
-    ctx?.doc.schema.tags.some(tag => tag.tag === merge$3.tag && tag.default);
+const isMergeKey = (ctx, key) => (merge.identify(key) ||
+    (isScalar(key) &&
+        (!key.type || key.type === Scalar.PLAIN) &&
+        merge.identify(key.value))) &&
+    ctx?.doc.schema.tags.some(tag => tag.tag === merge.tag && tag.default);
 function addMergeToJSMap(ctx, map, value) {
-    value = ctx && identity$k.isAlias(value) ? value.resolve(ctx.doc) : value;
-    if (identity$k.isSeq(value))
+    value = ctx && isAlias(value) ? value.resolve(ctx.doc) : value;
+    if (isSeq(value))
         for (const it of value.items)
             mergeValue(ctx, map, it);
     else if (Array.isArray(value))
@@ -33701,8 +33442,8 @@ function addMergeToJSMap(ctx, map, value) {
         mergeValue(ctx, map, value);
 }
 function mergeValue(ctx, map, value) {
-    const source = ctx && identity$k.isAlias(value) ? value.resolve(ctx.doc) : value;
-    if (!identity$k.isMap(source))
+    const source = ctx && isAlias(value) ? value.resolve(ctx.doc) : value;
+    if (!isMap(source))
         throw new Error('Merge sources must be maps or map aliases');
     const srcMap = source.toJSON(null, ctx, Map);
     for (const [key, value] of srcMap) {
@@ -33725,33 +33466,23 @@ function mergeValue(ctx, map, value) {
     return map;
 }
 
-merge$4.addMergeToJSMap = addMergeToJSMap;
-merge$4.isMergeKey = isMergeKey;
-merge$4.merge = merge$3;
-
-var log$1 = log$2;
-var merge$2 = merge$4;
-var stringify$4 = stringify$7;
-var identity$j = identity$w;
-var toJS$3 = toJS$8;
-
-function addPairToJSMap$2(ctx, map, { key, value }) {
-    if (identity$j.isNode(key) && key.addToJSMap)
+function addPairToJSMap(ctx, map, { key, value }) {
+    if (isNode(key) && key.addToJSMap)
         key.addToJSMap(ctx, map, value);
     // TODO: Should drop this special case for bare << handling
-    else if (merge$2.isMergeKey(ctx, key))
-        merge$2.addMergeToJSMap(ctx, map, value);
+    else if (isMergeKey(ctx, key))
+        addMergeToJSMap(ctx, map, value);
     else {
-        const jsKey = toJS$3.toJS(key, '', ctx);
+        const jsKey = toJS(key, '', ctx);
         if (map instanceof Map) {
-            map.set(jsKey, toJS$3.toJS(value, jsKey, ctx));
+            map.set(jsKey, toJS(value, jsKey, ctx));
         }
         else if (map instanceof Set) {
             map.add(jsKey);
         }
         else {
             const stringKey = stringifyKey(key, jsKey, ctx);
-            const jsValue = toJS$3.toJS(value, stringKey, ctx);
+            const jsValue = toJS(value, stringKey, ctx);
             if (stringKey in map)
                 Object.defineProperty(map, stringKey, {
                     value: jsValue,
@@ -33770,8 +33501,8 @@ function stringifyKey(key, jsKey, ctx) {
         return '';
     if (typeof jsKey !== 'object')
         return String(jsKey);
-    if (identity$j.isNode(key) && ctx?.doc) {
-        const strCtx = stringify$4.createStringifyContext(ctx.doc, {});
+    if (isNode(key) && ctx?.doc) {
+        const strCtx = createStringifyContext(ctx.doc, {});
         strCtx.anchors = new Set();
         for (const node of ctx.anchors.keys())
             strCtx.anchors.add(node.anchor);
@@ -33782,7 +33513,7 @@ function stringifyKey(key, jsKey, ctx) {
             let jsonStr = JSON.stringify(strKey);
             if (jsonStr.length > 40)
                 jsonStr = jsonStr.substring(0, 36) + '..."';
-            log$1.warn(ctx.doc.options.logLevel, `Keys with collection values will be stringified due to JS Object restrictions: ${jsonStr}. Set mapAsMap: true to use object keys.`);
+            warn(ctx.doc.options.logLevel, `Keys with collection values will be stringified due to JS Object restrictions: ${jsonStr}. Set mapAsMap: true to use object keys.`);
             ctx.mapKeyWarned = true;
         }
         return strKey;
@@ -33790,59 +33521,37 @@ function stringifyKey(key, jsKey, ctx) {
     return JSON.stringify(jsKey);
 }
 
-addPairToJSMap$3.addPairToJSMap = addPairToJSMap$2;
-
-var createNode$2 = createNode$5;
-var stringifyPair = stringifyPair$2;
-var addPairToJSMap$1 = addPairToJSMap$3;
-var identity$i = identity$w;
-
 function createPair(key, value, ctx) {
-    const k = createNode$2.createNode(key, undefined, ctx);
-    const v = createNode$2.createNode(value, undefined, ctx);
-    return new Pair$6(k, v);
+    const k = createNode(key, undefined, ctx);
+    const v = createNode(value, undefined, ctx);
+    return new Pair(k, v);
 }
-class Pair$6 {
+class Pair {
     constructor(key, value = null) {
-        Object.defineProperty(this, identity$i.NODE_TYPE, { value: identity$i.PAIR });
+        Object.defineProperty(this, NODE_TYPE, { value: PAIR });
         this.key = key;
         this.value = value;
     }
     clone(schema) {
         let { key, value } = this;
-        if (identity$i.isNode(key))
+        if (isNode(key))
             key = key.clone(schema);
-        if (identity$i.isNode(value))
+        if (isNode(value))
             value = value.clone(schema);
-        return new Pair$6(key, value);
+        return new Pair(key, value);
     }
     toJSON(_, ctx) {
         const pair = ctx?.mapAsMap ? new Map() : {};
-        return addPairToJSMap$1.addPairToJSMap(ctx, pair, this);
+        return addPairToJSMap(ctx, pair, this);
     }
     toString(ctx, onComment, onChompKeep) {
         return ctx?.doc
-            ? stringifyPair.stringifyPair(this, ctx, onComment, onChompKeep)
+            ? stringifyPair(this, ctx, onComment, onChompKeep)
             : JSON.stringify(this);
     }
 }
 
-Pair$7.Pair = Pair$6;
-Pair$7.createPair = createPair;
-
-var Schema$2 = {};
-
-var map$6 = {};
-
-var YAMLMap$7 = {};
-
-var stringifyCollection$3 = {};
-
-var identity$h = identity$w;
-var stringify$3 = stringify$7;
-var stringifyComment$1 = stringifyComment$5;
-
-function stringifyCollection$2(collection, ctx, options) {
+function stringifyCollection(collection, ctx, options) {
     const flow = ctx.inFlow ?? collection.flow;
     const stringify = flow ? stringifyFlowCollection : stringifyBlockCollection;
     return stringify(collection, ctx, options);
@@ -33855,15 +33564,15 @@ function stringifyBlockCollection({ comment, items }, ctx, { blockItemPrefix, fl
     for (let i = 0; i < items.length; ++i) {
         const item = items[i];
         let comment = null;
-        if (identity$h.isNode(item)) {
+        if (isNode(item)) {
             if (!chompKeep && item.spaceBefore)
                 lines.push('');
             addCommentBefore(ctx, lines, item.commentBefore, chompKeep);
             if (item.comment)
                 comment = item.comment;
         }
-        else if (identity$h.isPair(item)) {
-            const ik = identity$h.isNode(item.key) ? item.key : null;
+        else if (isPair(item)) {
+            const ik = isNode(item.key) ? item.key : null;
             if (ik) {
                 if (!chompKeep && ik.spaceBefore)
                     lines.push('');
@@ -33871,9 +33580,9 @@ function stringifyBlockCollection({ comment, items }, ctx, { blockItemPrefix, fl
             }
         }
         chompKeep = false;
-        let str = stringify$3.stringify(item, itemCtx, () => (comment = null), () => (chompKeep = true));
+        let str = stringify(item, itemCtx, () => (comment = null), () => (chompKeep = true));
         if (comment)
-            str += stringifyComment$1.lineComment(str, itemIndent, commentString(comment));
+            str += lineComment(str, itemIndent, commentString(comment));
         if (chompKeep && comment)
             chompKeep = false;
         lines.push(blockItemPrefix + str);
@@ -33890,7 +33599,7 @@ function stringifyBlockCollection({ comment, items }, ctx, { blockItemPrefix, fl
         }
     }
     if (comment) {
-        str += '\n' + stringifyComment$1.indentComment(commentString(comment), indent);
+        str += '\n' + indentComment(commentString(comment), indent);
         if (onComment)
             onComment();
     }
@@ -33912,15 +33621,15 @@ function stringifyFlowCollection({ items }, ctx, { flowChars, itemIndent }) {
     for (let i = 0; i < items.length; ++i) {
         const item = items[i];
         let comment = null;
-        if (identity$h.isNode(item)) {
+        if (isNode(item)) {
             if (item.spaceBefore)
                 lines.push('');
             addCommentBefore(ctx, lines, item.commentBefore, false);
             if (item.comment)
                 comment = item.comment;
         }
-        else if (identity$h.isPair(item)) {
-            const ik = identity$h.isNode(item.key) ? item.key : null;
+        else if (isPair(item)) {
+            const ik = isNode(item.key) ? item.key : null;
             if (ik) {
                 if (ik.spaceBefore)
                     lines.push('');
@@ -33928,7 +33637,7 @@ function stringifyFlowCollection({ items }, ctx, { flowChars, itemIndent }) {
                 if (ik.comment)
                     reqNewline = true;
             }
-            const iv = identity$h.isNode(item.value) ? item.value : null;
+            const iv = isNode(item.value) ? item.value : null;
             if (iv) {
                 if (iv.comment)
                     comment = iv.comment;
@@ -33941,11 +33650,11 @@ function stringifyFlowCollection({ items }, ctx, { flowChars, itemIndent }) {
         }
         if (comment)
             reqNewline = true;
-        let str = stringify$3.stringify(item, itemCtx, () => (comment = null));
+        let str = stringify(item, itemCtx, () => (comment = null));
         if (i < items.length - 1)
             str += ',';
         if (comment)
-            str += stringifyComment$1.lineComment(str, itemIndent, commentString(comment));
+            str += lineComment(str, itemIndent, commentString(comment));
         if (!reqNewline && (lines.length > linesAtValue || str.includes('\n')))
             reqNewline = true;
         lines.push(str);
@@ -33975,38 +33684,29 @@ function addCommentBefore({ indent, options: { commentString } }, lines, comment
     if (comment && chompKeep)
         comment = comment.replace(/^\n+/, '');
     if (comment) {
-        const ic = stringifyComment$1.indentComment(commentString(comment), indent);
+        const ic = indentComment(commentString(comment), indent);
         lines.push(ic.trimStart()); // Avoid double indent on first line
     }
 }
 
-stringifyCollection$3.stringifyCollection = stringifyCollection$2;
-
-var stringifyCollection$1 = stringifyCollection$3;
-var addPairToJSMap = addPairToJSMap$3;
-var Collection$2 = Collection$4;
-var identity$g = identity$w;
-var Pair$5 = Pair$7;
-var Scalar$d = Scalar$j;
-
 function findPair(items, key) {
-    const k = identity$g.isScalar(key) ? key.value : key;
+    const k = isScalar(key) ? key.value : key;
     for (const it of items) {
-        if (identity$g.isPair(it)) {
+        if (isPair(it)) {
             if (it.key === key || it.key === k)
                 return it;
-            if (identity$g.isScalar(it.key) && it.key.value === k)
+            if (isScalar(it.key) && it.key.value === k)
                 return it;
         }
     }
     return undefined;
 }
-class YAMLMap$6 extends Collection$2.Collection {
+class YAMLMap extends Collection {
     static get tagName() {
         return 'tag:yaml.org,2002:map';
     }
     constructor(schema) {
-        super(identity$g.MAP, schema);
+        super(MAP, schema);
         this.items = [];
     }
     /**
@@ -34022,7 +33722,7 @@ class YAMLMap$6 extends Collection$2.Collection {
             else if (Array.isArray(replacer) && !replacer.includes(key))
                 return;
             if (value !== undefined || keepUndefined)
-                map.items.push(Pair$5.createPair(key, value, ctx));
+                map.items.push(createPair(key, value, ctx));
         };
         if (obj instanceof Map) {
             for (const [key, value] of obj)
@@ -34045,21 +33745,21 @@ class YAMLMap$6 extends Collection$2.Collection {
      */
     add(pair, overwrite) {
         let _pair;
-        if (identity$g.isPair(pair))
+        if (isPair(pair))
             _pair = pair;
         else if (!pair || typeof pair !== 'object' || !('key' in pair)) {
             // In TypeScript, this never happens.
-            _pair = new Pair$5.Pair(pair, pair?.value);
+            _pair = new Pair(pair, pair?.value);
         }
         else
-            _pair = new Pair$5.Pair(pair.key, pair.value);
+            _pair = new Pair(pair.key, pair.value);
         const prev = findPair(this.items, _pair.key);
         const sortEntries = this.schema?.sortMapEntries;
         if (prev) {
             if (!overwrite)
                 throw new Error(`Key ${_pair.key} already set`);
             // For scalars, keep the old node & its comments and anchors
-            if (identity$g.isScalar(prev.value) && Scalar$d.isScalarValue(_pair.value))
+            if (isScalar(prev.value) && isScalarValue(_pair.value))
                 prev.value.value = _pair.value;
             else
                 prev.value = _pair.value;
@@ -34085,13 +33785,13 @@ class YAMLMap$6 extends Collection$2.Collection {
     get(key, keepScalar) {
         const it = findPair(this.items, key);
         const node = it?.value;
-        return (!keepScalar && identity$g.isScalar(node) ? node.value : node) ?? undefined;
+        return (!keepScalar && isScalar(node) ? node.value : node) ?? undefined;
     }
     has(key) {
         return !!findPair(this.items, key);
     }
     set(key, value) {
-        this.add(new Pair$5.Pair(key, value), true);
+        this.add(new Pair(key, value), true);
     }
     /**
      * @param ctx - Conversion context, originally set in Document#toJS()
@@ -34103,19 +33803,19 @@ class YAMLMap$6 extends Collection$2.Collection {
         if (ctx?.onCreate)
             ctx.onCreate(map);
         for (const item of this.items)
-            addPairToJSMap.addPairToJSMap(ctx, map, item);
+            addPairToJSMap(ctx, map, item);
         return map;
     }
     toString(ctx, onComment, onChompKeep) {
         if (!ctx)
             return JSON.stringify(this);
         for (const item of this.items) {
-            if (!identity$g.isPair(item))
+            if (!isPair(item))
                 throw new Error(`Map items must all be pairs; found ${JSON.stringify(item)} instead`);
         }
         if (!ctx.allNullValues && this.hasAllNullValues(false))
             ctx = Object.assign({}, ctx, { allNullValues: true });
-        return stringifyCollection$1.stringifyCollection(this, ctx, {
+        return stringifyCollection(this, ctx, {
             blockItemPrefix: '',
             flowChars: { start: '{', end: '}' },
             itemIndent: ctx.indent || '',
@@ -34125,44 +33825,25 @@ class YAMLMap$6 extends Collection$2.Collection {
     }
 }
 
-YAMLMap$7.YAMLMap = YAMLMap$6;
-YAMLMap$7.findPair = findPair;
-
-var identity$f = identity$w;
-var YAMLMap$5 = YAMLMap$7;
-
-const map$5 = {
+const map = {
     collection: 'map',
     default: true,
-    nodeClass: YAMLMap$5.YAMLMap,
+    nodeClass: YAMLMap,
     tag: 'tag:yaml.org,2002:map',
     resolve(map, onError) {
-        if (!identity$f.isMap(map))
+        if (!isMap(map))
             onError('Expected a mapping for this tag');
         return map;
     },
-    createNode: (schema, obj, ctx) => YAMLMap$5.YAMLMap.from(schema, obj, ctx)
+    createNode: (schema, obj, ctx) => YAMLMap.from(schema, obj, ctx)
 };
 
-map$6.map = map$5;
-
-var seq$6 = {};
-
-var YAMLSeq$7 = {};
-
-var createNode$1 = createNode$5;
-var stringifyCollection = stringifyCollection$3;
-var Collection$1 = Collection$4;
-var identity$e = identity$w;
-var Scalar$c = Scalar$j;
-var toJS$2 = toJS$8;
-
-class YAMLSeq$6 extends Collection$1.Collection {
+class YAMLSeq extends Collection {
     static get tagName() {
         return 'tag:yaml.org,2002:seq';
     }
     constructor(schema) {
-        super(identity$e.SEQ, schema);
+        super(SEQ, schema);
         this.items = [];
     }
     add(value) {
@@ -34188,7 +33869,7 @@ class YAMLSeq$6 extends Collection$1.Collection {
         if (typeof idx !== 'number')
             return undefined;
         const it = this.items[idx];
-        return !keepScalar && identity$e.isScalar(it) ? it.value : it;
+        return !keepScalar && isScalar(it) ? it.value : it;
     }
     /**
      * Checks if the collection includes a value with the key `key`.
@@ -34212,7 +33893,7 @@ class YAMLSeq$6 extends Collection$1.Collection {
         if (typeof idx !== 'number')
             throw new Error(`Expected a valid index, not ${key}.`);
         const prev = this.items[idx];
-        if (identity$e.isScalar(prev) && Scalar$c.isScalarValue(value))
+        if (isScalar(prev) && isScalarValue(value))
             prev.value = value;
         else
             this.items[idx] = value;
@@ -34223,13 +33904,13 @@ class YAMLSeq$6 extends Collection$1.Collection {
             ctx.onCreate(seq);
         let i = 0;
         for (const item of this.items)
-            seq.push(toJS$2.toJS(item, String(i++), ctx));
+            seq.push(toJS(item, String(i++), ctx));
         return seq;
     }
     toString(ctx, onComment, onChompKeep) {
         if (!ctx)
             return JSON.stringify(this);
-        return stringifyCollection.stringifyCollection(this, ctx, {
+        return stringifyCollection(this, ctx, {
             blockItemPrefix: '- ',
             flowChars: { start: '[', end: ']' },
             itemIndent: (ctx.indent || '') + '  ',
@@ -34247,14 +33928,14 @@ class YAMLSeq$6 extends Collection$1.Collection {
                     const key = obj instanceof Set ? it : String(i++);
                     it = replacer.call(obj, key, it);
                 }
-                seq.items.push(createNode$1.createNode(it, undefined, ctx));
+                seq.items.push(createNode(it, undefined, ctx));
             }
         }
         return seq;
     }
 }
 function asItemIndex(key) {
-    let idx = identity$e.isScalar(key) ? key.value : key;
+    let idx = isScalar(key) ? key.value : key;
     if (idx && typeof idx === 'string')
         idx = Number(idx);
     return typeof idx === 'number' && Number.isInteger(idx) && idx >= 0
@@ -34262,73 +33943,48 @@ function asItemIndex(key) {
         : null;
 }
 
-YAMLSeq$7.YAMLSeq = YAMLSeq$6;
-
-var identity$d = identity$w;
-var YAMLSeq$5 = YAMLSeq$7;
-
-const seq$5 = {
+const seq = {
     collection: 'seq',
     default: true,
-    nodeClass: YAMLSeq$5.YAMLSeq,
+    nodeClass: YAMLSeq,
     tag: 'tag:yaml.org,2002:seq',
     resolve(seq, onError) {
-        if (!identity$d.isSeq(seq))
+        if (!isSeq(seq))
             onError('Expected a sequence for this tag');
         return seq;
     },
-    createNode: (schema, obj, ctx) => YAMLSeq$5.YAMLSeq.from(schema, obj, ctx)
+    createNode: (schema, obj, ctx) => YAMLSeq.from(schema, obj, ctx)
 };
 
-seq$6.seq = seq$5;
-
-var string$5 = {};
-
-var stringifyString$2 = stringifyString$5;
-
-const string$4 = {
+const string = {
     identify: value => typeof value === 'string',
     default: true,
     tag: 'tag:yaml.org,2002:str',
     resolve: str => str,
     stringify(item, ctx, onComment, onChompKeep) {
         ctx = Object.assign({ actualString: true }, ctx);
-        return stringifyString$2.stringifyString(item, ctx, onComment, onChompKeep);
+        return stringifyString(item, ctx, onComment, onChompKeep);
     }
 };
 
-string$5.string = string$4;
-
-var tags$1 = {};
-
-var _null$3 = {};
-
-var Scalar$b = Scalar$j;
-
 const nullTag = {
     identify: value => value == null,
-    createNode: () => new Scalar$b.Scalar(null),
+    createNode: () => new Scalar(null),
     default: true,
     tag: 'tag:yaml.org,2002:null',
     test: /^(?:~|[Nn]ull|NULL)?$/,
-    resolve: () => new Scalar$b.Scalar(null),
+    resolve: () => new Scalar(null),
     stringify: ({ source }, ctx) => typeof source === 'string' && nullTag.test.test(source)
         ? source
         : ctx.options.nullStr
 };
-
-_null$3.nullTag = nullTag;
-
-var bool$4 = {};
-
-var Scalar$a = Scalar$j;
 
 const boolTag = {
     identify: value => typeof value === 'boolean',
     default: true,
     tag: 'tag:yaml.org,2002:bool',
     test: /^(?:[Tt]rue|TRUE|[Ff]alse|FALSE)$/,
-    resolve: str => new Scalar$a.Scalar(str[0] === 't' || str[0] === 'T'),
+    resolve: str => new Scalar(str[0] === 't' || str[0] === 'T'),
     stringify({ source, value }, ctx) {
         if (source && boolTag.test.test(source)) {
             const sv = source[0] === 't' || source[0] === 'T';
@@ -34339,13 +33995,7 @@ const boolTag = {
     }
 };
 
-bool$4.boolTag = boolTag;
-
-var float$6 = {};
-
-var stringifyNumber$6 = {};
-
-function stringifyNumber$5({ format, minFractionDigits, tag, value }) {
+function stringifyNumber({ format, minFractionDigits, tag, value }) {
     if (typeof value === 'bigint')
         return String(value);
     const num = typeof value === 'number' ? value : Number(value);
@@ -34368,11 +34018,6 @@ function stringifyNumber$5({ format, minFractionDigits, tag, value }) {
     return n;
 }
 
-stringifyNumber$6.stringifyNumber = stringifyNumber$5;
-
-var Scalar$9 = Scalar$j;
-var stringifyNumber$4 = stringifyNumber$6;
-
 const floatNaN$1 = {
     identify: value => typeof value === 'number',
     default: true,
@@ -34383,7 +34028,7 @@ const floatNaN$1 = {
         : str[0] === '-'
             ? Number.NEGATIVE_INFINITY
             : Number.POSITIVE_INFINITY,
-    stringify: stringifyNumber$4.stringifyNumber
+    stringify: stringifyNumber
 };
 const floatExp$1 = {
     identify: value => typeof value === 'number',
@@ -34394,31 +34039,23 @@ const floatExp$1 = {
     resolve: str => parseFloat(str),
     stringify(node) {
         const num = Number(node.value);
-        return isFinite(num) ? num.toExponential() : stringifyNumber$4.stringifyNumber(node);
+        return isFinite(num) ? num.toExponential() : stringifyNumber(node);
     }
 };
-const float$5 = {
+const float$1 = {
     identify: value => typeof value === 'number',
     default: true,
     tag: 'tag:yaml.org,2002:float',
     test: /^[-+]?(?:\.[0-9]+|[0-9]+\.[0-9]*)$/,
     resolve(str) {
-        const node = new Scalar$9.Scalar(parseFloat(str));
+        const node = new Scalar(parseFloat(str));
         const dot = str.indexOf('.');
         if (dot !== -1 && str[str.length - 1] === '0')
             node.minFractionDigits = str.length - dot - 1;
         return node;
     },
-    stringify: stringifyNumber$4.stringifyNumber
+    stringify: stringifyNumber
 };
-
-float$6.float = float$5;
-float$6.floatExp = floatExp$1;
-float$6.floatNaN = floatNaN$1;
-
-var int$6 = {};
-
-var stringifyNumber$3 = stringifyNumber$6;
 
 const intIdentify$2 = (value) => typeof value === 'bigint' || Number.isInteger(value);
 const intResolve$1 = (str, offset, radix, { intAsBigInt }) => (intAsBigInt ? BigInt(str) : parseInt(str.substring(offset), radix));
@@ -34426,7 +34063,7 @@ function intStringify$1(node, radix, prefix) {
     const { value } = node;
     if (intIdentify$2(value) && value >= 0)
         return prefix + value.toString(radix);
-    return stringifyNumber$3.stringifyNumber(node);
+    return stringifyNumber(node);
 }
 const intOct$1 = {
     identify: value => intIdentify$2(value) && value >= 0,
@@ -34437,13 +34074,13 @@ const intOct$1 = {
     resolve: (str, _onError, opt) => intResolve$1(str, 2, 8, opt),
     stringify: node => intStringify$1(node, 8, '0o')
 };
-const int$5 = {
+const int$1 = {
     identify: intIdentify$2,
     default: true,
     tag: 'tag:yaml.org,2002:int',
     test: /^[-+]?[0-9]+$/,
     resolve: (str, _onError, opt) => intResolve$1(str, 0, 10, opt),
-    stringify: stringifyNumber$3.stringifyNumber
+    stringify: stringifyNumber
 };
 const intHex$1 = {
     identify: value => intIdentify$2(value) && value >= 0,
@@ -34455,41 +34092,19 @@ const intHex$1 = {
     stringify: node => intStringify$1(node, 16, '0x')
 };
 
-int$6.int = int$5;
-int$6.intHex = intHex$1;
-int$6.intOct = intOct$1;
-
-var schema$8 = {};
-
-var map$4 = map$6;
-var _null$2 = _null$3;
-var seq$4 = seq$6;
-var string$3 = string$5;
-var bool$3 = bool$4;
-var float$4 = float$6;
-var int$4 = int$6;
-
-const schema$7 = [
-    map$4.map,
-    seq$4.seq,
-    string$3.string,
-    _null$2.nullTag,
-    bool$3.boolTag,
-    int$4.intOct,
-    int$4.int,
-    int$4.intHex,
-    float$4.floatNaN,
-    float$4.floatExp,
-    float$4.float
+const schema$2 = [
+    map,
+    seq,
+    string,
+    nullTag,
+    boolTag,
+    intOct$1,
+    int$1,
+    intHex$1,
+    floatNaN$1,
+    floatExp$1,
+    float$1
 ];
-
-schema$8.schema = schema$7;
-
-var schema$6 = {};
-
-var Scalar$8 = Scalar$j;
-var map$3 = map$6;
-var seq$3 = seq$6;
 
 function intIdentify$1(value) {
     return typeof value === 'bigint' || Number.isInteger(value);
@@ -34505,7 +34120,7 @@ const jsonScalars = [
     },
     {
         identify: value => value == null,
-        createNode: () => new Scalar$8.Scalar(null),
+        createNode: () => new Scalar(null),
         default: true,
         tag: 'tag:yaml.org,2002:null',
         test: /^null$/,
@@ -34546,17 +34161,9 @@ const jsonError = {
         return str;
     }
 };
-const schema$5 = [map$3.map, seq$3.seq].concat(jsonScalars, jsonError);
+const schema$1 = [map, seq].concat(jsonScalars, jsonError);
 
-schema$6.schema = schema$5;
-
-var binary$3 = {};
-
-var node_buffer = require$$0__default$1['default'];
-var Scalar$7 = Scalar$j;
-var stringifyString$1 = stringifyString$5;
-
-const binary$2 = {
+const binary = {
     identify: value => value instanceof Uint8Array, // Buffer inherits from Uint8Array
     default: false,
     tag: 'tag:yaml.org,2002:binary',
@@ -34569,10 +34176,7 @@ const binary$2 = {
      *   document.querySelector('#photo').src = URL.createObjectURL(blob)
      */
     resolve(src, onError) {
-        if (typeof node_buffer.Buffer === 'function') {
-            return node_buffer.Buffer.from(src, 'base64');
-        }
-        else if (typeof atob === 'function') {
+        if (typeof atob === 'function') {
             // On IE 11, atob() can't handle newlines
             const str = atob(src.replace(/[\n\r]/g, ''));
             const buffer = new Uint8Array(str.length);
@@ -34588,13 +34192,7 @@ const binary$2 = {
     stringify({ comment, type, value }, ctx, onComment, onChompKeep) {
         const buf = value; // checked earlier by binary.identify()
         let str;
-        if (typeof node_buffer.Buffer === 'function') {
-            str =
-                buf instanceof node_buffer.Buffer
-                    ? buf.toString('base64')
-                    : node_buffer.Buffer.from(buf.buffer).toString('base64');
-        }
-        else if (typeof btoa === 'function') {
+        if (typeof btoa === 'function') {
             let s = '';
             for (let i = 0; i < buf.length; ++i)
                 s += String.fromCharCode(buf[i]);
@@ -34604,41 +34202,30 @@ const binary$2 = {
             throw new Error('This environment does not support writing binary tags; either Buffer or btoa is required');
         }
         if (!type)
-            type = Scalar$7.Scalar.BLOCK_LITERAL;
-        if (type !== Scalar$7.Scalar.QUOTE_DOUBLE) {
+            type = Scalar.BLOCK_LITERAL;
+        if (type !== Scalar.QUOTE_DOUBLE) {
             const lineWidth = Math.max(ctx.options.lineWidth - ctx.indent.length, ctx.options.minContentWidth);
             const n = Math.ceil(str.length / lineWidth);
             const lines = new Array(n);
             for (let i = 0, o = 0; i < n; ++i, o += lineWidth) {
                 lines[i] = str.substr(o, lineWidth);
             }
-            str = lines.join(type === Scalar$7.Scalar.BLOCK_LITERAL ? '\n' : ' ');
+            str = lines.join(type === Scalar.BLOCK_LITERAL ? '\n' : ' ');
         }
-        return stringifyString$1.stringifyString({ comment, type, value: str }, ctx, onComment, onChompKeep);
+        return stringifyString({ comment, type, value: str }, ctx, onComment, onChompKeep);
     }
 };
 
-binary$3.binary = binary$2;
-
-var omap$3 = {};
-
-var pairs$4 = {};
-
-var identity$c = identity$w;
-var Pair$4 = Pair$7;
-var Scalar$6 = Scalar$j;
-var YAMLSeq$4 = YAMLSeq$7;
-
 function resolvePairs(seq, onError) {
-    if (identity$c.isSeq(seq)) {
+    if (isSeq(seq)) {
         for (let i = 0; i < seq.items.length; ++i) {
             let item = seq.items[i];
-            if (identity$c.isPair(item))
+            if (isPair(item))
                 continue;
-            else if (identity$c.isMap(item)) {
+            else if (isMap(item)) {
                 if (item.items.length > 1)
                     onError('Each pair must have its own sequence indicator');
-                const pair = item.items[0] || new Pair$4.Pair(new Scalar$6.Scalar(null));
+                const pair = item.items[0] || new Pair(new Scalar(null));
                 if (item.commentBefore)
                     pair.key.commentBefore = pair.key.commentBefore
                         ? `${item.commentBefore}\n${pair.key.commentBefore}`
@@ -34651,7 +34238,7 @@ function resolvePairs(seq, onError) {
                 }
                 item = pair;
             }
-            seq.items[i] = identity$c.isPair(item) ? item : new Pair$4.Pair(item);
+            seq.items[i] = isPair(item) ? item : new Pair(item);
         }
     }
     else
@@ -34660,7 +34247,7 @@ function resolvePairs(seq, onError) {
 }
 function createPairs(schema, iterable, ctx) {
     const { replacer } = ctx;
-    const pairs = new YAMLSeq$4.YAMLSeq(schema);
+    const pairs = new YAMLSeq(schema);
     pairs.tag = 'tag:yaml.org,2002:pairs';
     let i = 0;
     if (iterable && Symbol.iterator in Object(iterable))
@@ -34689,11 +34276,11 @@ function createPairs(schema, iterable, ctx) {
             else {
                 key = it;
             }
-            pairs.items.push(Pair$4.createPair(key, value, ctx));
+            pairs.items.push(createPair(key, value, ctx));
         }
     return pairs;
 }
-const pairs$3 = {
+const pairs = {
     collection: 'seq',
     default: false,
     tag: 'tag:yaml.org,2002:pairs',
@@ -34701,24 +34288,14 @@ const pairs$3 = {
     createNode: createPairs
 };
 
-pairs$4.createPairs = createPairs;
-pairs$4.pairs = pairs$3;
-pairs$4.resolvePairs = resolvePairs;
-
-var identity$b = identity$w;
-var toJS$1 = toJS$8;
-var YAMLMap$4 = YAMLMap$7;
-var YAMLSeq$3 = YAMLSeq$7;
-var pairs$2 = pairs$4;
-
-class YAMLOMap extends YAMLSeq$3.YAMLSeq {
+class YAMLOMap extends YAMLSeq {
     constructor() {
         super();
-        this.add = YAMLMap$4.YAMLMap.prototype.add.bind(this);
-        this.delete = YAMLMap$4.YAMLMap.prototype.delete.bind(this);
-        this.get = YAMLMap$4.YAMLMap.prototype.get.bind(this);
-        this.has = YAMLMap$4.YAMLMap.prototype.has.bind(this);
-        this.set = YAMLMap$4.YAMLMap.prototype.set.bind(this);
+        this.add = YAMLMap.prototype.add.bind(this);
+        this.delete = YAMLMap.prototype.delete.bind(this);
+        this.get = YAMLMap.prototype.get.bind(this);
+        this.has = YAMLMap.prototype.has.bind(this);
+        this.set = YAMLMap.prototype.set.bind(this);
         this.tag = YAMLOMap.tag;
     }
     /**
@@ -34733,12 +34310,12 @@ class YAMLOMap extends YAMLSeq$3.YAMLSeq {
             ctx.onCreate(map);
         for (const pair of this.items) {
             let key, value;
-            if (identity$b.isPair(pair)) {
-                key = toJS$1.toJS(pair.key, '', ctx);
-                value = toJS$1.toJS(pair.value, key, ctx);
+            if (isPair(pair)) {
+                key = toJS(pair.key, '', ctx);
+                value = toJS(pair.value, key, ctx);
             }
             else {
-                key = toJS$1.toJS(pair, '', ctx);
+                key = toJS(pair, '', ctx);
             }
             if (map.has(key))
                 throw new Error('Ordered maps must not include duplicate keys');
@@ -34747,24 +34324,24 @@ class YAMLOMap extends YAMLSeq$3.YAMLSeq {
         return map;
     }
     static from(schema, iterable, ctx) {
-        const pairs$1 = pairs$2.createPairs(schema, iterable, ctx);
+        const pairs = createPairs(schema, iterable, ctx);
         const omap = new this();
-        omap.items = pairs$1.items;
+        omap.items = pairs.items;
         return omap;
     }
 }
 YAMLOMap.tag = 'tag:yaml.org,2002:omap';
-const omap$2 = {
+const omap = {
     collection: 'seq',
     identify: value => value instanceof Map,
     nodeClass: YAMLOMap,
     default: false,
     tag: 'tag:yaml.org,2002:omap',
     resolve(seq, onError) {
-        const pairs$1 = pairs$2.resolvePairs(seq, onError);
+        const pairs = resolvePairs(seq, onError);
         const seenKeys = [];
-        for (const { key } of pairs$1.items) {
-            if (identity$b.isScalar(key)) {
+        for (const { key } of pairs.items) {
+            if (isScalar(key)) {
                 if (seenKeys.includes(key.value)) {
                     onError(`Ordered maps must not include duplicate keys: ${key.value}`);
                 }
@@ -34773,19 +34350,10 @@ const omap$2 = {
                 }
             }
         }
-        return Object.assign(new YAMLOMap(), pairs$1);
+        return Object.assign(new YAMLOMap(), pairs);
     },
     createNode: (schema, iterable, ctx) => YAMLOMap.from(schema, iterable, ctx)
 };
-
-omap$3.YAMLOMap = YAMLOMap;
-omap$3.omap = omap$2;
-
-var schema$4 = {};
-
-var bool$2 = {};
-
-var Scalar$5 = Scalar$j;
 
 function boolStringify({ value, source }, ctx) {
     const boolObj = value ? trueTag : falseTag;
@@ -34798,7 +34366,7 @@ const trueTag = {
     default: true,
     tag: 'tag:yaml.org,2002:bool',
     test: /^(?:Y|y|[Yy]es|YES|[Tt]rue|TRUE|[Oo]n|ON)$/,
-    resolve: () => new Scalar$5.Scalar(true),
+    resolve: () => new Scalar(true),
     stringify: boolStringify
 };
 const falseTag = {
@@ -34806,17 +34374,9 @@ const falseTag = {
     default: true,
     tag: 'tag:yaml.org,2002:bool',
     test: /^(?:N|n|[Nn]o|NO|[Ff]alse|FALSE|[Oo]ff|OFF)$/,
-    resolve: () => new Scalar$5.Scalar(false),
+    resolve: () => new Scalar(false),
     stringify: boolStringify
 };
-
-bool$2.falseTag = falseTag;
-bool$2.trueTag = trueTag;
-
-var float$3 = {};
-
-var Scalar$4 = Scalar$j;
-var stringifyNumber$2 = stringifyNumber$6;
 
 const floatNaN = {
     identify: value => typeof value === 'number',
@@ -34828,7 +34388,7 @@ const floatNaN = {
         : str[0] === '-'
             ? Number.NEGATIVE_INFINITY
             : Number.POSITIVE_INFINITY,
-    stringify: stringifyNumber$2.stringifyNumber
+    stringify: stringifyNumber
 };
 const floatExp = {
     identify: value => typeof value === 'number',
@@ -34839,16 +34399,16 @@ const floatExp = {
     resolve: (str) => parseFloat(str.replace(/_/g, '')),
     stringify(node) {
         const num = Number(node.value);
-        return isFinite(num) ? num.toExponential() : stringifyNumber$2.stringifyNumber(node);
+        return isFinite(num) ? num.toExponential() : stringifyNumber(node);
     }
 };
-const float$2 = {
+const float = {
     identify: value => typeof value === 'number',
     default: true,
     tag: 'tag:yaml.org,2002:float',
     test: /^[-+]?(?:[0-9][0-9_]*)?\.[0-9_]*$/,
     resolve(str) {
-        const node = new Scalar$4.Scalar(parseFloat(str.replace(/_/g, '')));
+        const node = new Scalar(parseFloat(str.replace(/_/g, '')));
         const dot = str.indexOf('.');
         if (dot !== -1) {
             const f = str.substring(dot + 1).replace(/_/g, '');
@@ -34857,16 +34417,8 @@ const float$2 = {
         }
         return node;
     },
-    stringify: stringifyNumber$2.stringifyNumber
+    stringify: stringifyNumber
 };
-
-float$3.float = float$2;
-float$3.floatExp = floatExp;
-float$3.floatNaN = floatNaN;
-
-var int$3 = {};
-
-var stringifyNumber$1 = stringifyNumber$6;
 
 const intIdentify = (value) => typeof value === 'bigint' || Number.isInteger(value);
 function intResolve(str, offset, radix, { intAsBigInt }) {
@@ -34898,7 +34450,7 @@ function intStringify(node, radix, prefix) {
         const str = value.toString(radix);
         return value < 0 ? '-' + prefix + str.substr(1) : prefix + str;
     }
-    return stringifyNumber$1.stringifyNumber(node);
+    return stringifyNumber(node);
 }
 const intBin = {
     identify: intIdentify,
@@ -34918,13 +34470,13 @@ const intOct = {
     resolve: (str, _onError, opt) => intResolve(str, 1, 8, opt),
     stringify: node => intStringify(node, 8, '0')
 };
-const int$2 = {
+const int = {
     identify: intIdentify,
     default: true,
     tag: 'tag:yaml.org,2002:int',
     test: /^[-+]?[0-9][0-9_]*$/,
     resolve: (str, _onError, opt) => intResolve(str, 0, 10, opt),
-    stringify: stringifyNumber$1.stringifyNumber
+    stringify: stringifyNumber
 };
 const intHex = {
     identify: intIdentify,
@@ -34936,35 +34488,24 @@ const intHex = {
     stringify: node => intStringify(node, 16, '0x')
 };
 
-int$3.int = int$2;
-int$3.intBin = intBin;
-int$3.intHex = intHex;
-int$3.intOct = intOct;
-
-var set$3 = {};
-
-var identity$a = identity$w;
-var Pair$3 = Pair$7;
-var YAMLMap$3 = YAMLMap$7;
-
-class YAMLSet extends YAMLMap$3.YAMLMap {
+class YAMLSet extends YAMLMap {
     constructor(schema) {
         super(schema);
         this.tag = YAMLSet.tag;
     }
     add(key) {
         let pair;
-        if (identity$a.isPair(key))
+        if (isPair(key))
             pair = key;
         else if (key &&
             typeof key === 'object' &&
             'key' in key &&
             'value' in key &&
             key.value === null)
-            pair = new Pair$3.Pair(key.key, null);
+            pair = new Pair(key.key, null);
         else
-            pair = new Pair$3.Pair(key, null);
-        const prev = YAMLMap$3.findPair(this.items, pair.key);
+            pair = new Pair(key, null);
+        const prev = findPair(this.items, pair.key);
         if (!prev)
             this.items.push(pair);
     }
@@ -34973,9 +34514,9 @@ class YAMLSet extends YAMLMap$3.YAMLMap {
      * Otherwise, returns the value of that Pair's key.
      */
     get(key, keepPair) {
-        const pair = YAMLMap$3.findPair(this.items, key);
-        return !keepPair && identity$a.isPair(pair)
-            ? identity$a.isScalar(pair.key)
+        const pair = findPair(this.items, key);
+        return !keepPair && isPair(pair)
+            ? isScalar(pair.key)
                 ? pair.key.value
                 : pair.key
             : pair;
@@ -34983,12 +34524,12 @@ class YAMLSet extends YAMLMap$3.YAMLMap {
     set(key, value) {
         if (typeof value !== 'boolean')
             throw new Error(`Expected boolean value for set(key, value) in a YAML set, not ${typeof value}`);
-        const prev = YAMLMap$3.findPair(this.items, key);
+        const prev = findPair(this.items, key);
         if (prev && !value) {
             this.items.splice(this.items.indexOf(prev), 1);
         }
         else if (!prev && value) {
-            this.items.push(new Pair$3.Pair(key));
+            this.items.push(new Pair(key));
         }
     }
     toJSON(_, ctx) {
@@ -35009,13 +34550,13 @@ class YAMLSet extends YAMLMap$3.YAMLMap {
             for (let value of iterable) {
                 if (typeof replacer === 'function')
                     value = replacer.call(iterable, value, value);
-                set.items.push(Pair$3.createPair(value, null, ctx));
+                set.items.push(createPair(value, null, ctx));
             }
         return set;
     }
 }
 YAMLSet.tag = 'tag:yaml.org,2002:set';
-const set$2 = {
+const set = {
     collection: 'map',
     identify: value => value instanceof Set,
     nodeClass: YAMLSet,
@@ -35023,7 +34564,7 @@ const set$2 = {
     tag: 'tag:yaml.org,2002:set',
     createNode: (schema, iterable, ctx) => YAMLSet.from(schema, iterable, ctx),
     resolve(map, onError) {
-        if (identity$a.isMap(map)) {
+        if (isMap(map)) {
             if (map.hasAllNullValues(true))
                 return Object.assign(new YAMLSet(), map);
             else
@@ -35034,13 +34575,6 @@ const set$2 = {
         return map;
     }
 };
-
-set$3.YAMLSet = YAMLSet;
-set$3.set = set$2;
-
-var timestamp$3 = {};
-
-var stringifyNumber = stringifyNumber$6;
 
 /** Internal types handle bigint as number, because TS can't figure it out. */
 function parseSexagesimal(str, asBigInt) {
@@ -35064,7 +34598,7 @@ function stringifySexagesimal(node) {
     if (typeof value === 'bigint')
         num = n => BigInt(n);
     else if (isNaN(value) || !isFinite(value))
-        return stringifyNumber.stringifyNumber(node);
+        return stringifyNumber(node);
     let sign = '';
     if (value < 0) {
         sign = '-';
@@ -35108,7 +34642,7 @@ const floatTime = {
     resolve: str => parseSexagesimal(str, false),
     stringify: stringifySexagesimal
 };
-const timestamp$2 = {
+const timestamp = {
     identify: value => value instanceof Date,
     default: true,
     tag: 'tag:yaml.org,2002:timestamp',
@@ -35122,7 +34656,7 @@ const timestamp$2 = {
         '(?:[ \\t]*(Z|[-+][012]?[0-9](?::[0-9]{2})?))?' + // Z | +5 | -03:30
         ')?$'),
     resolve(str) {
-        const match = str.match(timestamp$2.test);
+        const match = str.match(timestamp.test);
         if (!match)
             throw new Error('!!timestamp expects a date, starting with yyyy-mm-dd');
         const [, year, month, day, hour, minute, second] = match.map(Number);
@@ -35140,107 +34674,70 @@ const timestamp$2 = {
     stringify: ({ value }) => value.toISOString().replace(/(T00:00:00)?\.000Z$/, '')
 };
 
-timestamp$3.floatTime = floatTime;
-timestamp$3.intTime = intTime;
-timestamp$3.timestamp = timestamp$2;
-
-var map$2 = map$6;
-var _null$1 = _null$3;
-var seq$2 = seq$6;
-var string$2 = string$5;
-var binary$1 = binary$3;
-var bool$1 = bool$2;
-var float$1 = float$3;
-var int$1 = int$3;
-var merge$1 = merge$4;
-var omap$1 = omap$3;
-var pairs$1 = pairs$4;
-var set$1 = set$3;
-var timestamp$1 = timestamp$3;
-
-const schema$3 = [
-    map$2.map,
-    seq$2.seq,
-    string$2.string,
-    _null$1.nullTag,
-    bool$1.trueTag,
-    bool$1.falseTag,
-    int$1.intBin,
-    int$1.intOct,
-    int$1.int,
-    int$1.intHex,
-    float$1.floatNaN,
-    float$1.floatExp,
-    float$1.float,
-    binary$1.binary,
-    merge$1.merge,
-    omap$1.omap,
-    pairs$1.pairs,
-    set$1.set,
-    timestamp$1.intTime,
-    timestamp$1.floatTime,
-    timestamp$1.timestamp
+const schema = [
+    map,
+    seq,
+    string,
+    nullTag,
+    trueTag,
+    falseTag,
+    intBin,
+    intOct,
+    int,
+    intHex,
+    floatNaN,
+    floatExp,
+    float,
+    binary,
+    merge,
+    omap,
+    pairs,
+    set,
+    intTime,
+    floatTime,
+    timestamp
 ];
 
-schema$4.schema = schema$3;
-
-var map$1 = map$6;
-var _null = _null$3;
-var seq$1 = seq$6;
-var string$1 = string$5;
-var bool = bool$4;
-var float = float$6;
-var int = int$6;
-var schema = schema$8;
-var schema$1 = schema$6;
-var binary = binary$3;
-var merge = merge$4;
-var omap = omap$3;
-var pairs = pairs$4;
-var schema$2 = schema$4;
-var set = set$3;
-var timestamp = timestamp$3;
-
 const schemas = new Map([
-    ['core', schema.schema],
-    ['failsafe', [map$1.map, seq$1.seq, string$1.string]],
-    ['json', schema$1.schema],
-    ['yaml11', schema$2.schema],
-    ['yaml-1.1', schema$2.schema]
+    ['core', schema$2],
+    ['failsafe', [map, seq, string]],
+    ['json', schema$1],
+    ['yaml11', schema],
+    ['yaml-1.1', schema]
 ]);
 const tagsByName = {
-    binary: binary.binary,
-    bool: bool.boolTag,
-    float: float.float,
-    floatExp: float.floatExp,
-    floatNaN: float.floatNaN,
-    floatTime: timestamp.floatTime,
-    int: int.int,
-    intHex: int.intHex,
-    intOct: int.intOct,
-    intTime: timestamp.intTime,
-    map: map$1.map,
-    merge: merge.merge,
-    null: _null.nullTag,
-    omap: omap.omap,
-    pairs: pairs.pairs,
-    seq: seq$1.seq,
-    set: set.set,
-    timestamp: timestamp.timestamp
+    binary,
+    bool: boolTag,
+    float: float$1,
+    floatExp: floatExp$1,
+    floatNaN: floatNaN$1,
+    floatTime,
+    int: int$1,
+    intHex: intHex$1,
+    intOct: intOct$1,
+    intTime,
+    map,
+    merge,
+    null: nullTag,
+    omap,
+    pairs,
+    seq,
+    set,
+    timestamp
 };
 const coreKnownTags = {
-    'tag:yaml.org,2002:binary': binary.binary,
-    'tag:yaml.org,2002:merge': merge.merge,
-    'tag:yaml.org,2002:omap': omap.omap,
-    'tag:yaml.org,2002:pairs': pairs.pairs,
-    'tag:yaml.org,2002:set': set.set,
-    'tag:yaml.org,2002:timestamp': timestamp.timestamp
+    'tag:yaml.org,2002:binary': binary,
+    'tag:yaml.org,2002:merge': merge,
+    'tag:yaml.org,2002:omap': omap,
+    'tag:yaml.org,2002:pairs': pairs,
+    'tag:yaml.org,2002:set': set,
+    'tag:yaml.org,2002:timestamp': timestamp
 };
 function getTags(customTags, schemaName, addMergeTag) {
     const schemaTags = schemas.get(schemaName);
     if (schemaTags && !customTags) {
-        return addMergeTag && !schemaTags.includes(merge.merge)
-            ? schemaTags.concat(merge.merge)
+        return addMergeTag && !schemaTags.includes(merge)
+            ? schemaTags.concat(merge)
             : schemaTags.slice();
     }
     let tags = schemaTags;
@@ -35263,7 +34760,7 @@ function getTags(customTags, schemaName, addMergeTag) {
         tags = customTags(tags.slice());
     }
     if (addMergeTag)
-        tags = tags.concat(merge.merge);
+        tags = tags.concat(merge);
     return tags.reduce((tags, tag) => {
         const tagObj = typeof tag === 'string' ? tagsByName[tag] : tag;
         if (!tagObj) {
@@ -35279,30 +34776,21 @@ function getTags(customTags, schemaName, addMergeTag) {
     }, []);
 }
 
-tags$1.coreKnownTags = coreKnownTags;
-tags$1.getTags = getTags;
-
-var identity$9 = identity$w;
-var map = map$6;
-var seq = seq$6;
-var string = string$5;
-var tags = tags$1;
-
 const sortMapEntriesByKey = (a, b) => a.key < b.key ? -1 : a.key > b.key ? 1 : 0;
-class Schema$1 {
+class Schema {
     constructor({ compat, customTags, merge, resolveKnownTags, schema, sortMapEntries, toStringDefaults }) {
         this.compat = Array.isArray(compat)
-            ? tags.getTags(compat, 'compat')
+            ? getTags(compat, 'compat')
             : compat
-                ? tags.getTags(null, compat)
+                ? getTags(null, compat)
                 : null;
         this.name = (typeof schema === 'string' && schema) || 'core';
-        this.knownTags = resolveKnownTags ? tags.coreKnownTags : {};
-        this.tags = tags.getTags(customTags, this.name, merge);
+        this.knownTags = resolveKnownTags ? coreKnownTags : {};
+        this.tags = getTags(customTags, this.name, merge);
         this.toStringOptions = toStringDefaults ?? null;
-        Object.defineProperty(this, identity$9.MAP, { value: map.map });
-        Object.defineProperty(this, identity$9.SCALAR, { value: string.string });
-        Object.defineProperty(this, identity$9.SEQ, { value: seq.seq });
+        Object.defineProperty(this, MAP, { value: map });
+        Object.defineProperty(this, SCALAR$1, { value: string });
+        Object.defineProperty(this, SEQ, { value: seq });
         // Used by createMap()
         this.sortMapEntries =
             typeof sortMapEntries === 'function'
@@ -35312,21 +34800,13 @@ class Schema$1 {
                     : null;
     }
     clone() {
-        const copy = Object.create(Schema$1.prototype, Object.getOwnPropertyDescriptors(this));
+        const copy = Object.create(Schema.prototype, Object.getOwnPropertyDescriptors(this));
         copy.tags = this.tags.slice();
         return copy;
     }
 }
 
-Schema$2.Schema = Schema$1;
-
-var stringifyDocument$2 = {};
-
-var identity$8 = identity$w;
-var stringify$2 = stringify$7;
-var stringifyComment = stringifyComment$5;
-
-function stringifyDocument$1(doc, options) {
+function stringifyDocument(doc, options) {
     const lines = [];
     let hasDirectives = options.directives === true;
     if (options.directives !== false && doc.directives) {
@@ -35340,32 +34820,32 @@ function stringifyDocument$1(doc, options) {
     }
     if (hasDirectives)
         lines.push('---');
-    const ctx = stringify$2.createStringifyContext(doc, options);
+    const ctx = createStringifyContext(doc, options);
     const { commentString } = ctx.options;
     if (doc.commentBefore) {
         if (lines.length !== 1)
             lines.unshift('');
         const cs = commentString(doc.commentBefore);
-        lines.unshift(stringifyComment.indentComment(cs, ''));
+        lines.unshift(indentComment(cs, ''));
     }
     let chompKeep = false;
     let contentComment = null;
     if (doc.contents) {
-        if (identity$8.isNode(doc.contents)) {
+        if (isNode(doc.contents)) {
             if (doc.contents.spaceBefore && hasDirectives)
                 lines.push('');
             if (doc.contents.commentBefore) {
                 const cs = commentString(doc.contents.commentBefore);
-                lines.push(stringifyComment.indentComment(cs, ''));
+                lines.push(indentComment(cs, ''));
             }
             // top-level block scalars need to be indented if followed by a comment
             ctx.forceBlockIndent = !!doc.comment;
             contentComment = doc.contents.comment;
         }
         const onChompKeep = contentComment ? undefined : () => (chompKeep = true);
-        let body = stringify$2.stringify(doc.contents, ctx, () => (contentComment = null), onChompKeep);
+        let body = stringify(doc.contents, ctx, () => (contentComment = null), onChompKeep);
         if (contentComment)
-            body += stringifyComment.lineComment(body, '', commentString(contentComment));
+            body += lineComment(body, '', commentString(contentComment));
         if ((body[0] === '|' || body[0] === '>') &&
             lines[lines.length - 1] === '---') {
             // Top-level block scalars with a preceding doc marker ought to use the
@@ -35376,14 +34856,14 @@ function stringifyDocument$1(doc, options) {
             lines.push(body);
     }
     else {
-        lines.push(stringify$2.stringify(doc.contents, ctx));
+        lines.push(stringify(doc.contents, ctx));
     }
     if (doc.directives?.docEnd) {
         if (doc.comment) {
             const cs = commentString(doc.comment);
             if (cs.includes('\n')) {
                 lines.push('...');
-                lines.push(stringifyComment.indentComment(cs, ''));
+                lines.push(indentComment(cs, ''));
             }
             else {
                 lines.push(`... ${cs}`);
@@ -35400,27 +34880,13 @@ function stringifyDocument$1(doc, options) {
         if (dc) {
             if ((!chompKeep || contentComment) && lines[lines.length - 1] !== '')
                 lines.push('');
-            lines.push(stringifyComment.indentComment(commentString(dc), ''));
+            lines.push(indentComment(commentString(dc), ''));
         }
     }
     return lines.join('\n') + '\n';
 }
 
-stringifyDocument$2.stringifyDocument = stringifyDocument$1;
-
-var Alias$2 = Alias$5;
-var Collection = Collection$4;
-var identity$7 = identity$w;
-var Pair$2 = Pair$7;
-var toJS = toJS$8;
-var Schema = Schema$2;
-var stringifyDocument = stringifyDocument$2;
-var anchors = anchors$3;
-var applyReviver = applyReviver$3;
-var createNode = createNode$5;
-var directives$1 = directives$2;
-
-class Document$3 {
+class Document {
     constructor(value, replacer, options) {
         /** A comment before this Document */
         this.commentBefore = null;
@@ -35430,7 +34896,7 @@ class Document$3 {
         this.errors = [];
         /** Warnings encountered during parsing. */
         this.warnings = [];
-        Object.defineProperty(this, identity$7.NODE_TYPE, { value: identity$7.DOC });
+        Object.defineProperty(this, NODE_TYPE, { value: DOC });
         let _replacer = null;
         if (typeof replacer === 'function' || Array.isArray(replacer)) {
             _replacer = replacer;
@@ -35457,7 +34923,7 @@ class Document$3 {
                 version = this.directives.yaml.version;
         }
         else
-            this.directives = new directives$1.Directives({ version });
+            this.directives = new Directives({ version });
         this.setSchema(version, options);
         // @ts-expect-error We can't really know that this matches Contents.
         this.contents =
@@ -35469,8 +34935,8 @@ class Document$3 {
      * Custom Node values that inherit from `Object` still refer to their original instances.
      */
     clone() {
-        const copy = Object.create(Document$3.prototype, {
-            [identity$7.NODE_TYPE]: { value: identity$7.DOC }
+        const copy = Object.create(Document.prototype, {
+            [NODE_TYPE]: { value: DOC }
         });
         copy.commentBefore = this.commentBefore;
         copy.comment = this.comment;
@@ -35481,7 +34947,7 @@ class Document$3 {
             copy.directives = this.directives.clone();
         copy.schema = this.schema.clone();
         // @ts-expect-error We can't really know that this matches Contents.
-        copy.contents = identity$7.isNode(this.contents)
+        copy.contents = isNode(this.contents)
             ? this.contents.clone(copy.schema)
             : this.contents;
         if (this.range)
@@ -35509,12 +34975,12 @@ class Document$3 {
      */
     createAlias(node, name) {
         if (!node.anchor) {
-            const prev = anchors.anchorNames(this);
+            const prev = anchorNames(this);
             node.anchor =
                 // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-                !name || prev.has(name) ? anchors.findNewAnchor(name || 'a', prev) : name;
+                !name || prev.has(name) ? findNewAnchor(name || 'a', prev) : name;
         }
-        return new Alias$2.Alias(node.anchor);
+        return new Alias$1(node.anchor);
     }
     createNode(value, replacer, options) {
         let _replacer = undefined;
@@ -35534,7 +35000,7 @@ class Document$3 {
             replacer = undefined;
         }
         const { aliasDuplicateObjects, anchorPrefix, flow, keepUndefined, onTagObj, tag } = options ?? {};
-        const { onAnchor, setAnchors, sourceObjects } = anchors.createNodeAnchors(this, 
+        const { onAnchor, setAnchors, sourceObjects } = createNodeAnchors(this, 
         // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         anchorPrefix || 'a');
         const ctx = {
@@ -35546,8 +35012,8 @@ class Document$3 {
             schema: this.schema,
             sourceObjects
         };
-        const node = createNode.createNode(value, tag, ctx);
-        if (flow && identity$7.isCollection(node))
+        const node = createNode(value, tag, ctx);
+        if (flow && isCollection(node))
             node.flow = true;
         setAnchors();
         return node;
@@ -35559,7 +35025,7 @@ class Document$3 {
     createPair(key, value, options = {}) {
         const k = this.createNode(key, null, options);
         const v = this.createNode(value, null, options);
-        return new Pair$2.Pair(k, v);
+        return new Pair(k, v);
     }
     /**
      * Removes a value from the document.
@@ -35573,7 +35039,7 @@ class Document$3 {
      * @returns `true` if the item was found and removed.
      */
     deleteIn(path) {
-        if (Collection.isEmptyPath(path)) {
+        if (isEmptyPath(path)) {
             if (this.contents == null)
                 return false;
             // @ts-expect-error Presumed impossible if Strict extends false
@@ -35590,7 +35056,7 @@ class Document$3 {
      * `true` (collections are always returned intact).
      */
     get(key, keepScalar) {
-        return identity$7.isCollection(this.contents)
+        return isCollection(this.contents)
             ? this.contents.get(key, keepScalar)
             : undefined;
     }
@@ -35600,11 +35066,11 @@ class Document$3 {
      * `true` (collections are always returned intact).
      */
     getIn(path, keepScalar) {
-        if (Collection.isEmptyPath(path))
-            return !keepScalar && identity$7.isScalar(this.contents)
+        if (isEmptyPath(path))
+            return !keepScalar && isScalar(this.contents)
                 ? this.contents.value
                 : this.contents;
-        return identity$7.isCollection(this.contents)
+        return isCollection(this.contents)
             ? this.contents.getIn(path, keepScalar)
             : undefined;
     }
@@ -35612,15 +35078,15 @@ class Document$3 {
      * Checks if the document includes a value with the key `key`.
      */
     has(key) {
-        return identity$7.isCollection(this.contents) ? this.contents.has(key) : false;
+        return isCollection(this.contents) ? this.contents.has(key) : false;
     }
     /**
      * Checks if the document includes a value at `path`.
      */
     hasIn(path) {
-        if (Collection.isEmptyPath(path))
+        if (isEmptyPath(path))
             return this.contents !== undefined;
-        return identity$7.isCollection(this.contents) ? this.contents.hasIn(path) : false;
+        return isCollection(this.contents) ? this.contents.hasIn(path) : false;
     }
     /**
      * Sets a value in this document. For `!!set`, `value` needs to be a
@@ -35629,7 +35095,7 @@ class Document$3 {
     set(key, value) {
         if (this.contents == null) {
             // @ts-expect-error We can't really know that this matches Contents.
-            this.contents = Collection.collectionFromPath(this.schema, [key], value);
+            this.contents = collectionFromPath(this.schema, [key], value);
         }
         else if (assertCollection(this.contents)) {
             this.contents.set(key, value);
@@ -35640,13 +35106,13 @@ class Document$3 {
      * boolean to add/remove the item from the set.
      */
     setIn(path, value) {
-        if (Collection.isEmptyPath(path)) {
+        if (isEmptyPath(path)) {
             // @ts-expect-error We can't really know that this matches Contents.
             this.contents = value;
         }
         else if (this.contents == null) {
             // @ts-expect-error We can't really know that this matches Contents.
-            this.contents = Collection.collectionFromPath(this.schema, Array.from(path), value);
+            this.contents = collectionFromPath(this.schema, Array.from(path), value);
         }
         else if (assertCollection(this.contents)) {
             this.contents.setIn(path, value);
@@ -35668,7 +35134,7 @@ class Document$3 {
                 if (this.directives)
                     this.directives.yaml.version = '1.1';
                 else
-                    this.directives = new directives$1.Directives({ version: '1.1' });
+                    this.directives = new Directives({ version: '1.1' });
                 opt = { resolveKnownTags: false, schema: 'yaml-1.1' };
                 break;
             case '1.2':
@@ -35676,7 +35142,7 @@ class Document$3 {
                 if (this.directives)
                     this.directives.yaml.version = version;
                 else
-                    this.directives = new directives$1.Directives({ version });
+                    this.directives = new Directives({ version });
                 opt = { resolveKnownTags: true, schema: 'core' };
                 break;
             case null:
@@ -35693,7 +35159,7 @@ class Document$3 {
         if (options.schema instanceof Object)
             this.schema = options.schema;
         else if (opt)
-            this.schema = new Schema.Schema(Object.assign(opt, options));
+            this.schema = new Schema(Object.assign(opt, options));
         else
             throw new Error(`With a null YAML version, the { schema: Schema } option is required`);
     }
@@ -35707,12 +35173,12 @@ class Document$3 {
             mapKeyWarned: false,
             maxAliasCount: typeof maxAliasCount === 'number' ? maxAliasCount : 100
         };
-        const res = toJS.toJS(this.contents, jsonArg ?? '', ctx);
+        const res = toJS(this.contents, jsonArg ?? '', ctx);
         if (typeof onAnchor === 'function')
             for (const { count, res } of ctx.anchors.values())
                 onAnchor(res, count);
         return typeof reviver === 'function'
-            ? applyReviver.applyReviver(reviver, { '': res }, '', res)
+            ? applyReviver(reviver, { '': res }, '', res)
             : res;
     }
     /**
@@ -35733,18 +35199,14 @@ class Document$3 {
             const s = JSON.stringify(options.indent);
             throw new Error(`"indent" option must be a positive integer, not ${s}`);
         }
-        return stringifyDocument.stringifyDocument(this, options);
+        return stringifyDocument(this, options);
     }
 }
 function assertCollection(contents) {
-    if (identity$7.isCollection(contents))
+    if (isCollection(contents))
         return true;
     throw new Error('Expected a YAML collection as document contents');
 }
-
-Document$4.Document = Document$3;
-
-var errors$3 = {};
 
 class YAMLError extends Error {
     constructor(name, pos, code, message) {
@@ -35802,22 +35264,7 @@ const prettifyError = (src, lc) => (error) => {
     }
 };
 
-errors$3.YAMLError = YAMLError;
-errors$3.YAMLParseError = YAMLParseError;
-errors$3.YAMLWarning = YAMLWarning;
-errors$3.prettifyError = prettifyError;
-
-var composeDoc$2 = {};
-
-var composeNode$2 = {};
-
-var composeCollection$2 = {};
-
-var resolveBlockMap$2 = {};
-
-var resolveProps$5 = {};
-
-function resolveProps$4(tokens, { flow, indicator, next, offset, onError, parentIndent, startOnNewline }) {
+function resolveProps(tokens, { flow, indicator, next, offset, onError, parentIndent, startOnNewline }) {
     let spaceBefore = false;
     let atNewline = startOnNewline;
     let hasSpace = startOnNewline;
@@ -35964,10 +35411,6 @@ function resolveProps$4(tokens, { flow, indicator, next, offset, onError, parent
     };
 }
 
-resolveProps$5.resolveProps = resolveProps$4;
-
-var utilContainsNewline$3 = {};
-
 function containsNewline(key) {
     if (!key)
         return null;
@@ -36001,29 +35444,17 @@ function containsNewline(key) {
     }
 }
 
-utilContainsNewline$3.containsNewline = containsNewline;
-
-var utilFlowIndentCheck$2 = {};
-
-var utilContainsNewline$2 = utilContainsNewline$3;
-
 function flowIndentCheck(indent, fc, onError) {
     if (fc?.type === 'flow-collection') {
         const end = fc.end[0];
         if (end.indent === indent &&
             (end.source === ']' || end.source === '}') &&
-            utilContainsNewline$2.containsNewline(fc)) {
+            containsNewline(fc)) {
             const msg = 'Flow end indicator should be more indented than parent';
             onError(end, 'BAD_INDENT', msg, true);
         }
     }
 }
-
-utilFlowIndentCheck$2.flowIndentCheck = flowIndentCheck;
-
-var utilMapIncludes$2 = {};
-
-var identity$6 = identity$w;
 
 function mapIncludes(ctx, items, search) {
     const { uniqueKeys } = ctx.options;
@@ -36031,22 +35462,13 @@ function mapIncludes(ctx, items, search) {
         return false;
     const isEqual = typeof uniqueKeys === 'function'
         ? uniqueKeys
-        : (a, b) => a === b || (identity$6.isScalar(a) && identity$6.isScalar(b) && a.value === b.value);
+        : (a, b) => a === b || (isScalar(a) && isScalar(b) && a.value === b.value);
     return items.some(pair => isEqual(pair.key, search));
 }
 
-utilMapIncludes$2.mapIncludes = mapIncludes;
-
-var Pair$1 = Pair$7;
-var YAMLMap$2 = YAMLMap$7;
-var resolveProps$3 = resolveProps$5;
-var utilContainsNewline$1 = utilContainsNewline$3;
-var utilFlowIndentCheck$1 = utilFlowIndentCheck$2;
-var utilMapIncludes$1 = utilMapIncludes$2;
-
 const startColMsg = 'All mapping items must start at the same column';
-function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, tag) {
-    const NodeClass = tag?.nodeClass ?? YAMLMap$2.YAMLMap;
+function resolveBlockMap({ composeNode, composeEmptyNode }, ctx, bm, onError, tag) {
+    const NodeClass = tag?.nodeClass ?? YAMLMap;
     const map = new NodeClass(ctx.schema);
     if (ctx.atRoot)
         ctx.atRoot = false;
@@ -36055,7 +35477,7 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
     for (const collItem of bm.items) {
         const { start, key, sep, value } = collItem;
         // key properties
-        const keyProps = resolveProps$3.resolveProps(start, {
+        const keyProps = resolveProps(start, {
             indicator: 'explicit-key-ind',
             next: key ?? sep?.[0],
             offset,
@@ -36081,7 +35503,7 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
                 }
                 continue;
             }
-            if (keyProps.newlineAfterProp || utilContainsNewline$1.containsNewline(key)) {
+            if (keyProps.newlineAfterProp || containsNewline(key)) {
                 onError(key ?? start[start.length - 1], 'MULTILINE_IMPLICIT_KEY', 'Implicit keys need to be on a single line');
             }
         }
@@ -36095,12 +35517,12 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
             ? composeNode(ctx, key, keyProps, onError)
             : composeEmptyNode(ctx, keyStart, start, null, keyProps, onError);
         if (ctx.schema.compat)
-            utilFlowIndentCheck$1.flowIndentCheck(bm.indent, key, onError);
+            flowIndentCheck(bm.indent, key, onError);
         ctx.atKey = false;
-        if (utilMapIncludes$1.mapIncludes(ctx, map.items, keyNode))
+        if (mapIncludes(ctx, map.items, keyNode))
             onError(keyStart, 'DUPLICATE_KEY', 'Map keys must be unique');
         // value properties
-        const valueProps = resolveProps$3.resolveProps(sep ?? [], {
+        const valueProps = resolveProps(sep ?? [], {
             indicator: 'map-value-ind',
             next: value,
             offset: keyNode.range[2],
@@ -36122,9 +35544,9 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
                 ? composeNode(ctx, value, valueProps, onError)
                 : composeEmptyNode(ctx, offset, sep, null, valueProps, onError);
             if (ctx.schema.compat)
-                utilFlowIndentCheck$1.flowIndentCheck(bm.indent, value, onError);
+                flowIndentCheck(bm.indent, value, onError);
             offset = valueNode.range[2];
-            const pair = new Pair$1.Pair(keyNode, valueNode);
+            const pair = new Pair(keyNode, valueNode);
             if (ctx.options.keepSourceTokens)
                 pair.srcToken = collItem;
             map.items.push(pair);
@@ -36139,7 +35561,7 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
                 else
                     keyNode.comment = valueProps.comment;
             }
-            const pair = new Pair$1.Pair(keyNode);
+            const pair = new Pair(keyNode);
             if (ctx.options.keepSourceTokens)
                 pair.srcToken = collItem;
             map.items.push(pair);
@@ -36151,16 +35573,8 @@ function resolveBlockMap$1({ composeNode, composeEmptyNode }, ctx, bm, onError, 
     return map;
 }
 
-resolveBlockMap$2.resolveBlockMap = resolveBlockMap$1;
-
-var resolveBlockSeq$2 = {};
-
-var YAMLSeq$2 = YAMLSeq$7;
-var resolveProps$2 = resolveProps$5;
-var utilFlowIndentCheck = utilFlowIndentCheck$2;
-
-function resolveBlockSeq$1({ composeNode, composeEmptyNode }, ctx, bs, onError, tag) {
-    const NodeClass = tag?.nodeClass ?? YAMLSeq$2.YAMLSeq;
+function resolveBlockSeq({ composeNode, composeEmptyNode }, ctx, bs, onError, tag) {
+    const NodeClass = tag?.nodeClass ?? YAMLSeq;
     const seq = new NodeClass(ctx.schema);
     if (ctx.atRoot)
         ctx.atRoot = false;
@@ -36169,7 +35583,7 @@ function resolveBlockSeq$1({ composeNode, composeEmptyNode }, ctx, bs, onError, 
     let offset = bs.offset;
     let commentEnd = null;
     for (const { start, value } of bs.items) {
-        const props = resolveProps$2.resolveProps(start, {
+        const props = resolveProps(start, {
             indicator: 'seq-item-ind',
             next: value,
             offset,
@@ -36195,7 +35609,7 @@ function resolveBlockSeq$1({ composeNode, composeEmptyNode }, ctx, bs, onError, 
             ? composeNode(ctx, value, props, onError)
             : composeEmptyNode(ctx, props.end, start, null, props, onError);
         if (ctx.schema.compat)
-            utilFlowIndentCheck.flowIndentCheck(bs.indent, value, onError);
+            flowIndentCheck(bs.indent, value, onError);
         offset = node.range[2];
         seq.items.push(node);
     }
@@ -36203,13 +35617,7 @@ function resolveBlockSeq$1({ composeNode, composeEmptyNode }, ctx, bs, onError, 
     return seq;
 }
 
-resolveBlockSeq$2.resolveBlockSeq = resolveBlockSeq$1;
-
-var resolveFlowCollection$2 = {};
-
-var resolveEnd$6 = {};
-
-function resolveEnd$5(end, offset, reqSpace, onError) {
+function resolveEnd(end, offset, reqSpace, onError) {
     let comment = '';
     if (end) {
         let hasSpace = false;
@@ -36245,23 +35653,12 @@ function resolveEnd$5(end, offset, reqSpace, onError) {
     return { comment, offset };
 }
 
-resolveEnd$6.resolveEnd = resolveEnd$5;
-
-var identity$5 = identity$w;
-var Pair = Pair$7;
-var YAMLMap$1 = YAMLMap$7;
-var YAMLSeq$1 = YAMLSeq$7;
-var resolveEnd$4 = resolveEnd$6;
-var resolveProps$1 = resolveProps$5;
-var utilContainsNewline = utilContainsNewline$3;
-var utilMapIncludes = utilMapIncludes$2;
-
 const blockMsg = 'Block collections are not allowed within flow collections';
 const isBlock = (token) => token && (token.type === 'block-map' || token.type === 'block-seq');
-function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onError, tag) {
+function resolveFlowCollection({ composeNode, composeEmptyNode }, ctx, fc, onError, tag) {
     const isMap = fc.start.source === '{';
     const fcName = isMap ? 'flow map' : 'flow sequence';
-    const NodeClass = (tag?.nodeClass ?? (isMap ? YAMLMap$1.YAMLMap : YAMLSeq$1.YAMLSeq));
+    const NodeClass = (tag?.nodeClass ?? (isMap ? YAMLMap : YAMLSeq));
     const coll = new NodeClass(ctx.schema);
     coll.flow = true;
     const atRoot = ctx.atRoot;
@@ -36273,7 +35670,7 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
     for (let i = 0; i < fc.items.length; ++i) {
         const collItem = fc.items[i];
         const { start, key, sep, value } = collItem;
-        const props = resolveProps$1.resolveProps(start, {
+        const props = resolveProps(start, {
             flow: fcName,
             indicator: 'explicit-key-ind',
             next: key ?? sep?.[0],
@@ -36297,7 +35694,7 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
                 offset = props.end;
                 continue;
             }
-            if (!isMap && ctx.options.strict && utilContainsNewline.containsNewline(key))
+            if (!isMap && ctx.options.strict && containsNewline(key))
                 onError(key, // checked by containsNewline()
                 'MULTILINE_IMPLICIT_KEY', 'Implicit keys of flow sequence pairs need to be on a single line');
         }
@@ -36324,7 +35721,7 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
                 }
                 if (prevItemComment) {
                     let prev = coll.items[coll.items.length - 1];
-                    if (identity$5.isPair(prev))
+                    if (isPair(prev))
                         prev = prev.value ?? prev.key;
                     if (prev.comment)
                         prev.comment += '\n' + prevItemComment;
@@ -36357,7 +35754,7 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
                 onError(keyNode.range, 'BLOCK_IN_FLOW', blockMsg);
             ctx.atKey = false;
             // value properties
-            const valueProps = resolveProps$1.resolveProps(sep ?? [], {
+            const valueProps = resolveProps(sep ?? [], {
                 flow: fcName,
                 indicator: 'map-value-ind',
                 next: value,
@@ -36403,17 +35800,17 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
                 else
                     keyNode.comment = valueProps.comment;
             }
-            const pair = new Pair.Pair(keyNode, valueNode);
+            const pair = new Pair(keyNode, valueNode);
             if (ctx.options.keepSourceTokens)
                 pair.srcToken = collItem;
             if (isMap) {
                 const map = coll;
-                if (utilMapIncludes.mapIncludes(ctx, map.items, keyNode))
+                if (mapIncludes(ctx, map.items, keyNode))
                     onError(keyStart, 'DUPLICATE_KEY', 'Map keys must be unique');
                 map.items.push(pair);
             }
             else {
-                const map = new YAMLMap$1.YAMLMap(ctx.schema);
+                const map = new YAMLMap(ctx.schema);
                 map.flow = true;
                 map.items.push(pair);
                 const endRange = (valueNode ?? keyNode).range;
@@ -36438,7 +35835,7 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
             ee.unshift(ce);
     }
     if (ee.length > 0) {
-        const end = resolveEnd$4.resolveEnd(ee, cePos, ctx.options.strict, onError);
+        const end = resolveEnd(ee, cePos, ctx.options.strict, onError);
         if (end.comment) {
             if (coll.comment)
                 coll.comment += '\n' + end.comment;
@@ -36453,22 +35850,12 @@ function resolveFlowCollection$1({ composeNode, composeEmptyNode }, ctx, fc, onE
     return coll;
 }
 
-resolveFlowCollection$2.resolveFlowCollection = resolveFlowCollection$1;
-
-var identity$4 = identity$w;
-var Scalar$3 = Scalar$j;
-var YAMLMap = YAMLMap$7;
-var YAMLSeq = YAMLSeq$7;
-var resolveBlockMap = resolveBlockMap$2;
-var resolveBlockSeq = resolveBlockSeq$2;
-var resolveFlowCollection = resolveFlowCollection$2;
-
 function resolveCollection(CN, ctx, token, onError, tagName, tag) {
     const coll = token.type === 'block-map'
-        ? resolveBlockMap.resolveBlockMap(CN, ctx, token, onError, tag)
+        ? resolveBlockMap(CN, ctx, token, onError, tag)
         : token.type === 'block-seq'
-            ? resolveBlockSeq.resolveBlockSeq(CN, ctx, token, onError, tag)
-            : resolveFlowCollection.resolveFlowCollection(CN, ctx, token, onError, tag);
+            ? resolveBlockSeq(CN, ctx, token, onError, tag)
+            : resolveFlowCollection(CN, ctx, token, onError, tag);
     const Coll = coll.constructor;
     // If we got a tagName matching the class, or the tag name is '!',
     // then use the tagName from the node class used to create it.
@@ -36480,7 +35867,7 @@ function resolveCollection(CN, ctx, token, onError, tagName, tag) {
         coll.tag = tagName;
     return coll;
 }
-function composeCollection$1(CN, ctx, token, props, onError) {
+function composeCollection(CN, ctx, token, props, onError) {
     const tagToken = props.tag;
     const tagName = !tagToken
         ? null
@@ -36509,8 +35896,8 @@ function composeCollection$1(CN, ctx, token, props, onError) {
     if (!tagToken ||
         !tagName ||
         tagName === '!' ||
-        (tagName === YAMLMap.YAMLMap.tagName && expType === 'map') ||
-        (tagName === YAMLSeq.YAMLSeq.tagName && expType === 'seq')) {
+        (tagName === YAMLMap.tagName && expType === 'map') ||
+        (tagName === YAMLSeq.tagName && expType === 'seq')) {
         return resolveCollection(CN, ctx, token, onError, tagName);
     }
     let tag = ctx.schema.tags.find(t => t.tag === tagName && t.collection === expType);
@@ -36532,9 +35919,9 @@ function composeCollection$1(CN, ctx, token, props, onError) {
     }
     const coll = resolveCollection(CN, ctx, token, onError, tagName, tag);
     const res = tag.resolve?.(coll, msg => onError(tagToken, 'TAG_RESOLVE_FAILED', msg), ctx.options) ?? coll;
-    const node = identity$4.isNode(res)
+    const node = isNode(res)
         ? res
-        : new Scalar$3.Scalar(res);
+        : new Scalar(res);
     node.range = coll.range;
     node.tag = tagName;
     if (tag?.format)
@@ -36542,20 +35929,12 @@ function composeCollection$1(CN, ctx, token, props, onError) {
     return node;
 }
 
-composeCollection$2.composeCollection = composeCollection$1;
-
-var composeScalar$2 = {};
-
-var resolveBlockScalar$3 = {};
-
-var Scalar$2 = Scalar$j;
-
-function resolveBlockScalar$2(ctx, scalar, onError) {
+function resolveBlockScalar(ctx, scalar, onError) {
     const start = scalar.offset;
     const header = parseBlockScalarHeader(scalar, ctx.options.strict, onError);
     if (!header)
         return { value: '', type: null, comment: '', range: [start, start, start] };
-    const type = header.mode === '>' ? Scalar$2.Scalar.BLOCK_FOLDED : Scalar$2.Scalar.BLOCK_LITERAL;
+    const type = header.mode === '>' ? Scalar.BLOCK_FOLDED : Scalar.BLOCK_LITERAL;
     const lines = scalar.source ? splitLines(scalar.source) : [];
     // determine the end of content & start of chomping
     let chompStart = lines.length;
@@ -36628,7 +36007,7 @@ function resolveBlockScalar$2(ctx, scalar, onError) {
             onError(offset - content.length - (crlf ? 2 : 1), 'BAD_INDENT', message);
             indent = '';
         }
-        if (type === Scalar$2.Scalar.BLOCK_LITERAL) {
+        if (type === Scalar.BLOCK_LITERAL) {
             value += sep + indent.slice(trimIndent) + content;
             sep = '\n';
         }
@@ -36745,29 +36124,22 @@ function splitLines(source) {
     return lines;
 }
 
-resolveBlockScalar$3.resolveBlockScalar = resolveBlockScalar$2;
-
-var resolveFlowScalar$3 = {};
-
-var Scalar$1 = Scalar$j;
-var resolveEnd$3 = resolveEnd$6;
-
-function resolveFlowScalar$2(scalar, strict, onError) {
+function resolveFlowScalar(scalar, strict, onError) {
     const { offset, type, source, end } = scalar;
     let _type;
     let value;
     const _onError = (rel, code, msg) => onError(offset + rel, code, msg);
     switch (type) {
         case 'scalar':
-            _type = Scalar$1.Scalar.PLAIN;
+            _type = Scalar.PLAIN;
             value = plainValue(source, _onError);
             break;
         case 'single-quoted-scalar':
-            _type = Scalar$1.Scalar.QUOTE_SINGLE;
+            _type = Scalar.QUOTE_SINGLE;
             value = singleQuotedValue(source, _onError);
             break;
         case 'double-quoted-scalar':
-            _type = Scalar$1.Scalar.QUOTE_DOUBLE;
+            _type = Scalar.QUOTE_DOUBLE;
             value = doubleQuotedValue(source, _onError);
             break;
         /* istanbul ignore next should not happen */
@@ -36781,7 +36153,7 @@ function resolveFlowScalar$2(scalar, strict, onError) {
             };
     }
     const valueEnd = offset + source.length;
-    const re = resolveEnd$3.resolveEnd(end, valueEnd, strict, onError);
+    const re = resolveEnd(end, valueEnd, strict, onError);
     return {
         value,
         type: _type,
@@ -36971,39 +36343,32 @@ function parseCharCode(source, offset, length, onError) {
     return String.fromCodePoint(code);
 }
 
-resolveFlowScalar$3.resolveFlowScalar = resolveFlowScalar$2;
-
-var identity$3 = identity$w;
-var Scalar = Scalar$j;
-var resolveBlockScalar$1 = resolveBlockScalar$3;
-var resolveFlowScalar$1 = resolveFlowScalar$3;
-
-function composeScalar$1(ctx, token, tagToken, onError) {
+function composeScalar(ctx, token, tagToken, onError) {
     const { value, type, comment, range } = token.type === 'block-scalar'
-        ? resolveBlockScalar$1.resolveBlockScalar(ctx, token, onError)
-        : resolveFlowScalar$1.resolveFlowScalar(token, ctx.options.strict, onError);
+        ? resolveBlockScalar(ctx, token, onError)
+        : resolveFlowScalar(token, ctx.options.strict, onError);
     const tagName = tagToken
         ? ctx.directives.tagName(tagToken.source, msg => onError(tagToken, 'TAG_RESOLVE_FAILED', msg))
         : null;
     let tag;
     if (ctx.options.stringKeys && ctx.atKey) {
-        tag = ctx.schema[identity$3.SCALAR];
+        tag = ctx.schema[SCALAR$1];
     }
     else if (tagName)
         tag = findScalarTagByName(ctx.schema, value, tagName, tagToken, onError);
     else if (token.type === 'scalar')
         tag = findScalarTagByTest(ctx, value, token, onError);
     else
-        tag = ctx.schema[identity$3.SCALAR];
+        tag = ctx.schema[SCALAR$1];
     let scalar;
     try {
         const res = tag.resolve(value, msg => onError(tagToken ?? token, 'TAG_RESOLVE_FAILED', msg), ctx.options);
-        scalar = identity$3.isScalar(res) ? res : new Scalar.Scalar(res);
+        scalar = isScalar(res) ? res : new Scalar(res);
     }
     catch (error) {
         const msg = error instanceof Error ? error.message : String(error);
         onError(tagToken ?? token, 'TAG_RESOLVE_FAILED', msg);
-        scalar = new Scalar.Scalar(value);
+        scalar = new Scalar(value);
     }
     scalar.range = range;
     scalar.source = value;
@@ -37019,7 +36384,7 @@ function composeScalar$1(ctx, token, tagToken, onError) {
 }
 function findScalarTagByName(schema, value, tagName, tagToken, onError) {
     if (tagName === '!')
-        return schema[identity$3.SCALAR]; // non-specific tag
+        return schema[SCALAR$1]; // non-specific tag
     const matchWithTest = [];
     for (const tag of schema.tags) {
         if (!tag.collection && tag.tag === tagName) {
@@ -37040,14 +36405,14 @@ function findScalarTagByName(schema, value, tagName, tagToken, onError) {
         return kt;
     }
     onError(tagToken, 'TAG_RESOLVE_FAILED', `Unresolved tag: ${tagName}`, tagName !== 'tag:yaml.org,2002:str');
-    return schema[identity$3.SCALAR];
+    return schema[SCALAR$1];
 }
 function findScalarTagByTest({ atKey, directives, schema }, value, token, onError) {
     const tag = schema.tags.find(tag => (tag.default === true || (atKey && tag.default === 'key')) &&
-        tag.test?.test(value)) || schema[identity$3.SCALAR];
+        tag.test?.test(value)) || schema[SCALAR$1];
     if (schema.compat) {
         const compat = schema.compat.find(tag => tag.default && tag.test?.test(value)) ??
-            schema[identity$3.SCALAR];
+            schema[SCALAR$1];
         if (tag.tag !== compat.tag) {
             const ts = directives.tagString(tag.tag);
             const cs = directives.tagString(compat.tag);
@@ -37057,10 +36422,6 @@ function findScalarTagByTest({ atKey, directives, schema }, value, token, onErro
     }
     return tag;
 }
-
-composeScalar$2.composeScalar = composeScalar$1;
-
-var utilEmptyScalarPosition$1 = {};
 
 function emptyScalarPosition(offset, before, pos) {
     if (before) {
@@ -37088,17 +36449,8 @@ function emptyScalarPosition(offset, before, pos) {
     return offset;
 }
 
-utilEmptyScalarPosition$1.emptyScalarPosition = emptyScalarPosition;
-
-var Alias$1 = Alias$5;
-var identity$2 = identity$w;
-var composeCollection = composeCollection$2;
-var composeScalar = composeScalar$2;
-var resolveEnd$2 = resolveEnd$6;
-var utilEmptyScalarPosition = utilEmptyScalarPosition$1;
-
-const CN = { composeNode: composeNode$1, composeEmptyNode };
-function composeNode$1(ctx, token, props, onError) {
+const CN = { composeNode, composeEmptyNode };
+function composeNode(ctx, token, props, onError) {
     const atKey = ctx.atKey;
     const { spaceBefore, comment, anchor, tag } = props;
     let node;
@@ -37113,14 +36465,14 @@ function composeNode$1(ctx, token, props, onError) {
         case 'single-quoted-scalar':
         case 'double-quoted-scalar':
         case 'block-scalar':
-            node = composeScalar.composeScalar(ctx, token, tag, onError);
+            node = composeScalar(ctx, token, tag, onError);
             if (anchor)
                 node.anchor = anchor.source.substring(1);
             break;
         case 'block-map':
         case 'block-seq':
         case 'flow-collection':
-            node = composeCollection.composeCollection(CN, ctx, token, props, onError);
+            node = composeCollection(CN, ctx, token, props, onError);
             if (anchor)
                 node.anchor = anchor.source.substring(1);
             break;
@@ -37137,7 +36489,7 @@ function composeNode$1(ctx, token, props, onError) {
         onError(anchor, 'BAD_ALIAS', 'Anchor cannot be an empty string');
     if (atKey &&
         ctx.options.stringKeys &&
-        (!identity$2.isScalar(node) ||
+        (!isScalar(node) ||
             typeof node.value !== 'string' ||
             (node.tag && node.tag !== 'tag:yaml.org,2002:str'))) {
         const msg = 'With stringKeys, all keys must be strings';
@@ -37159,11 +36511,11 @@ function composeNode$1(ctx, token, props, onError) {
 function composeEmptyNode(ctx, offset, before, pos, { spaceBefore, comment, anchor, tag, end }, onError) {
     const token = {
         type: 'scalar',
-        offset: utilEmptyScalarPosition.emptyScalarPosition(offset, before, pos),
+        offset: emptyScalarPosition(offset, before, pos),
         indent: -1,
         source: ''
     };
-    const node = composeScalar.composeScalar(ctx, token, tag, onError);
+    const node = composeScalar(ctx, token, tag, onError);
     if (anchor) {
         node.anchor = anchor.source.substring(1);
         if (node.anchor === '')
@@ -37178,30 +36530,22 @@ function composeEmptyNode(ctx, offset, before, pos, { spaceBefore, comment, anch
     return node;
 }
 function composeAlias({ options }, { offset, source, end }, onError) {
-    const alias = new Alias$1.Alias(source.substring(1));
+    const alias = new Alias$1(source.substring(1));
     if (alias.source === '')
         onError(offset, 'BAD_ALIAS', 'Alias cannot be an empty string');
     if (alias.source.endsWith(':'))
         onError(offset + source.length - 1, 'BAD_ALIAS', 'Alias ending in : is ambiguous', true);
     const valueEnd = offset + source.length;
-    const re = resolveEnd$2.resolveEnd(end, valueEnd, options.strict, onError);
+    const re = resolveEnd(end, valueEnd, options.strict, onError);
     alias.range = [offset, valueEnd, re.offset];
     if (re.comment)
         alias.comment = re.comment;
     return alias;
 }
 
-composeNode$2.composeEmptyNode = composeEmptyNode;
-composeNode$2.composeNode = composeNode$1;
-
-var Document$2 = Document$4;
-var composeNode = composeNode$2;
-var resolveEnd$1 = resolveEnd$6;
-var resolveProps = resolveProps$5;
-
-function composeDoc$1(options, directives, { offset, start, value, end }, onError) {
+function composeDoc(options, directives, { offset, start, value, end }, onError) {
     const opts = Object.assign({ _directives: directives }, options);
-    const doc = new Document$2.Document(undefined, opts);
+    const doc = new Document(undefined, opts);
     const ctx = {
         atKey: false,
         atRoot: true,
@@ -37209,7 +36553,7 @@ function composeDoc$1(options, directives, { offset, start, value, end }, onErro
         options: doc.options,
         schema: doc.schema
     };
-    const props = resolveProps.resolveProps(start, {
+    const props = resolveProps(start, {
         indicator: 'doc-start',
         next: value ?? end?.[0],
         offset,
@@ -37226,25 +36570,15 @@ function composeDoc$1(options, directives, { offset, start, value, end }, onErro
     }
     // @ts-expect-error If Contents is set, let's trust the user
     doc.contents = value
-        ? composeNode.composeNode(ctx, value, props, onError)
-        : composeNode.composeEmptyNode(ctx, props.end, start, null, props, onError);
+        ? composeNode(ctx, value, props, onError)
+        : composeEmptyNode(ctx, props.end, start, null, props, onError);
     const contentEnd = doc.contents.range[2];
-    const re = resolveEnd$1.resolveEnd(end, contentEnd, false, onError);
+    const re = resolveEnd(end, contentEnd, false, onError);
     if (re.comment)
         doc.comment = re.comment;
     doc.range = [offset, contentEnd, re.offset];
     return doc;
 }
-
-composeDoc$2.composeDoc = composeDoc$1;
-
-var node_process$1 = require$$0__default['default'];
-var directives = directives$2;
-var Document$1 = Document$4;
-var errors$2 = errors$3;
-var identity$1 = identity$w;
-var composeDoc = composeDoc$2;
-var resolveEnd = resolveEnd$6;
 
 function getErrorPos(src) {
     if (typeof src === 'number')
@@ -37303,12 +36637,12 @@ class Composer {
         this.onError = (source, code, message, warning) => {
             const pos = getErrorPos(source);
             if (warning)
-                this.warnings.push(new errors$2.YAMLWarning(pos, code, message));
+                this.warnings.push(new YAMLWarning(pos, code, message));
             else
-                this.errors.push(new errors$2.YAMLParseError(pos, code, message));
+                this.errors.push(new YAMLParseError(pos, code, message));
         };
         // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
-        this.directives = new directives.Directives({ version: options.version || '1.2' });
+        this.directives = new Directives({ version: options.version || '1.2' });
         this.options = options;
     }
     decorate(doc, afterDoc) {
@@ -37322,9 +36656,9 @@ class Composer {
             else if (afterEmptyLine || doc.directives.docStart || !dc) {
                 doc.commentBefore = comment;
             }
-            else if (identity$1.isCollection(dc) && !dc.flow && dc.items.length > 0) {
+            else if (isCollection(dc) && !dc.flow && dc.items.length > 0) {
                 let it = dc.items[0];
-                if (identity$1.isPair(it))
+                if (isPair(it))
                     it = it.key;
                 const cb = it.commentBefore;
                 it.commentBefore = cb ? `${comment}\n${cb}` : comment;
@@ -37372,8 +36706,6 @@ class Composer {
     }
     /** Advance the composer by one CST token. */
     *next(token) {
-        if (node_process$1.env.LOG_STREAM)
-            console.dir(token, { depth: null });
         switch (token.type) {
             case 'directive':
                 this.directives.add(token.source, (offset, message, warning) => {
@@ -37385,7 +36717,7 @@ class Composer {
                 this.atDirectives = true;
                 break;
             case 'document': {
-                const doc = composeDoc.composeDoc(this.options, this.directives, token, this.onError);
+                const doc = composeDoc(this.options, this.directives, token, this.onError);
                 if (this.atDirectives && !doc.directives.docStart)
                     this.onError(token, 'MISSING_CHAR', 'Missing directives-end/doc-start indicator line');
                 this.decorate(doc, false);
@@ -37406,7 +36738,7 @@ class Composer {
                 const msg = token.source
                     ? `${token.message}: ${JSON.stringify(token.source)}`
                     : token.message;
-                const error = new errors$2.YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', msg);
+                const error = new YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', msg);
                 if (this.atDirectives || !this.doc)
                     this.errors.push(error);
                 else
@@ -37416,11 +36748,11 @@ class Composer {
             case 'doc-end': {
                 if (!this.doc) {
                     const msg = 'Unexpected doc-end without preceding document';
-                    this.errors.push(new errors$2.YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', msg));
+                    this.errors.push(new YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', msg));
                     break;
                 }
                 this.doc.directives.docEnd = true;
-                const end = resolveEnd.resolveEnd(token.end, token.offset + token.source.length, this.doc.options.strict, this.onError);
+                const end = resolveEnd(token.end, token.offset + token.source.length, this.doc.options.strict, this.onError);
                 this.decorate(this.doc, true);
                 if (end.comment) {
                     const dc = this.doc.comment;
@@ -37430,7 +36762,7 @@ class Composer {
                 break;
             }
             default:
-                this.errors.push(new errors$2.YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', `Unsupported token ${token.type}`));
+                this.errors.push(new YAMLParseError(getErrorPos(token), 'UNEXPECTED_TOKEN', `Unsupported token ${token.type}`));
         }
     }
     /**
@@ -37447,7 +36779,7 @@ class Composer {
         }
         else if (forceDoc) {
             const opts = Object.assign({ _directives: this.directives }, this.options);
-            const doc = new Document$1.Document(undefined, opts);
+            const doc = new Document(undefined, opts);
             if (this.atDirectives)
                 this.onError(endOffset, 'MISSING_CHAR', 'Missing directives-end indicator line');
             doc.range = [0, endOffset, endOffset];
@@ -37457,441 +36789,6 @@ class Composer {
     }
 }
 
-composer$1.Composer = Composer;
-
-var lineCounter$1 = {};
-
-/**
- * Tracks newlines during parsing in order to provide an efficient API for
- * determining the one-indexed `{ line, col }` position for any offset
- * within the input.
- */
-class LineCounter {
-    constructor() {
-        this.lineStarts = [];
-        /**
-         * Should be called in ascending order. Otherwise, call
-         * `lineCounter.lineStarts.sort()` before calling `linePos()`.
-         */
-        this.addNewLine = (offset) => this.lineStarts.push(offset);
-        /**
-         * Performs a binary search and returns the 1-indexed { line, col }
-         * position of `offset`. If `line === 0`, `addNewLine` has never been
-         * called or `offset` is before the first known newline.
-         */
-        this.linePos = (offset) => {
-            let low = 0;
-            let high = this.lineStarts.length;
-            while (low < high) {
-                const mid = (low + high) >> 1; // Math.floor((low + high) / 2)
-                if (this.lineStarts[mid] < offset)
-                    low = mid + 1;
-                else
-                    high = mid;
-            }
-            if (this.lineStarts[low] === offset)
-                return { line: low + 1, col: 1 };
-            if (low === 0)
-                return { line: 0, col: offset };
-            const start = this.lineStarts[low - 1];
-            return { line: low, col: offset - start + 1 };
-        };
-    }
-}
-
-lineCounter$1.LineCounter = LineCounter;
-
-var parser$2 = {};
-
-var cst$2 = {};
-
-var cstScalar$1 = {};
-
-var resolveBlockScalar = resolveBlockScalar$3;
-var resolveFlowScalar = resolveFlowScalar$3;
-var errors$1 = errors$3;
-var stringifyString = stringifyString$5;
-
-function resolveAsScalar(token, strict = true, onError) {
-    if (token) {
-        const _onError = (pos, code, message) => {
-            const offset = typeof pos === 'number' ? pos : Array.isArray(pos) ? pos[0] : pos.offset;
-            if (onError)
-                onError(offset, code, message);
-            else
-                throw new errors$1.YAMLParseError([offset, offset + 1], code, message);
-        };
-        switch (token.type) {
-            case 'scalar':
-            case 'single-quoted-scalar':
-            case 'double-quoted-scalar':
-                return resolveFlowScalar.resolveFlowScalar(token, strict, _onError);
-            case 'block-scalar':
-                return resolveBlockScalar.resolveBlockScalar({ options: { strict } }, token, _onError);
-        }
-    }
-    return null;
-}
-/**
- * Create a new scalar token with `value`
- *
- * Values that represent an actual string but may be parsed as a different type should use a `type` other than `'PLAIN'`,
- * as this function does not support any schema operations and won't check for such conflicts.
- *
- * @param value The string representation of the value, which will have its content properly indented.
- * @param context.end Comments and whitespace after the end of the value, or after the block scalar header. If undefined, a newline will be added.
- * @param context.implicitKey Being within an implicit key may affect the resolved type of the token's value.
- * @param context.indent The indent level of the token.
- * @param context.inFlow Is this scalar within a flow collection? This may affect the resolved type of the token's value.
- * @param context.offset The offset position of the token.
- * @param context.type The preferred type of the scalar token. If undefined, the previous type of the `token` will be used, defaulting to `'PLAIN'`.
- */
-function createScalarToken(value, context) {
-    const { implicitKey = false, indent, inFlow = false, offset = -1, type = 'PLAIN' } = context;
-    const source = stringifyString.stringifyString({ type, value }, {
-        implicitKey,
-        indent: indent > 0 ? ' '.repeat(indent) : '',
-        inFlow,
-        options: { blockQuote: true, lineWidth: -1 }
-    });
-    const end = context.end ?? [
-        { type: 'newline', offset: -1, indent, source: '\n' }
-    ];
-    switch (source[0]) {
-        case '|':
-        case '>': {
-            const he = source.indexOf('\n');
-            const head = source.substring(0, he);
-            const body = source.substring(he + 1) + '\n';
-            const props = [
-                { type: 'block-scalar-header', offset, indent, source: head }
-            ];
-            if (!addEndtoBlockProps(props, end))
-                props.push({ type: 'newline', offset: -1, indent, source: '\n' });
-            return { type: 'block-scalar', offset, indent, props, source: body };
-        }
-        case '"':
-            return { type: 'double-quoted-scalar', offset, indent, source, end };
-        case "'":
-            return { type: 'single-quoted-scalar', offset, indent, source, end };
-        default:
-            return { type: 'scalar', offset, indent, source, end };
-    }
-}
-/**
- * Set the value of `token` to the given string `value`, overwriting any previous contents and type that it may have.
- *
- * Best efforts are made to retain any comments previously associated with the `token`,
- * though all contents within a collection's `items` will be overwritten.
- *
- * Values that represent an actual string but may be parsed as a different type should use a `type` other than `'PLAIN'`,
- * as this function does not support any schema operations and won't check for such conflicts.
- *
- * @param token Any token. If it does not include an `indent` value, the value will be stringified as if it were an implicit key.
- * @param value The string representation of the value, which will have its content properly indented.
- * @param context.afterKey In most cases, values after a key should have an additional level of indentation.
- * @param context.implicitKey Being within an implicit key may affect the resolved type of the token's value.
- * @param context.inFlow Being within a flow collection may affect the resolved type of the token's value.
- * @param context.type The preferred type of the scalar token. If undefined, the previous type of the `token` will be used, defaulting to `'PLAIN'`.
- */
-function setScalarValue(token, value, context = {}) {
-    let { afterKey = false, implicitKey = false, inFlow = false, type } = context;
-    let indent = 'indent' in token ? token.indent : null;
-    if (afterKey && typeof indent === 'number')
-        indent += 2;
-    if (!type)
-        switch (token.type) {
-            case 'single-quoted-scalar':
-                type = 'QUOTE_SINGLE';
-                break;
-            case 'double-quoted-scalar':
-                type = 'QUOTE_DOUBLE';
-                break;
-            case 'block-scalar': {
-                const header = token.props[0];
-                if (header.type !== 'block-scalar-header')
-                    throw new Error('Invalid block scalar header');
-                type = header.source[0] === '>' ? 'BLOCK_FOLDED' : 'BLOCK_LITERAL';
-                break;
-            }
-            default:
-                type = 'PLAIN';
-        }
-    const source = stringifyString.stringifyString({ type, value }, {
-        implicitKey: implicitKey || indent === null,
-        indent: indent !== null && indent > 0 ? ' '.repeat(indent) : '',
-        inFlow,
-        options: { blockQuote: true, lineWidth: -1 }
-    });
-    switch (source[0]) {
-        case '|':
-        case '>':
-            setBlockScalarValue(token, source);
-            break;
-        case '"':
-            setFlowScalarValue(token, source, 'double-quoted-scalar');
-            break;
-        case "'":
-            setFlowScalarValue(token, source, 'single-quoted-scalar');
-            break;
-        default:
-            setFlowScalarValue(token, source, 'scalar');
-    }
-}
-function setBlockScalarValue(token, source) {
-    const he = source.indexOf('\n');
-    const head = source.substring(0, he);
-    const body = source.substring(he + 1) + '\n';
-    if (token.type === 'block-scalar') {
-        const header = token.props[0];
-        if (header.type !== 'block-scalar-header')
-            throw new Error('Invalid block scalar header');
-        header.source = head;
-        token.source = body;
-    }
-    else {
-        const { offset } = token;
-        const indent = 'indent' in token ? token.indent : -1;
-        const props = [
-            { type: 'block-scalar-header', offset, indent, source: head }
-        ];
-        if (!addEndtoBlockProps(props, 'end' in token ? token.end : undefined))
-            props.push({ type: 'newline', offset: -1, indent, source: '\n' });
-        for (const key of Object.keys(token))
-            if (key !== 'type' && key !== 'offset')
-                delete token[key];
-        Object.assign(token, { type: 'block-scalar', indent, props, source: body });
-    }
-}
-/** @returns `true` if last token is a newline */
-function addEndtoBlockProps(props, end) {
-    if (end)
-        for (const st of end)
-            switch (st.type) {
-                case 'space':
-                case 'comment':
-                    props.push(st);
-                    break;
-                case 'newline':
-                    props.push(st);
-                    return true;
-            }
-    return false;
-}
-function setFlowScalarValue(token, source, type) {
-    switch (token.type) {
-        case 'scalar':
-        case 'double-quoted-scalar':
-        case 'single-quoted-scalar':
-            token.type = type;
-            token.source = source;
-            break;
-        case 'block-scalar': {
-            const end = token.props.slice(1);
-            let oa = source.length;
-            if (token.props[0].type === 'block-scalar-header')
-                oa -= token.props[0].source.length;
-            for (const tok of end)
-                tok.offset += oa;
-            delete token.props;
-            Object.assign(token, { type, source, end });
-            break;
-        }
-        case 'block-map':
-        case 'block-seq': {
-            const offset = token.offset + source.length;
-            const nl = { type: 'newline', offset, indent: token.indent, source: '\n' };
-            delete token.items;
-            Object.assign(token, { type, source, end: [nl] });
-            break;
-        }
-        default: {
-            const indent = 'indent' in token ? token.indent : -1;
-            const end = 'end' in token && Array.isArray(token.end)
-                ? token.end.filter(st => st.type === 'space' ||
-                    st.type === 'comment' ||
-                    st.type === 'newline')
-                : [];
-            for (const key of Object.keys(token))
-                if (key !== 'type' && key !== 'offset')
-                    delete token[key];
-            Object.assign(token, { type, indent, source, end });
-        }
-    }
-}
-
-cstScalar$1.createScalarToken = createScalarToken;
-cstScalar$1.resolveAsScalar = resolveAsScalar;
-cstScalar$1.setScalarValue = setScalarValue;
-
-var cstStringify$1 = {};
-
-/**
- * Stringify a CST document, token, or collection item
- *
- * Fair warning: This applies no validation whatsoever, and
- * simply concatenates the sources in their logical order.
- */
-const stringify$1 = (cst) => 'type' in cst ? stringifyToken(cst) : stringifyItem(cst);
-function stringifyToken(token) {
-    switch (token.type) {
-        case 'block-scalar': {
-            let res = '';
-            for (const tok of token.props)
-                res += stringifyToken(tok);
-            return res + token.source;
-        }
-        case 'block-map':
-        case 'block-seq': {
-            let res = '';
-            for (const item of token.items)
-                res += stringifyItem(item);
-            return res;
-        }
-        case 'flow-collection': {
-            let res = token.start.source;
-            for (const item of token.items)
-                res += stringifyItem(item);
-            for (const st of token.end)
-                res += st.source;
-            return res;
-        }
-        case 'document': {
-            let res = stringifyItem(token);
-            if (token.end)
-                for (const st of token.end)
-                    res += st.source;
-            return res;
-        }
-        default: {
-            let res = token.source;
-            if ('end' in token && token.end)
-                for (const st of token.end)
-                    res += st.source;
-            return res;
-        }
-    }
-}
-function stringifyItem({ start, key, sep, value }) {
-    let res = '';
-    for (const st of start)
-        res += st.source;
-    if (key)
-        res += stringifyToken(key);
-    if (sep)
-        for (const st of sep)
-            res += st.source;
-    if (value)
-        res += stringifyToken(value);
-    return res;
-}
-
-cstStringify$1.stringify = stringify$1;
-
-var cstVisit$1 = {};
-
-const BREAK = Symbol('break visit');
-const SKIP = Symbol('skip children');
-const REMOVE = Symbol('remove item');
-/**
- * Apply a visitor to a CST document or item.
- *
- * Walks through the tree (depth-first) starting from the root, calling a
- * `visitor` function with two arguments when entering each item:
- *   - `item`: The current item, which included the following members:
- *     - `start: SourceToken[]` – Source tokens before the key or value,
- *       possibly including its anchor or tag.
- *     - `key?: Token | null` – Set for pair values. May then be `null`, if
- *       the key before the `:` separator is empty.
- *     - `sep?: SourceToken[]` – Source tokens between the key and the value,
- *       which should include the `:` map value indicator if `value` is set.
- *     - `value?: Token` – The value of a sequence item, or of a map pair.
- *   - `path`: The steps from the root to the current node, as an array of
- *     `['key' | 'value', number]` tuples.
- *
- * The return value of the visitor may be used to control the traversal:
- *   - `undefined` (default): Do nothing and continue
- *   - `visit.SKIP`: Do not visit the children of this token, continue with
- *      next sibling
- *   - `visit.BREAK`: Terminate traversal completely
- *   - `visit.REMOVE`: Remove the current item, then continue with the next one
- *   - `number`: Set the index of the next step. This is useful especially if
- *     the index of the current token has changed.
- *   - `function`: Define the next visitor for this item. After the original
- *     visitor is called on item entry, next visitors are called after handling
- *     a non-empty `key` and when exiting the item.
- */
-function visit(cst, visitor) {
-    if ('type' in cst && cst.type === 'document')
-        cst = { start: cst.start, value: cst.value };
-    _visit(Object.freeze([]), cst, visitor);
-}
-// Without the `as symbol` casts, TS declares these in the `visit`
-// namespace using `var`, but then complains about that because
-// `unique symbol` must be `const`.
-/** Terminate visit traversal completely */
-visit.BREAK = BREAK;
-/** Do not visit the children of the current item */
-visit.SKIP = SKIP;
-/** Remove the current item */
-visit.REMOVE = REMOVE;
-/** Find the item at `path` from `cst` as the root */
-visit.itemAtPath = (cst, path) => {
-    let item = cst;
-    for (const [field, index] of path) {
-        const tok = item?.[field];
-        if (tok && 'items' in tok) {
-            item = tok.items[index];
-        }
-        else
-            return undefined;
-    }
-    return item;
-};
-/**
- * Get the immediate parent collection of the item at `path` from `cst` as the root.
- *
- * Throws an error if the collection is not found, which should never happen if the item itself exists.
- */
-visit.parentCollection = (cst, path) => {
-    const parent = visit.itemAtPath(cst, path.slice(0, -1));
-    const field = path[path.length - 1][0];
-    const coll = parent?.[field];
-    if (coll && 'items' in coll)
-        return coll;
-    throw new Error('Parent collection not found');
-};
-function _visit(path, item, visitor) {
-    let ctrl = visitor(item, path);
-    if (typeof ctrl === 'symbol')
-        return ctrl;
-    for (const field of ['key', 'value']) {
-        const token = item[field];
-        if (token && 'items' in token) {
-            for (let i = 0; i < token.items.length; ++i) {
-                const ci = _visit(Object.freeze(path.concat([[field, i]])), token.items[i], visitor);
-                if (typeof ci === 'number')
-                    i = ci - 1;
-                else if (ci === BREAK)
-                    return BREAK;
-                else if (ci === REMOVE) {
-                    token.items.splice(i, 1);
-                    i -= 1;
-                }
-            }
-            if (typeof ctrl === 'function' && field === 'key')
-                ctrl = ctrl(item, path);
-        }
-    }
-    return typeof ctrl === 'function' ? ctrl(item, path) : ctrl;
-}
-
-cstVisit$1.visit = visit;
-
-var cstScalar = cstScalar$1;
-var cstStringify = cstStringify$1;
-var cstVisit = cstVisit$1;
-
 /** The byte order mark */
 const BOM = '\u{FEFF}';
 /** Start of doc-mode */
@@ -37900,30 +36797,6 @@ const DOCUMENT = '\x02'; // C0: Start of Text
 const FLOW_END = '\x18'; // C0: Cancel
 /** Next token is a scalar value */
 const SCALAR = '\x1f'; // C0: Unit Separator
-/** @returns `true` if `token` is a flow or block collection */
-const isCollection = (token) => !!token && 'items' in token;
-/** @returns `true` if `token` is a flow or block scalar; not an alias */
-const isScalar = (token) => !!token &&
-    (token.type === 'scalar' ||
-        token.type === 'single-quoted-scalar' ||
-        token.type === 'double-quoted-scalar' ||
-        token.type === 'block-scalar');
-/* istanbul ignore next */
-/** Get a printable representation of a lexer token */
-function prettyToken(token) {
-    switch (token) {
-        case BOM:
-            return '<BOM>';
-        case DOCUMENT:
-            return '<DOC>';
-        case FLOW_END:
-            return '<FLOW_END>';
-        case SCALAR:
-            return '<SCALAR>';
-        default:
-            return JSON.stringify(token);
-    }
-}
 /** Identify the type of a lexer token. May return `null` for unknown tokens. */
 function tokenType(source) {
     switch (source) {
@@ -37984,24 +36857,6 @@ function tokenType(source) {
     }
     return null;
 }
-
-cst$2.createScalarToken = cstScalar.createScalarToken;
-cst$2.resolveAsScalar = cstScalar.resolveAsScalar;
-cst$2.setScalarValue = cstScalar.setScalarValue;
-cst$2.stringify = cstStringify.stringify;
-cst$2.visit = cstVisit.visit;
-cst$2.BOM = BOM;
-cst$2.DOCUMENT = DOCUMENT;
-cst$2.FLOW_END = FLOW_END;
-cst$2.SCALAR = SCALAR;
-cst$2.isCollection = isCollection;
-cst$2.isScalar = isScalar;
-cst$2.prettyToken = prettyToken;
-cst$2.tokenType = tokenType;
-
-var lexer$1 = {};
-
-var cst$1 = cst$2;
 
 /*
 START -> stream
@@ -38247,7 +37102,7 @@ class Lexer {
         let line = this.getLine();
         if (line === null)
             return this.setNext('stream');
-        if (line[0] === cst$1.BOM) {
+        if (line[0] === BOM) {
             yield* this.pushCount(1);
             line = line.substring(1);
         }
@@ -38282,7 +37137,7 @@ class Lexer {
             yield* this.pushNewline();
             return 'stream';
         }
-        yield cst$1.DOCUMENT;
+        yield DOCUMENT;
         return yield* this.parseLineStart();
     }
     *parseLineStart() {
@@ -38388,7 +37243,7 @@ class Lexer {
             if (!atFlowEndMarker) {
                 // this is an error
                 this.flowLevel = 0;
-                yield cst$1.FLOW_END;
+                yield FLOW_END;
                 return yield* this.parseLineStart();
             }
         }
@@ -38566,7 +37421,7 @@ class Lexer {
                     break;
             } while (true);
         }
-        yield cst$1.SCALAR;
+        yield SCALAR;
         yield* this.pushToIndex(nl + 1, true);
         return yield* this.parseLineStart();
     }
@@ -38610,7 +37465,7 @@ class Lexer {
         }
         if (!ch && !this.atEnd)
             return this.setNext('plain-scalar');
-        yield cst$1.SCALAR;
+        yield SCALAR;
         yield* this.pushToIndex(end + 1, true);
         return inFlow ? 'flow' : 'doc';
     }
@@ -38717,11 +37572,43 @@ class Lexer {
     }
 }
 
-lexer$1.Lexer = Lexer;
-
-var node_process = require$$0__default['default'];
-var cst = cst$2;
-var lexer = lexer$1;
+/**
+ * Tracks newlines during parsing in order to provide an efficient API for
+ * determining the one-indexed `{ line, col }` position for any offset
+ * within the input.
+ */
+class LineCounter {
+    constructor() {
+        this.lineStarts = [];
+        /**
+         * Should be called in ascending order. Otherwise, call
+         * `lineCounter.lineStarts.sort()` before calling `linePos()`.
+         */
+        this.addNewLine = (offset) => this.lineStarts.push(offset);
+        /**
+         * Performs a binary search and returns the 1-indexed { line, col }
+         * position of `offset`. If `line === 0`, `addNewLine` has never been
+         * called or `offset` is before the first known newline.
+         */
+        this.linePos = (offset) => {
+            let low = 0;
+            let high = this.lineStarts.length;
+            while (low < high) {
+                const mid = (low + high) >> 1; // Math.floor((low + high) / 2)
+                if (this.lineStarts[mid] < offset)
+                    low = mid + 1;
+                else
+                    high = mid;
+            }
+            if (this.lineStarts[low] === offset)
+                return { line: low + 1, col: 1 };
+            if (low === 0)
+                return { line: 0, col: offset };
+            const start = this.lineStarts[low - 1];
+            return { line: low, col: offset - start + 1 };
+        };
+    }
+}
 
 function includesToken(list, type) {
     for (let i = 0; i < list.length; ++i)
@@ -38862,7 +37749,7 @@ class Parser {
         /** The type of the current token, set in parse() */
         this.type = '';
         // Must be defined after `next()`
-        this.lexer = new lexer.Lexer();
+        this.lexer = new Lexer();
         this.onNewLine = onNewLine;
     }
     /**
@@ -38886,15 +37773,13 @@ class Parser {
      */
     *next(source) {
         this.source = source;
-        if (node_process.env.LOG_TOKENS)
-            console.log('|', cst.prettyToken(source));
         if (this.atScalar) {
             this.atScalar = false;
             yield* this.step();
             this.offset += source.length;
             return;
         }
-        const type = cst.tokenType(source);
+        const type = tokenType(source);
         if (!type) {
             const message = `Not a YAML token: ${source}`;
             yield* this.pop({ type: 'error', offset: this.offset, message, source });
@@ -39675,113 +38560,32 @@ class Parser {
     }
 }
 
-parser$2.Parser = Parser;
-
-var composer = composer$1;
-var Document = Document$4;
-var errors = errors$3;
-var log = log$2;
-var identity = identity$w;
-var lineCounter = lineCounter$1;
-var parser$1 = parser$2;
-
 function parseOptions(options) {
     const prettyErrors = options.prettyErrors !== false;
-    const lineCounter$1 = options.lineCounter || (prettyErrors && new lineCounter.LineCounter()) || null;
-    return { lineCounter: lineCounter$1, prettyErrors };
-}
-/**
- * Parse the input as a stream of YAML documents.
- *
- * Documents should be separated from each other by `...` or `---` marker lines.
- *
- * @returns If an empty `docs` array is returned, it will be of type
- *   EmptyStream and contain additional stream information. In
- *   TypeScript, you should use `'empty' in docs` as a type guard for it.
- */
-function parseAllDocuments(source, options = {}) {
-    const { lineCounter, prettyErrors } = parseOptions(options);
-    const parser$1$1 = new parser$1.Parser(lineCounter?.addNewLine);
-    const composer$1 = new composer.Composer(options);
-    const docs = Array.from(composer$1.compose(parser$1$1.parse(source)));
-    if (prettyErrors && lineCounter)
-        for (const doc of docs) {
-            doc.errors.forEach(errors.prettifyError(source, lineCounter));
-            doc.warnings.forEach(errors.prettifyError(source, lineCounter));
-        }
-    if (docs.length > 0)
-        return docs;
-    return Object.assign([], { empty: true }, composer$1.streamInfo());
+    const lineCounter = options.lineCounter || (prettyErrors && new LineCounter()) || null;
+    return { lineCounter, prettyErrors };
 }
 /** Parse an input string into a single YAML.Document */
 function parseDocument(source, options = {}) {
     const { lineCounter, prettyErrors } = parseOptions(options);
-    const parser$1$1 = new parser$1.Parser(lineCounter?.addNewLine);
-    const composer$1 = new composer.Composer(options);
+    const parser = new Parser(lineCounter?.addNewLine);
+    const composer = new Composer(options);
     // `doc` is always set by compose.end(true) at the very latest
     let doc = null;
-    for (const _doc of composer$1.compose(parser$1$1.parse(source), true, source.length)) {
+    for (const _doc of composer.compose(parser.parse(source), true, source.length)) {
         if (!doc)
             doc = _doc;
         else if (doc.options.logLevel !== 'silent') {
-            doc.errors.push(new errors.YAMLParseError(_doc.range.slice(0, 2), 'MULTIPLE_DOCS', 'Source contains multiple documents; please use YAML.parseAllDocuments()'));
+            doc.errors.push(new YAMLParseError(_doc.range.slice(0, 2), 'MULTIPLE_DOCS', 'Source contains multiple documents; please use YAML.parseAllDocuments()'));
             break;
         }
     }
     if (prettyErrors && lineCounter) {
-        doc.errors.forEach(errors.prettifyError(source, lineCounter));
-        doc.warnings.forEach(errors.prettifyError(source, lineCounter));
+        doc.errors.forEach(prettifyError(source, lineCounter));
+        doc.warnings.forEach(prettifyError(source, lineCounter));
     }
     return doc;
 }
-function parse(src, reviver, options) {
-    let _reviver = undefined;
-    if (typeof reviver === 'function') {
-        _reviver = reviver;
-    }
-    else if (options === undefined && reviver && typeof reviver === 'object') {
-        options = reviver;
-    }
-    const doc = parseDocument(src, options);
-    if (!doc)
-        return null;
-    doc.warnings.forEach(warning => log.warn(doc.options.logLevel, warning));
-    if (doc.errors.length > 0) {
-        if (doc.options.logLevel !== 'silent')
-            throw doc.errors[0];
-        else
-            doc.errors = [];
-    }
-    return doc.toJS(Object.assign({ reviver: _reviver }, options));
-}
-function stringify(value, replacer, options) {
-    let _replacer = null;
-    if (typeof replacer === 'function' || Array.isArray(replacer)) {
-        _replacer = replacer;
-    }
-    else if (options === undefined && replacer) {
-        options = replacer;
-    }
-    if (typeof options === 'string')
-        options = options.length;
-    if (typeof options === 'number') {
-        const indent = Math.round(options);
-        options = indent < 1 ? undefined : indent > 8 ? { indent: 8 } : { indent };
-    }
-    if (value === undefined) {
-        const { keepUndefined } = options ?? replacer ?? {};
-        if (!keepUndefined)
-            return undefined;
-    }
-    if (identity.isDocument(value) && !_replacer)
-        return value.toString(options);
-    return new Document.Document(value, _replacer, options).toString(options);
-}
-
-publicApi.parse = parse;
-publicApi.parseAllDocuments = parseAllDocuments;
-publicApi.parseDocument = parseDocument;
-publicApi.stringify = stringify;
 
 const gutter = lintGutter();
 const tooltipTheme = EditorView.theme({
@@ -39790,15 +38594,14 @@ const tooltipTheme = EditorView.theme({
 const yamlLinter = async (view) => {
     const diagnostics = [];
     const text = view.state.doc.toString();
-    const yamlDocument = publicApi.parseDocument(text);
-    console.log('yamlDocument', yamlDocument);
+    const yamlDocument = parseDocument(text);
     if (yamlDocument.errors.length) {
-        yamlDocument.errors.forEach(err => {
+        yamlDocument.errors.forEach(error => {
             diagnostics.push({
                 from: 0,
                 to: 0,
                 severity: 'error',
-                message: err.message,
+                message: error.message,
             });
         });
     }
@@ -40169,21 +38972,21 @@ const blockLiteral = new ExternalTokenizer((input, stack) => {
 });
 
 const yamlHighlighting = styleTags({
-  DirectiveName: tags$2.keyword,
-  DirectiveContent: tags$2.attributeValue,
-  "DirectiveEnd DocEnd": tags$2.meta,
-  QuotedLiteral: tags$2.string,
-  BlockLiteralHeader: tags$2.special(tags$2.string),
-  BlockLiteralContent: tags$2.content,
-  Literal: tags$2.content,
-  "Key/Literal Key/QuotedLiteral": tags$2.definition(tags$2.propertyName),
-  "Anchor Alias": tags$2.labelName,
-  Tag: tags$2.typeName,
-  Comment: tags$2.lineComment,
-  ": , -": tags$2.separator,
-  "?": tags$2.punctuation,
-  "[ ]": tags$2.squareBracket,
-  "{ }": tags$2.brace
+  DirectiveName: tags.keyword,
+  DirectiveContent: tags.attributeValue,
+  "DirectiveEnd DocEnd": tags.meta,
+  QuotedLiteral: tags.string,
+  BlockLiteralHeader: tags.special(tags.string),
+  BlockLiteralContent: tags.content,
+  Literal: tags.content,
+  "Key/Literal Key/QuotedLiteral": tags.definition(tags.propertyName),
+  "Anchor Alias": tags.labelName,
+  Tag: tags.typeName,
+  Comment: tags.lineComment,
+  ": , -": tags.separator,
+  "?": tags.punctuation,
+  "[ ]": tags.squareBracket,
+  "{ }": tags.brace
 });
 
 // This file was generated by lezer-generator. You probably shouldn't edit it.
@@ -40425,10 +39228,10 @@ class YamlEditor {
         this.calculateEditorHeight();
     }
     render() {
-        return (hAsync(Host, { key: '2d09d107de619a7dfc7709d2ae5f5e841b0e7e1e', style: {
+        return (hAsync(Host, { key: 'bc31333fc6a2d9949cf825297a201a8ff6fbd7b2', style: {
                 display: 'block',
                 height: '100%',
-            } }, hAsync("div", { key: 'b19d5f9157c760bc05b4c78b6b56d415933965f9', class: "editor-wrapper" }, this.showActionsPanel && (hAsync("editor-panel", { key: '90b9967274451c6f31ee3993593bc0e3c6659183' }, hAsync("slot", { key: '48028d01378d2303e081dd9e7e9db8fb5b077f25', name: "panel" }))), hAsync("div", { key: '043b6581c26bd57d40b1e4f171826aed2cb6ef61', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '5b86e7908f2fa419c2af61f1a071940367db95e5', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
+            } }, hAsync("div", { key: 'd9401d5bc503f34ce7675e22b45e747ebb8da3e0', class: "editor-wrapper" }, this.showActionsPanel && (hAsync("editor-panel", { key: '008781f4904958cd6fd634ddbd545eeaaee8f8ad' }, hAsync("slot", { key: '993891891c443febd0b58b33da9c79decae56934', name: "panel" }))), hAsync("div", { key: '4f7bab0db3aa5f621b7467c412b89154395f229f', id: this._id, style: { height: this._editorHeight, width: '100%' } }), this.footerConfig && this.showFooter && (hAsync("editor-footer", { key: '21f098e41f71ae769d153b03899509d085fc54ce', cursorPosition: this._cursorPosition, backgroundColor: this.footerConfig.backgroundColor, color: this.footerConfig.color })))));
     }
     static get watchers() { return {
         "theme": ["onThemeChange"],
@@ -40445,6 +39248,7 @@ class YamlEditor {
             "showActionsPanel": [4, "show-actions-panel"],
             "showFooter": [4, "show-footer"],
             "theme": [1],
+            "_cursorPosition": [32],
             "_editorHeight": [32],
             "foldAll": [64],
             "unfoldAll": [64]
