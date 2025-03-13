@@ -15,7 +15,7 @@ export namespace Components {
          */
         "background-color"?: string;
         "color": string;
-        "cursorPosition": CursorPosition;
+        "cursorPosition"?: CursorPosition;
     }
     interface EditorPanel {
     }
@@ -35,7 +35,7 @@ export namespace Components {
         /**
           * Defines if the editor is in readonly mode Default value false
          */
-        "readonly": boolean;
+        "readonly"?: boolean;
         /**
           * Defines if the action panel should be visible
          */
@@ -77,7 +77,7 @@ export namespace Components {
         /**
           * Defines if the editor is in readonly mode Default value false
          */
-        "readonly": boolean;
+        "readonly"?: boolean;
         /**
           * Defines if the action panel should be visible
          */
@@ -119,7 +119,7 @@ export namespace Components {
         /**
           * Defines if the editor is in readonly mode Default value false
          */
-        "readonly": boolean;
+        "readonly"?: boolean;
         /**
           * Defines if the action panel should be visible
          */

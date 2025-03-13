@@ -7,7 +7,7 @@ import { CursorPosition } from '../../types/types';
   shadow: false,
 })
 export class EditorFooter {
-  @Prop() cursorPosition: CursorPosition;
+  @Prop() cursorPosition?: CursorPosition;
   @Prop() backgroundColor: string;
   @Prop() color: string;
 
@@ -20,7 +20,7 @@ export class EditorFooter {
         }}
       >
         <div class="editor-footer">
-          Ln {this.cursorPosition.ln}, Col {this.cursorPosition.col}{' '}
+          Ln {this.cursorPosition?.ln || 0}, Col {this.cursorPosition?.col || 0}{' '}
         </div>
       </Host>
     );

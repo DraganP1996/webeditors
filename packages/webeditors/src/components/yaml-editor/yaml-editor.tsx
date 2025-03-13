@@ -23,7 +23,7 @@ export class YamlEditor {
    * Defines if the editor is in readonly mode
    * Default value false
    */
-  @Prop() readonly = false;
+  @Prop() readonly?: boolean;
   /**
    * Configuration for the editor footer
    */
@@ -44,7 +44,7 @@ export class YamlEditor {
   /**
    * Position of the cursor
    */
-  @State() private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
+  @State() private _cursorPosition: CursorPosition;
 
   /**
    * Method that makes possible to fold all the foldible blocks
@@ -105,11 +105,11 @@ export class YamlEditor {
   @Event() editorChange: EventEmitter<string>;
 
   private _editorView: EditorView;
-  private _currentValue = '';
-  private _tabSize: Compartment = new Compartment();
-  private _currTheme = new Compartment();
+  private _currentValue: string;
+  private _tabSize: Compartment;
+  private _currTheme: Compartment;
 
-  @State() private _editorHeight = '100%';
+  @State() private _editorHeight: string;
 
   private _setTheme(theme: ThemeNames) {
     this._editorView.dispatch({
@@ -134,7 +134,7 @@ export class YamlEditor {
     this._cursorPosition = { col, ln };
   }
 
-  private _id = !!this.el.id ? this.el.id : `xml-editor-${Math.random().toString(36).substr(2, 9)}`;
+  private _id: string;
 
   calculateEditorHeight() {
     const panel = this.el.querySelector('div[slot=panel]');
@@ -145,9 +145,9 @@ export class YamlEditor {
     this._editorHeight = `calc(100% - ${panelHeight + footerHeight}px)`;
   }
 
-  componentDidLoad() {
+  private _initializeCodeMirror() {
     const extensions: Extension[] = [
-      EditorState.readOnly.of(this.readonly),
+      EditorState.readOnly.of(!!this.readonly),
       EditorView.updateListener.of((update: ViewUpdate) => {
         this._updateCursorPosition();
 
@@ -160,7 +160,9 @@ export class YamlEditor {
       ...YAML_EXTENSIONS,
     ];
 
-    const parent = document.querySelector(`#${this._id}`)!;
+    const parent = this.el.querySelector(`#${this._id}`)!;
+
+    console.log('Check the parent element', parent);
 
     const state = EditorState.create({
       doc: this.value,
@@ -172,6 +174,19 @@ export class YamlEditor {
     });
 
     this.calculateEditorHeight();
+  }
+
+  componentWillLoad() {
+    this._cursorPosition = { ln: 0, col: 0 };
+    this._currentValue = '';
+    this._tabSize = new Compartment();
+    this._currTheme = new Compartment();
+    this._editorHeight = '100%';
+    this._id = !!this.el.id ? this.el.id : `json-editor-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  componentDidLoad() {
+    requestAnimationFrame(() => this._initializeCodeMirror());
   }
 
   render() {

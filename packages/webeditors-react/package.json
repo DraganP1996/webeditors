@@ -1,6 +1,6 @@
 {
   "name": "webeditors-react",
-  "version": "0.0.83",
+  "version": "0.0.9",
   "description": "> TODO: description",
   "author": "Dragan Petrovic <pdragan1996@gmail.com>",
   "homepage": "",
@@ -32,6 +32,6 @@
   },
   "dependencies": {
     "@stencil/react-output-target": "^0.8.2",
-    "webeditors-vanilla": "0.0.43"
+    "webeditors-vanilla": "0.0.5"
   }
 }

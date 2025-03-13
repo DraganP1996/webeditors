@@ -25,7 +25,7 @@ export class JsonEditor {
    * Defines if the editor is in readonly mode
    * Default value false
    */
-  @Prop() readonly = false;
+  @Prop() readonly?: boolean;
   /**
    * Configuration for the editor footer
    */
@@ -46,12 +46,12 @@ export class JsonEditor {
   /**
    * Defines the mode of the editor
    */
-  @Prop() mode: 'json' | 'text' = 'json';
+  @Prop() mode: 'json' | 'text';
 
   /**
    * Position of the cursor
    */
-  @State() private _cursorPosition: CursorPosition = { ln: 0, col: 0 };
+  @State() private _cursorPosition: CursorPosition;
 
   /**
    * Method that makes possible to fold all the foldible blocks
@@ -112,11 +112,11 @@ export class JsonEditor {
   @Event() editorChange: EventEmitter<string>;
 
   private _editorView: EditorView;
-  private _currentValue = '';
-  private _tabSize: Compartment = new Compartment();
-  private _currTheme = new Compartment();
+  private _currentValue: string;
+  private _tabSize: Compartment;
+  private _currTheme: Compartment;
 
-  @State() private _editorHeight = '100%';
+  @State() private _editorHeight: string;
 
   private _setTheme(theme: ThemeNames) {
     this._editorView.dispatch({
@@ -141,20 +141,10 @@ export class JsonEditor {
     this._cursorPosition = { col, ln };
   }
 
-  private _id = !!this.el.id ? this.el.id : `json-editor-${Math.random().toString(36).substr(2, 9)}`;
-
-  calculateEditorHeight() {
-    const panel = this.el.querySelector('div[slot=panel]');
-    const panelHeight = panel?.clientHeight || 0;
-    const footer = this.el.getElementsByTagName('editor-footer')[0];
-    const footerHeight = footer?.clientHeight || 0;
-
-    this._editorHeight = `calc(100% - ${panelHeight + footerHeight}px)`;
-  }
-
-  componentDidLoad() {
+  private _initializeCodeMirror() {
+    const parent = this.el.querySelector(`#${this._id}`)!;
     const plainExtensions: Extension[] = [
-      EditorState.readOnly.of(this.readonly),
+      EditorState.readOnly.of(!!this.readonly),
       EditorView.updateListener.of((update: ViewUpdate) => {
         this._updateCursorPosition();
 
@@ -168,7 +158,8 @@ export class JsonEditor {
     ];
 
     const extensions = this.mode === 'json' ? [...plainExtensions, ...JSON_EXTENSIONS] : plainExtensions;
-    const parent = document.querySelector(`#${this._id}`)!;
+
+    console.log('Check the parent element', parent);
 
     const state = EditorState.create({
       doc: this.value,
@@ -180,6 +171,30 @@ export class JsonEditor {
     });
 
     this.calculateEditorHeight();
+  }
+
+  private _id: string;
+
+  calculateEditorHeight() {
+    const panel = this.el.querySelector('div[slot=panel]');
+    const panelHeight = panel?.clientHeight || 0;
+    const footer = this.el.getElementsByTagName('editor-footer')[0];
+    const footerHeight = footer?.clientHeight || 0;
+
+    this._editorHeight = `calc(100% - ${panelHeight + footerHeight}px)`;
+  }
+
+  componentWillLoad() {
+    this._cursorPosition = { ln: 0, col: 0 };
+    this._currentValue = '';
+    this._tabSize = new Compartment();
+    this._currTheme = new Compartment();
+    this._editorHeight = '100%';
+    this._id = !!this.el.id ? this.el.id : `json-editor-${Math.random().toString(36).substr(2, 9)}`;
+  }
+
+  componentDidLoad() {
+    requestAnimationFrame(() => this._initializeCodeMirror());
   }
 
   render() {

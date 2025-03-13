@@ -1,6 +1,6 @@
 {
   "name": "webeditors-vanilla",
-  "version": "0.0.43",
+  "version": "0.0.5",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.cjs.js",
@@ -25,12 +25,6 @@
       "import": "./loader/index.js",
       "require": "./loader/index.cjs",
       "types": "./loader/index.d.ts"
-    },
-    "./hydrate": {
-      "types": "./hydrate/index.d.ts",
-      "import": "./hydrate/index.js",
-      "require": "./hydrate/index.cjs.js",
-      "default": "./hydrate/index.js"
     }
   },
   "repository": {
@@ -39,8 +33,7 @@
   },
   "files": [
     "dist/",
-    "loader/",
-    "hydrate/"
+    "loader/"
   ],
   "scripts": {
     "build": "stencil build",
