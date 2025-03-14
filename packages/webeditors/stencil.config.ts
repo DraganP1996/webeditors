@@ -6,7 +6,7 @@ import { nodeResolve } from '@rollup/plugin-node-resolve';
 import { resolve } from 'path';
 
 export const config: Config = {
-  namespace: 'webeditors',
+  namespace: 'webeditors-vanilla',
   outputTargets: [
     {
       type: 'dist',
@@ -32,6 +32,7 @@ export const config: Config = {
   testing: {
     browserHeadless: 'shell',
   },
+  sourceMap: false,
   rollupPlugins: {
     before: [
       alias({

@@ -1,6 +1,6 @@
 {
   "name": "webeditors-vanilla",
-  "version": "0.0.5",
+  "version": "0.0.69",
   "description": "Stencil Component Starter",
   "main": "dist/index.cjs.js",
   "module": "dist/index.cjs.js",
@@ -10,7 +10,7 @@
   "unpkg": "dist/webeditors/webeditors.esm.js",
   "exports": {
     ".": {
-      "import": "./dist/webeditors/webeditors.esm.js",
+      "import": "./dist/esm/index.js",
       "require": "./dist/webeditors/webeditors.cjs.js"
     },
     "./dist/*": {
@@ -23,17 +23,20 @@
     },
     "./loader": {
       "import": "./loader/index.js",
-      "require": "./loader/index.cjs",
       "types": "./loader/index.d.ts"
     }
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/stenciljs/component-starter.git"
+    "url": "https://github.com/DraganP1996/webeditors.git"
   },
   "files": [
-    "dist/",
-    "loader/"
+    "dist/esm/",
+    "dist/components/",
+    "dist/types/",
+    "loader/",
+    "LICENSE",
+    "README.md"
   ],
   "scripts": {
     "build": "stencil build",
@@ -53,16 +56,16 @@
     "@codemirror/language": "^6.10.8",
     "@codemirror/lint": "^6.8.4",
     "@codemirror/search": "^6.5.10",
-    "@rollup/plugin-alias": "^5.1.1",
     "codemirror": "^6.0.1",
     "fast-xml-parser": "^5.0.8",
     "thememirror": "^2.0.1",
     "yaml": "^2.7.0"
   },
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.1.1",
     "@rollup/plugin-commonjs": "21.1.0",
     "@rollup/plugin-node-resolve": "13.3.0",
-    "@stencil/core": "^4.27.1",
+    "@stencil/core": "^4.28.2",
     "@stencil/react-output-target": "^0.8.2",
     "@types/jest": "^29.5.14",
     "@types/node": "^22.13.5",

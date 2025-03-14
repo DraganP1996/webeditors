@@ -10,10 +10,6 @@ export { CursorPosition, EditorFooterConfig, ThemeNames } from "./types/types";
 export namespace Components {
     interface EditorFooter {
         "backgroundColor": string;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "background-color"?: string;
         "color": string;
         "cursorPosition"?: CursorPosition;
     }
@@ -41,17 +37,9 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter": boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -83,17 +71,9 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter": boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -125,17 +105,9 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter": boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -237,10 +209,6 @@ declare global {
 declare namespace LocalJSX {
     interface EditorFooter {
         "backgroundColor"?: string;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "background-color"?: string;
         "color"?: string;
         "cursorPosition"?: CursorPosition;
     }
@@ -268,17 +236,9 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter"?: boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -306,17 +266,9 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter"?: boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
@@ -344,17 +296,9 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-actions-panel"?: boolean;
-        /**
           * Defines if the footer should be visible
          */
         "showFooter"?: boolean;
-        /**
-         * @deprecated use camelCase instead. Support for dash-casing will be removed in Stencil v5.
-         */
-        "show-footer"?: boolean;
         /**
           * Theme of the editor
          */
