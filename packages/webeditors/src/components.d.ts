@@ -15,6 +15,40 @@ export namespace Components {
     }
     interface EditorPanel {
     }
+    interface JavascriptEditor {
+        /**
+          * Method that makes possible to fold all the foldible blocks
+         */
+        "foldAll": () => Promise<void>;
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly"?: boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel": boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter": boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Method that makes possible to unfold all the folded
+         */
+        "unfoldAll": () => Promise<void>;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value": string;
+    }
     interface JsonEditor {
         /**
           * Method that makes possible to fold all the foldible blocks
@@ -122,6 +156,10 @@ export namespace Components {
         "value": string;
     }
 }
+export interface JavascriptEditorCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLJavascriptEditorElement;
+}
 export interface JsonEditorCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLJsonEditorElement;
@@ -146,6 +184,23 @@ declare global {
     var HTMLEditorPanelElement: {
         prototype: HTMLEditorPanelElement;
         new (): HTMLEditorPanelElement;
+    };
+    interface HTMLJavascriptEditorElementEventMap {
+        "editorChange": string;
+    }
+    interface HTMLJavascriptEditorElement extends Components.JavascriptEditor, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLJavascriptEditorElementEventMap>(type: K, listener: (this: HTMLJavascriptEditorElement, ev: JavascriptEditorCustomEvent<HTMLJavascriptEditorElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLJavascriptEditorElementEventMap>(type: K, listener: (this: HTMLJavascriptEditorElement, ev: JavascriptEditorCustomEvent<HTMLJavascriptEditorElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLJavascriptEditorElement: {
+        prototype: HTMLJavascriptEditorElement;
+        new (): HTMLJavascriptEditorElement;
     };
     interface HTMLJsonEditorElementEventMap {
         "editorChange": string;
@@ -201,6 +256,7 @@ declare global {
     interface HTMLElementTagNameMap {
         "editor-footer": HTMLEditorFooterElement;
         "editor-panel": HTMLEditorPanelElement;
+        "javascript-editor": HTMLJavascriptEditorElement;
         "json-editor": HTMLJsonEditorElement;
         "xml-editor": HTMLXmlEditorElement;
         "yaml-editor": HTMLYamlEditorElement;
@@ -213,6 +269,36 @@ declare namespace LocalJSX {
         "cursorPosition"?: CursorPosition;
     }
     interface EditorPanel {
+    }
+    interface JavascriptEditor {
+        /**
+          * Configuration for the editor footer
+         */
+        "footerConfig"?: EditorFooterConfig;
+        /**
+          * Event triggered by the change of the editor value
+         */
+        "onEditorChange"?: (event: JavascriptEditorCustomEvent<string>) => void;
+        /**
+          * Defines if the editor is in readonly mode Default value false
+         */
+        "readonly"?: boolean;
+        /**
+          * Defines if the action panel should be visible
+         */
+        "showActionsPanel"?: boolean;
+        /**
+          * Defines if the footer should be visible
+         */
+        "showFooter"?: boolean;
+        /**
+          * Theme of the editor
+         */
+        "theme"?: ThemeNames;
+        /**
+          * Value that will be displayed inside the editor
+         */
+        "value"?: string;
     }
     interface JsonEditor {
         /**
@@ -311,6 +397,7 @@ declare namespace LocalJSX {
     interface IntrinsicElements {
         "editor-footer": EditorFooter;
         "editor-panel": EditorPanel;
+        "javascript-editor": JavascriptEditor;
         "json-editor": JsonEditor;
         "xml-editor": XmlEditor;
         "yaml-editor": YamlEditor;
@@ -322,6 +409,7 @@ declare module "@stencil/core" {
         interface IntrinsicElements {
             "editor-footer": LocalJSX.EditorFooter & JSXBase.HTMLAttributes<HTMLEditorFooterElement>;
             "editor-panel": LocalJSX.EditorPanel & JSXBase.HTMLAttributes<HTMLEditorPanelElement>;
+            "javascript-editor": LocalJSX.JavascriptEditor & JSXBase.HTMLAttributes<HTMLJavascriptEditorElement>;
             "json-editor": LocalJSX.JsonEditor & JSXBase.HTMLAttributes<HTMLJsonEditorElement>;
             "xml-editor": LocalJSX.XmlEditor & JSXBase.HTMLAttributes<HTMLXmlEditorElement>;
             "yaml-editor": LocalJSX.YamlEditor & JSXBase.HTMLAttributes<HTMLYamlEditorElement>;

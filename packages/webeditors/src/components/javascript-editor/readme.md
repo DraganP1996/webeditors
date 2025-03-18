@@ -1,4 +1,4 @@
-# xml-editor
+# json-editor
 
 
 
@@ -57,9 +57,9 @@ Type: `Promise<void>`
 ### Graph
 ```mermaid
 graph TD;
-  xml-editor --> editor-panel
-  xml-editor --> editor-footer
-  style xml-editor fill:#f9f,stroke:#333,stroke-width:4px
+  javascript-editor --> editor-panel
+  javascript-editor --> editor-footer
+  style javascript-editor fill:#f9f,stroke:#333,stroke-width:4px
 ```
 
 ----------------------------------------------

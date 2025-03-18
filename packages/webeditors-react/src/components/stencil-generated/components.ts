@@ -12,6 +12,7 @@ import { createComponent } from '@stencil/react-output-target/runtime';
 import React from 'react';
 import { EditorFooter as EditorFooterElement, defineCustomElement as defineEditorFooter } from "webeditors-vanilla/dist/components/editor-footer.js";
 import { EditorPanel as EditorPanelElement, defineCustomElement as defineEditorPanel } from "webeditors-vanilla/dist/components/editor-panel.js";
+import { JavascriptEditor as JavascriptEditorElement, defineCustomElement as defineJavascriptEditor } from "webeditors-vanilla/dist/components/javascript-editor.js";
 import { JsonEditor as JsonEditorElement, defineCustomElement as defineJsonEditor } from "webeditors-vanilla/dist/components/json-editor.js";
 import { XmlEditor as XmlEditorElement, defineCustomElement as defineXmlEditor } from "webeditors-vanilla/dist/components/xml-editor.js";
 import { YamlEditor as YamlEditorElement, defineCustomElement as defineYamlEditor } from "webeditors-vanilla/dist/components/yaml-editor.js";
@@ -36,6 +37,17 @@ export const EditorPanel: StencilReactComponent<EditorPanelElement, EditorPanelE
     react: React,
     events: {} as EditorPanelEvents,
     defineCustomElement: defineEditorPanel
+});
+
+type JavascriptEditorEvents = { onEditorChange: EventName<CustomEvent<string>> };
+
+export const JavascriptEditor: StencilReactComponent<JavascriptEditorElement, JavascriptEditorEvents> = /*@__PURE__*/ createComponent<JavascriptEditorElement, JavascriptEditorEvents>({
+    tagName: 'javascript-editor',
+    elementClass: JavascriptEditorElement,
+    // @ts-ignore - React type of Stencil Output Target may differ from the React version used in the Nuxt.js project, this can be ignored.
+    react: React,
+    events: { onEditorChange: 'editorChange' } as JavascriptEditorEvents,
+    defineCustomElement: defineJavascriptEditor
 });
 
 type JsonEditorEvents = { onEditorChange: EventName<CustomEvent<string>> };

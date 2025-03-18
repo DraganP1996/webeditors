@@ -52,8 +52,8 @@ Type: `Promise<void>`
 
 ### Depends on
 
-- [editor-panel](../editor-panel)
-- [editor-footer](../editor-footer)
+- [editor-panel](../../internal-components/editor-panel)
+- [editor-footer](../../internal-components/editor-footer)
 
 ### Graph
 ```mermaid

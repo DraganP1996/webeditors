@@ -1,13 +1,12 @@
 import { Component, h, Prop, State, Element, Watch, Host, Method, EventEmitter, Event } from '@stencil/core';
-
 import { Compartment, EditorState, Extension } from '@codemirror/state';
-
 import { EditorView, ViewUpdate } from '@codemirror/view';
-import { ensureSyntaxTree, foldable, foldEffect, unfoldAll } from '@codemirror/language';
+import { unfoldAll } from '@codemirror/language';
 
 import { THEMES } from '../../styles/themes';
 import { CursorPosition, EditorFooterConfig, ThemeNames } from '../../types/types';
 import { XML_EXTENSIONS } from './const';
+import { onValueChange, setTheme, getCursorPosition, foldAll } from '../../utils';
 
 @Component({
   tag: 'xml-editor',
@@ -52,28 +51,7 @@ export class XMLEditor {
    * Method that makes possible to fold all the foldible blocks
    */
   @Method() async foldAll(): Promise<void> {
-    const effects = [];
-
-    ensureSyntaxTree(this._editorView.state, this._editorView.state.doc.length, 500).iterate({
-      from: 0,
-      to: this._editorView.state.doc.length,
-      enter: node => {
-        const foldRange = foldable(this._editorView.state, node.from, node.to);
-
-        if (
-          !foldRange ||
-          (foldRange.from === 0 && foldRange.to === this._editorView.state.doc.length) ||
-          (foldRange.from === 1 && foldRange.to === this._editorView.state.doc.length - 1)
-        )
-          return;
-
-        effects.push(foldEffect.of({ from: foldRange.from, to: foldRange.to }));
-      },
-    });
-
-    if (effects.length) {
-      this._editorView.dispatch({ effects });
-    }
+    return foldAll(this._editorView);
   }
   /**
    * Method that makes possible to unfold all the folded
@@ -84,21 +62,12 @@ export class XMLEditor {
 
   @Watch('theme')
   onThemeChange(theme: ThemeNames) {
-    theme && this._setTheme(theme);
+    theme && setTheme(this._editorView, theme, this._currTheme);
   }
 
   @Watch('value')
   onValueChange(value: string) {
-    const currentSelection = this._editorView.state.selection;
-
-    this._editorView.dispatch({
-      changes: {
-        from: 0,
-        to: this._editorView.state.doc.length,
-        insert: value,
-      },
-      selection: currentSelection,
-    });
+    onValueChange(this._editorView, value);
   }
 
   /**
@@ -113,12 +82,6 @@ export class XMLEditor {
 
   @State() private _editorHeight: string;
 
-  private _setTheme(theme: ThemeNames) {
-    this._editorView.dispatch({
-      effects: this._currTheme.reconfigure(THEMES[theme]),
-    });
-  }
-
   private _updateCurrentValue(value: string) {
     if (value.trim() === this._currentValue.trim()) return;
 
@@ -127,9 +90,7 @@ export class XMLEditor {
   }
 
   private _updateCursorPosition() {
-    const state = this._editorView.state;
-    const ln = state.doc.lineAt(state.selection.main.head).number;
-    const col = state.selection.ranges[0].head - state.doc.lineAt(state.selection.main.head).from;
+    const { col, ln } = getCursorPosition(this._editorView.state);
 
     if (col === this._cursorPosition.col && ln === this._cursorPosition.ln) return;
 
@@ -163,9 +124,6 @@ export class XMLEditor {
     ];
 
     const parent = this.el.querySelector(`#${this._id}`)!;
-
-    console.log('Check the parent element', parent);
-
     const state = EditorState.create({
       doc: this.value,
       extensions,

@@ -7,15 +7,15 @@ import { unfoldAll } from '@codemirror/language';
 
 import { THEMES } from '../../styles/themes';
 import { CursorPosition, EditorFooterConfig, ThemeNames } from '../../types/types';
-import { JSON_EXTENSIONS, PLAIN_TEXT_EXTENSIONS } from './const';
+import { JS_EXTENSIONS, PLAIN_TEXT_EXTENSIONS } from './const';
 import { onValueChange, setTheme, getCursorPosition, foldAll } from '../../utils';
 
 @Component({
-  tag: 'json-editor',
+  tag: 'javascript-editor',
   styleUrl: '../../styles/editor.css',
   shadow: false,
 })
-export class JsonEditor {
+export class JavascriptEditor {
   @Element() el!: HTMLElement;
 
   /**
@@ -39,16 +39,10 @@ export class JsonEditor {
    * Defines if the footer should be visible
    */
   @Prop() showFooter: boolean;
-
   /**
    * Theme of the editor
    */
   @Prop() theme?: ThemeNames;
-  /**
-   * Defines the mode of the editor
-   */
-  @Prop() mode: 'json' | 'text';
-
   /**
    * Position of the cursor
    */
@@ -120,7 +114,7 @@ export class JsonEditor {
       ...PLAIN_TEXT_EXTENSIONS,
     ];
 
-    const extensions = this.mode === 'json' ? [...plainExtensions, ...JSON_EXTENSIONS] : plainExtensions;
+    const extensions = [...plainExtensions, ...JS_EXTENSIONS];
 
     const state = EditorState.create({
       doc: this.value,
@@ -167,7 +161,7 @@ export class JsonEditor {
         }}
       >
         <div class="editor-wrapper">
-          {this.showActionsPanel && this.mode !== 'text' && (
+          {this.showActionsPanel && (
             <editor-panel>
               <slot name="panel" />
             </editor-panel>

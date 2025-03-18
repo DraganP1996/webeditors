@@ -18,13 +18,15 @@
 
 ### Used by
 
- - [json-editor](../json-editor)
- - [xml-editor](../xml-editor)
- - [yaml-editor](../yaml-editor)
+ - [javascript-editor](../../components/javascript-editor)
+ - [json-editor](../../components/json-editor)
+ - [xml-editor](../../components/xml-editor)
+ - [yaml-editor](../../components/yaml-editor)
 
 ### Graph
 ```mermaid
 graph TD;
+  javascript-editor --> editor-footer
   json-editor --> editor-footer
   xml-editor --> editor-footer
   yaml-editor --> editor-footer

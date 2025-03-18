@@ -9,13 +9,15 @@
 
 ### Used by
 
- - [json-editor](../json-editor)
- - [xml-editor](../xml-editor)
- - [yaml-editor](../yaml-editor)
+ - [javascript-editor](../../components/javascript-editor)
+ - [json-editor](../../components/json-editor)
+ - [xml-editor](../../components/xml-editor)
+ - [yaml-editor](../../components/yaml-editor)
 
 ### Graph
 ```mermaid
 graph TD;
+  javascript-editor --> editor-panel
   json-editor --> editor-panel
   xml-editor --> editor-panel
   yaml-editor --> editor-panel
