@@ -34,11 +34,6 @@ export class XMLEditor {
    */
   @Prop() showActionsPanel: boolean;
   /**
-   * Defines if the footer should be visible
-   */
-  @Prop() showFooter: boolean;
-
-  /**
    * Theme of the editor
    */
   @Prop() theme?: ThemeNames;
@@ -164,9 +159,7 @@ export class XMLEditor {
             </editor-panel>
           )}
           <div id={this._id} style={{ height: this._editorHeight, width: '100%' }}></div>
-          {this.footerConfig && this.showFooter && (
-            <editor-footer cursorPosition={this._cursorPosition} backgroundColor={this.footerConfig.backgroundColor} color={this.footerConfig.color} />
-          )}
+          {this.footerConfig && <editor-footer cursorPosition={this._cursorPosition} backgroundColor={this.footerConfig.backgroundColor} color={this.footerConfig.color} />}
         </div>
       </Host>
     );

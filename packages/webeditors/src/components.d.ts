@@ -33,10 +33,6 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter": boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -71,10 +67,6 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter": boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -105,10 +97,6 @@ export namespace Components {
          */
         "showActionsPanel": boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter": boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -138,10 +126,6 @@ export namespace Components {
           * Defines if the action panel should be visible
          */
         "showActionsPanel": boolean;
-        /**
-          * Defines if the footer should be visible
-         */
-        "showFooter": boolean;
         /**
           * Theme of the editor
          */
@@ -288,10 +272,6 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter"?: boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -322,10 +302,6 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter"?: boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -352,10 +328,6 @@ declare namespace LocalJSX {
          */
         "showActionsPanel"?: boolean;
         /**
-          * Defines if the footer should be visible
-         */
-        "showFooter"?: boolean;
-        /**
           * Theme of the editor
          */
         "theme"?: ThemeNames;
@@ -381,10 +353,6 @@ declare namespace LocalJSX {
           * Defines if the action panel should be visible
          */
         "showActionsPanel"?: boolean;
-        /**
-          * Defines if the footer should be visible
-         */
-        "showFooter"?: boolean;
         /**
           * Theme of the editor
          */
